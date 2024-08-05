@@ -1,0 +1,20 @@
+{% block content %}
+    <h1>All to-do lists</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {% for to_do_list in to_do_lists %}
+            <p>{{ to_do_list.title }}
+            <a href="http://localhost:8000/to-do-list/get/{{ to_do_list.list_id }}/">view</a>
+            <a href="http://localhost:8000/to-do-list/edit/{{ to_do_list.list_id }}/">change title</a>
+            <a href="http://localhost:8000/to-do-list/delete/{{ to_do_list.list_id }}/">delete</a>
+            </p>
+            <br>
+            <p>
+            <a href="http://localhost:8000/to-do-list/create/">Create a new list</a>
+            </p>
+        {% endfor %}
+
+
+    </form>
+{% endblock %}

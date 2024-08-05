@@ -1,0 +1,15 @@
+{% block content %}
+    <h1>Get to-do list</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {% for task in tasks %}
+            <p>{{ task.title }}
+            <a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a>
+            <a href="http://localhost:8000/task/edit/{{ task.task_id }}/">edit</a>
+            <a href="http://localhost:8000/task/delete/{{ task.task_id }}/">delete</a>
+        {% endfor %}
+
+
+    </form>
+{% endblock %}
