@@ -4,30 +4,17 @@ from django.shortcuts import render
 from my_app.models import Task
 
 
-# def edit_task(request, task_id, **kwargs):
-#     try:
-#         task = Task.objects.get(pk=task_id)
-#     except Task.DoesNotExist:
-#         return HttpResponse("<html><body>Task not found</body></html>")
-#
-#     task.title = kwargs.get('title', task.title)
-#     task.description = kwargs.get('description', task.description)
-#     task.deadline = kwargs.get('deadline', task.deadline)
-#     task.priority = kwargs.get('priority', task.priority)
-#     task.save()
-#
-#     html = "<html><body>Task updated successfully.</body></html>"
-#     return HttpResponse(html)
-
-
-def edit_task(request, task_id):
+def edit_task(request, task_id, username):
     if request.method == 'GET':
         try:
             task = Task.objects.get(pk=task_id)
         except Task.DoesNotExist:
             return HttpResponse("<html><body>Task not found</body></html>")
-
-        return render(request, "edit_task_template.html", {"task": task})
+        if task.owner.username == username:
+            return render(request, "edit_task_template.html", {"task": task})
+        else:
+            return HttpResponse("<html><body>You don't have permission to edit a task that has been shared with "
+                                "you.</body></html>")
 
     else:
         try:
@@ -42,11 +29,3 @@ def edit_task(request, task_id):
         task.save()
         html = "<html><body>Task updated successfully.</body></html>"
         return HttpResponse(html)
-
-# def edit_task(request):
-#     if request.method == 'POST':
-#         task_id = request.POST.get('task_id')
-#         try:
-#             task = Task.objects.get(pk=task_id)
-#         except Task.DoesNotExist:
-#             return HttpResponse("<html><body>Task not found</body></html>")

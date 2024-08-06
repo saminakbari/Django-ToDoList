@@ -6,10 +6,17 @@
         {% for task in tasks %}
             <p>{{ task.title }}
             <a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a>
-            <a href="http://localhost:8000/task/edit/{{ task.task_id }}/">edit</a>
-            <a href="http://localhost:8000/task/delete/{{ task.task_id }}/">delete</a>
+            <a href="http://localhost:8000/task/edit/{{ task.task_id }}/{{ username }}/">edit</a>
+            <a href="http://localhost:8000/task/delete/{{ task.task_id }}/{{ list_id }}/">delete</a>
+            <a href="http://localhost:8000/task/share/{{ task.task_id }}/">share</a>
         {% endfor %}
 
+        <p>
+            <a href="http://localhost:8000/task/create/{{ list_id }}/">Create a new task</a>
+        </p>
+        <p>
+            <a href="http://localhost:8000/task/shared-tasks/{{ username }}/{{ list_id }}">Tasks shared with me</a>
+        </p>
 
     </form>
 {% endblock %}

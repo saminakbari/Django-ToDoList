@@ -6,4 +6,3 @@ class CreateTaskForm(forms.Form):
     description = forms.CharField(label="Description", max_length=250)
     priority = forms.CharField(label="Priority", max_length=6)
     deadline = forms.DateField(label="Deadline")
-    list_id = forms.IntegerField(label="List ID")

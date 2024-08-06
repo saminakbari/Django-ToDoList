@@ -10,11 +10,10 @@
             <a href="http://localhost:8000/to-do-list/delete/{{ to_do_list.list_id }}/">delete</a>
             </p>
             <br>
-            <p>
-            <a href="http://localhost:8000/to-do-list/create/">Create a new list</a>
-            </p>
         {% endfor %}
-
+        <p>
+            <a href="http://localhost:8000/to-do-list/create/{{ username }}/">Create a new list</a>
+        </p>
 
     </form>
 {% endblock %}

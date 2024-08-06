@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-from my_app.forms import DeleteListForm
 from my_app.models import ToDoList
 from django.http import HttpResponse
 

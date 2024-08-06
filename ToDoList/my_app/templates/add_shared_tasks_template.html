@@ -1,0 +1,12 @@
+{% block content %}
+    <h1>Tasks shared with me</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for task in tasks %}
+            <p>
+                {{ username }} has shared {{ task.title }} with you.
+                <input type="submit" value="Add task {{ task.task_id }}" name="add">
+            </p>
+        {% endfor %}
+    </form>
+{% endblock %}

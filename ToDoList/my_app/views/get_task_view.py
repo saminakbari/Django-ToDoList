@@ -1,7 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 
-from my_app.forms import GetTaskForm
 from my_app.models import Task
 
 
