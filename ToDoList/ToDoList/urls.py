@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from my_app.views.login_view import login_user
+from my_app.views.register_login_view import register_or_login
 from my_app.views.register_view import register_user
 from my_app.views.create_list_view import create_list
 from my_app.views.create_task_view import create_task
@@ -29,6 +30,6 @@ urlpatterns = [
     path("user/register/", register_user),
     path("user/login/", login_user),
     path("task/share/<int:task_id>/", share_task),
-    path("task/shared-tasks/<str:username>/<int:list_id>/", show_shared_tasks)
-    # path("task/share/<str:sender_username>/<str:receiver_username>/", )
+    path("task/shared-tasks/<str:username>/<int:list_id>/", show_shared_tasks),
+    path("to-do-list/app/opening/", register_or_login),
 ]
