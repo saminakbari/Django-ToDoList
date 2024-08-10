@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from my_app.views.login_view import login_user
 from my_app.views.register_login_view import register_or_login
@@ -15,6 +15,7 @@ from my_app.views.get_task_view import get_task
 from my_app.views.share_task_view import share_task
 from my_app.views.add_shared_tasks_view import show_shared_tasks
 from my_app.views.show_all_lists_view import show_all_lists
+from my_app.version2 import v2_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
     path("task/share/<int:task_id>/", share_task),
     path("task/shared-tasks/<str:username>/<int:list_id>/", show_shared_tasks),
     path("to-do-list/app/opening/", register_or_login),
+    path("v2/", include(v2_urlpatterns))
 ]

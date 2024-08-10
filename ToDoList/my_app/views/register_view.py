@@ -14,8 +14,11 @@ def register_user(request):
             user = MyUser(username=username, password=password)
             user.save()
             html = "<html><body>You are registered successfully.</body></html>"
-            return HttpResponse(html)
+            # return HttpResponse(html)
+            return render(request, "login_template.html",
+                          {'message': 'You''re registered successfully. Please login to continue.'})
         else:
-            return HttpResponse("<html><body>Username already exists.</body></html>")
+            # return HttpResponse("<html><body>Username already exists.</body></html>")
+            return render(request, "register_template.html", {'message': 'Username already exists.'})
     else:
         return render(request, "register_template.html")
