@@ -20,10 +20,15 @@
         {% endfor %}
 
         <p>
-            <a href="http://localhost:8000/task/create/{{ list_id }}/">Create a new task</a>
+            <a href="http://localhost:8000/task/create/{{ to_do_list.list_id }}/">Create a new task</a>
         </p>
         <p>
-            <a href="http://localhost:8000/task/shared-tasks/{{ user.username }}/{{ list_id }}">Tasks shared with me</a>
+            <a href="http://localhost:8000/task/shared-tasks/{{ user.username }}/{{ to_do_list.list_id }}/">
+                Tasks shared with me</a>
+        </p>
+        <br>
+        <p>
+            <a href="http://localhost:8000/to-do-list/showall/{{ user.username }}/">back</a>
         </p>
 
     </form>

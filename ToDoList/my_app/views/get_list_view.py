@@ -6,10 +6,7 @@ from my_app.models import ToDoList
 
 def get_list(request, list_id):
     if request.method == 'GET':
-        try:
-            to_do_list = ToDoList.objects.get(pk=list_id)
-        except ToDoList.DoesNotExist:
-            return HttpResponse("<html><body>To-do list not found</body></html>")
+        to_do_list = ToDoList.objects.get(pk=list_id)
 
         sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
         sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
