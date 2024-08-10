@@ -4,6 +4,8 @@
         {% csrf_token %}
         <label for="title">Title: </label>
         <input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}>
+        <br><br>
+        <input type="submit" value="OK">
         <br>
     </form>
 {% endblock %}

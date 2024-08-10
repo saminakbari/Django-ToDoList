@@ -24,7 +24,7 @@ def create_task(request, list_id):
             sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
             sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
             return render(request, "get_list_template.html",
-                          {"tasks": sorted_tasks, "list_id": list_id, "user": to_do_list.owner,
+                          {"tasks": sorted_tasks, "to_do_list": to_do_list, "user": to_do_list.owner,
                            "message": "Task created successfully."})
 
     else:
