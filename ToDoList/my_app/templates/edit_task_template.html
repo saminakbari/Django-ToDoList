@@ -12,8 +12,29 @@
         <label for="deadline">Deadline: </label>
         <input id="deadline" type="date" name="deadline" value={{ task.deadline }}>
         <br>
+
         <label for="priority">Priority: </label>
-        <input id="priority" type="text" name="priority" value={{ task.priority }}>
+        {% if task.priority == '2' %}
+            <select id="priority" name="priority">
+                <option value="1">High</option>
+                <option value="2" selected="selected">Medium</option>
+                <option value="3">Low</option>
+            </select>
+        {% endif %}
+        {% if task.priority == '3' %}
+            <select id="priority" name="priority">
+                <option value="1">High</option>
+                <option value="2">Medium</option>
+                <option value="3" selected="selected">Low</option>
+            </select>
+        {% endif %}
+        {% if task.priority == '1' %}
+            <select id="priority" name="priority">
+                <option value="1" selected="selected">High</option>
+                <option value="2">Medium</option>
+                <option value="3">Low</option>
+            </select>
+        {% endif %}
         <br>
         <input type="submit" value="OK">
     </form>

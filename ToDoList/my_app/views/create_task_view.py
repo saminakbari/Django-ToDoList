@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from my_app.forms.create_task_form import CreateTaskForm
 from my_app.models import Task, ToDoList
@@ -19,8 +19,14 @@ def create_task(request, list_id):
             task.to_do_lists.add(to_do_list)
             task.owner = to_do_list.owner
             task.save()
-            return HttpResponse("<html><body>New task added to the to-do list successfully.</body></html>")
+            # return redirect(to="http://localhost:8000/to-do-list/get/{}/".format(list_id))
+
+            sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
+            sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
+            return render(request, "get_list_template.html",
+                          {"tasks": sorted_tasks, "list_id": list_id, "user": to_do_list.owner,
+                           "message": "Task created successfully."})
 
     else:
-        form = CreateTaskForm()
+        form = CreateTaskForm(initial={'priority': '2'})
         return render(request, "create_task_template.html", {"form": form})

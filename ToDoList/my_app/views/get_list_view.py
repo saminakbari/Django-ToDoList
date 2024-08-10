@@ -15,5 +15,4 @@ def get_list(request, list_id):
         sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
 
         return render(request, "get_list_template.html",
-                      {"tasks": sorted_tasks, "list_id": list_id,
-                       "username": to_do_list.owner.username})
+                      {"tasks": sorted_tasks, "to_do_list": to_do_list, "user": to_do_list.owner})

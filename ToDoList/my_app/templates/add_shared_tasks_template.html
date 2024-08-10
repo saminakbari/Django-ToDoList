@@ -4,8 +4,13 @@
         {% csrf_token %}
         {% for task in tasks %}
             <p>
-                {{ username }} has shared {{ task.title }} with you.
-                <input type="submit" value="Add task {{ task.task_id }}" name="add">
+                {{ task.owner.username }} has shared {{ task.title }} with you.
+                {% if task in to_do_list.tasks.all %}
+                    <input type="submit" value="Added" disabled="disabled">
+                {% else %}
+                    <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                    <input type="submit" value="Add task" name="add">
+                {% endif %}
             </p>
         {% endfor %}
     </form>

@@ -1,8 +1,15 @@
 {% block content %}
-	<h1>Get task</h1>
+    <h1>{{ task.title }}</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="OK">
+        <p>
+            description: {{ task.description }}
+        </p>
+        <p>
+            deadline: {{ task.deadline }}
+        </p>
+        <p>
+            priority: {{ task.priority }}
+        </p>
     </form>
 {% endblock %}
