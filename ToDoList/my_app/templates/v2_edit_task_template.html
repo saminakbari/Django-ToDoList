@@ -1,0 +1,41 @@
+{% block content %}
+    <h1>Edit task</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="title">Title: </label>
+        <input id="title" type="text" name="title" maxlength="100" value={{ task.title }}>
+        <br>
+        <label for="description">Description: </label>
+        <input id="description" type="text" name="description" maxlength="250" value={{ task.description }}>
+        <br>
+        <label for="deadline">Deadline: </label>
+        <input id="deadline" type="date" name="deadline" value={{ task.deadline }}>
+        <br>
+
+        <label for="priority">Priority: </label>
+        {% if task.priority == '2' %}
+            <select id="priority" name="priority">
+                <option value="1">High</option>
+                <option value="2" selected="selected">Medium</option>
+                <option value="3">Low</option>
+            </select>
+        {% endif %}
+        {% if task.priority == '3' %}
+            <select id="priority" name="priority">
+                <option value="1">High</option>
+                <option value="2">Medium</option>
+                <option value="3" selected="selected">Low</option>
+            </select>
+        {% endif %}
+        {% if task.priority == '1' %}
+            <select id="priority" name="priority">
+                <option value="1" selected="selected">High</option>
+                <option value="2">Medium</option>
+                <option value="3">Low</option>
+            </select>
+        {% endif %}
+        <br>
+        <input type="submit" value="OK">
+    </form>
+{% endblock %}

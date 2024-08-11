@@ -1,0 +1,35 @@
+{% block content %}
+    <h1>{{ to_do_list.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {% if message %}
+            <script>alert("{{message}}")</script>
+        {% endif %}
+
+        {% for task in tasks %}
+            <p>{{ task.title }}
+            <a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a>
+            {% if task.owner == user %}
+                <a href="http://localhost:8000/task/edit/{{ task.task_id }}/{{ to_do_list.list_id }}/">edit</a>
+            {% endif %}
+            <a href="http://localhost:8000/task/delete/{{ task.task_id }}/{{ to_do_list.list_id }}/">delete</a>
+            {% if task.owner == user %}
+                <a href="http://localhost:8000/task/share/{{ task.task_id }}/">share</a>
+            {% endif %}
+        {% endfor %}
+
+        <p>
+            <a href="http://localhost:8000/task/create/{{ to_do_list.list_id }}/">Create a new task</a>
+        </p>
+        <p>
+            <a href="http://localhost:8000/task/shared-tasks/{{ user.username }}/{{ to_do_list.list_id }}/">
+                Tasks shared with me</a>
+        </p>
+        <br>
+        <p>
+            <a href="http://localhost:8000/to-do-list/showall/{{ user.username }}/">back</a>
+        </p>
+
+    </form>
+{% endblock %}

@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from my_app.models.user import MyUser
 
@@ -10,15 +9,11 @@ def register_user(request):
         password = request.POST['password']
         try:
             MyUser.objects.get(username=username)
-        except:
+        except MyUser.DoesNotExist:
             user = MyUser(username=username, password=password)
             user.save()
-            html = "<html><body>You are registered successfully.</body></html>"
-            # return HttpResponse(html)
-            return render(request, "login_template.html",
-                          {'message': 'You''re registered successfully. Please login to continue.'})
+            return redirect("http://localhost:8000/to-do-list/showall/" + username + "/")
         else:
-            # return HttpResponse("<html><body>Username already exists.</body></html>")
             return render(request, "register_template.html", {'message': 'Username already exists.'})
     else:
         return render(request, "register_template.html")

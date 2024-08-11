@@ -1,14 +1,15 @@
 from django.shortcuts import render
+from django.views import View
 
 from my_app.models import ToDoList
 
 
-def get_list(request, list_id):
-    if request.method == 'GET':
+class GetList(View):
+    def get(self, request, list_id):
         to_do_list = ToDoList.objects.get(pk=list_id)
 
         sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
         sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
 
-        return render(request, "get_list_template.html",
+        return render(request, "v2_get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list, "user": to_do_list.owner})

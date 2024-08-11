@@ -1,0 +1,21 @@
+{% block content %}
+    <h1>Tasks shared with me</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for task in tasks %}
+            <p>
+                {{ task.owner.username }} has shared {{ task.title }} with you.
+                {% if task in to_do_list.tasks.all %}
+                    <input type="submit" value="Added" disabled="disabled">
+                {% else %}
+                    <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                    <input type="submit" value="Add task" name="add">
+                {% endif %}
+            </p>
+            <br>
+        {% endfor %}
+        <p>
+            <a href="http://localhost:8000/to-do-list/get/{{ to_do_list.list_id }}/">back to list</a>
+        </p>
+    </form>
+{% endblock %}

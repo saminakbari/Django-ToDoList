@@ -1,11 +1,16 @@
 from django.shortcuts import render
+from django.views import View
 
-from my_app.forms.create_list_form import CreateListForm
-from my_app.models import ToDoList, MyUser
+from my_app.forms import CreateListForm
+from my_app.models import MyUser, ToDoList
 
 
-def create_list(request, username):
-    if request.method == 'POST':
+class CreateList(View):
+    def get(self, request, username):
+        form = CreateListForm()
+        return render(request, 'v2_create_list_template.html', {"form": form})
+
+    def post(self, request, username):
         form = CreateListForm(request.POST)
         if form.is_valid():
             title = form.get_title()
@@ -13,9 +18,6 @@ def create_list(request, username):
             to_do_list = ToDoList(title=title, owner=user)
             to_do_list.save()
             user = MyUser.objects.get(username=username)
-            return render(request, "show_all_lists_template.html",
+            return render(request, "v2_show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(), "username": username,
                            "message": "List created successfully."})
-    else:
-        form = CreateListForm()
-        return render(request, 'create_list_template.html', {"form": form})

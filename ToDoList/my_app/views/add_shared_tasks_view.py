@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from my_app.models import MyUser, Task, ToDoList
 
 
-def show_shared_tasks(request, username, list_id):
+def add_shared_tasks(request, username, list_id):
     user = MyUser.objects.get(username=username)
     to_do_list = ToDoList.objects.get(list_id=list_id)
     shared_tasks = user.tasks_shared_with_user.all()

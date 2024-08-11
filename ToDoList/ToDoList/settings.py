@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = 'http://localhost:8000/admin/login/?next=/admin/'
+
 # Application definition
 
 INSTALLED_APPS = [

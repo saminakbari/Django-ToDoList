@@ -4,7 +4,7 @@ from django.views import View
 
 class RegisterLogin(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "register_login_template.html")
+        return render(request, "v2_register_login_template.html")
 
     def post(self, request, *args, **kwargs):
         if request.POST.get('choice_button') == 'Sign up':
