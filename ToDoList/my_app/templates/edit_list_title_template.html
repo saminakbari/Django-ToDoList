@@ -2,8 +2,12 @@
     <h1>Edit list</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="title">Title: </label>
-        <input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}>
+        <table>
+            <tr>
+                <td><label for="title">Title: </label></td>
+                <td><input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}></td>
+            </tr>
+        </table>
         <br><br>
         <input type="submit" value="OK">
         <br>

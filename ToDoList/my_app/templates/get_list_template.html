@@ -6,19 +6,26 @@
         {% if message %}
             <script>alert("{{message}}")</script>
         {% endif %}
-
-        {% for task in tasks %}
-            <p>{{ task.title }}
-            <a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a>
-            {% if task.owner == user %}
-                <a href="http://localhost:8000/task/edit/{{ task.task_id }}/{{ to_do_list.list_id }}/">edit</a>
-            {% endif %}
-            <a href="http://localhost:8000/task/delete/{{ task.task_id }}/{{ to_do_list.list_id }}/">delete</a>
-            {% if task.owner == user %}
-                <a href="http://localhost:8000/task/share/{{ task.task_id }}/">share</a>
-            {% endif %}
-        {% endfor %}
-
+        <table>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td><a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a></td>
+                    {% if task.owner == user %}
+                        <td>
+                            <a href="http://localhost:8000/task/edit/{{ task.task_id }}/{{ to_do_list.list_id }}/">edit</a>
+                        </td>
+                    {% endif %}
+                    <td>
+                        <a href="http://localhost:8000/task/delete/{{ task.task_id }}/{{ to_do_list.list_id }}/">delete</a>
+                    </td>
+                    {% if task.owner == user %}
+                        <td><a href="http://localhost:8000/task/share/{{ task.task_id }}/">share</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
         <p>
             <a href="http://localhost:8000/task/create/{{ to_do_list.list_id }}/">Create a new task</a>
         </p>
