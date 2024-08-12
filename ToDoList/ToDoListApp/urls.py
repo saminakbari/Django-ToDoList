@@ -1,16 +1,16 @@
 from django.urls import path
 
 from ToDoListApp.views import get_task
-from ToDoListApp.views.get_list_view import get_list
-from ToDoListApp.views.edit_task_view import edit_task
-from ToDoListApp.views.edit_list_view import edit_list
-from ToDoListApp.views.share_task_view import share_task
-from ToDoListApp.views.delete_list_view import delete_list
-from ToDoListApp.views.create_list_view import create_list
-from ToDoListApp.views.delete_task_view import delete_task
-from ToDoListApp.views.create_task_view import create_task
-from ToDoListApp.views.show_all_lists_view import show_all_lists
 from ToDoListApp.views.add_shared_tasks_view import add_shared_tasks
+from ToDoListApp.views.create_list_view import create_list
+from ToDoListApp.views.create_task_view import create_task
+from ToDoListApp.views.delete_list_view import delete_list
+from ToDoListApp.views.delete_task_view import delete_task
+from ToDoListApp.views.edit_list_view import edit_list
+from ToDoListApp.views.edit_task_view import edit_task
+from ToDoListApp.views.get_list_view import get_list
+from ToDoListApp.views.share_task_view import share_task
+from ToDoListApp.views.show_all_lists_view import show_all_lists
 
 v1_urlpatterns = [
     path("to-do-list/showall/", show_all_lists, name='v1-show-lists'),

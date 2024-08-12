@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from ToDoListApp.models import ToDoList, MyUser
+from ToDoListApp.models import MyUser, ToDoList
 
 
 class EditList(View):

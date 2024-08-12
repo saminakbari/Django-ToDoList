@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from ToDoListApp.models import MyUser, ToDoList, Task
+from ToDoListApp.models import MyUser, Task, ToDoList
 
 
 class AddSharedTasks(View):

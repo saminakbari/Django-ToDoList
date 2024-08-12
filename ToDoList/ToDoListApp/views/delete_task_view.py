@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models import Task2, ToDoList2
 
 
 @login_required
 def delete_task(request, task_id: int, list_id):
-    task = Task.objects.get(pk=task_id)
-    to_do_list = ToDoList.objects.get(pk=list_id)
+    task = Task2.objects.get(pk=task_id)
+    to_do_list = ToDoList2.objects.get(pk=list_id)
     to_do_list.tasks.remove(task)
     to_do_list.save()
     sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)

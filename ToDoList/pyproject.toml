@@ -1,0 +1,65 @@
+[tool.ruff]
+line-length = 88
+# Exclude specific directories or files if necessary
+exclude = [
+    "migrations",  # Ignore Django migration files
+    "node_modules",  # Ignore node_modules directory
+    "static",
+    "venv",
+    ".venv",  # Ignore virtual environment directory
+    ".gitlab",
+    "creator/utils/triboon_recommender.py",
+    "publisher_bot/bot/base/bot.py",
+    "publisher/models/pre_paid_leftover_contract.py",
+    "publisher/models/backlink/base_plan.py",
+    "link_pro/utils/providers/google/engine.py",
+    "link_pro/tasks/remove_duplicate_keywords.py",
+    "link_pro/models/keyword.py",
+    "external/utils/html_to_docx.py",
+    "external/utils/extractor_v2.py",
+    "external/utils.py",
+    "external/models/reportage_heading.py",
+    "external/models/check_reportage_history.py",
+    "creator/serializers/backlink/backlink_bulk.py",
+    "creator/models/invoice.py",
+    "core/models/custom_authentication.py",
+    "core/meta.py",
+    "core/admin/simple_history.py",
+    "core/admin/jalali_display.py",
+    "content/views/creator/cart_get_price_view.py",
+    "content/admin/views/create_campaign_view.py",
+    "content/admin/creator/content_admin.py",
+    "_helpers/script.py",
+    "_base/utils/LimitOffsetPagination.py",
+    "creator/models/check_reportage_history.py",
+    "__init__.py"
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # PEP8 errors
+    "F",  # Pyflakes
+    "I",  # Import conventions
+    "N",  # PEP 8 naming conventions
+    "DJ", # Django-specific linting rules
+]
+
+# Ignore specific rules that might be too strict for Django projects
+#ignore = [
+#    "F401",  # Ignore imported but unused errors
+#    "F841",  # Ignore Local variable is assigned to but never used
+#    "F811",  # Redefinition of unused
+#    "DJ001", # Avoid using `null=True` on string-based fields such as `CharField`,
+#    "E501",  # Ignore line length rule
+#    "DJ007", # Do not use `__all__` with `ModelForm`, use `fields` instead
+#    "E722",  # Do not use bare `except`
+#    "F405",  # Avoid Star import, may be undefined, or defined from star imports
+#    "F403",  # Avoid start import,  from * used; unable to detect undefined names
+#    "DJ008", # Model does not define `__str__` method
+#    "DJ006", # Do not use `exclude` with `ModelForm`, use `fields` instead
+#
+#
+#]
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "double"

@@ -1,7 +1,21 @@
 from django.urls import path
 
-from ToDoListApp.version3.views import RegisterLogin3, Register3, Login3, ShowLists3, CreateList3, EditList3, DeleteList3, \
-    GetList3, CreateTask3, EditTask3, DeleteTask3, GetTask3, ShareTask3, AddSharedTasks3
+from ToDoListApp.version3.views import (
+    AddSharedTasks3,
+    CreateList3,
+    CreateTask3,
+    DeleteList3,
+    DeleteTask3,
+    EditList3,
+    EditTask3,
+    GetList3,
+    GetTask3,
+    Login3,
+    Register3,
+    RegisterLogin3,
+    ShareTask3,
+    ShowLists3,
+)
 
 v3_urlpatterns = [
     # path("to-do-list/app/opening/", RegisterLogin3.as_view(), name='opening'),

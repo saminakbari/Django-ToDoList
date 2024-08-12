@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms.create_task_form import CreateTaskForm
-from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models import Task, Task2, ToDoList, ToDoList2
 
 
 @login_required
@@ -14,9 +14,9 @@ def create_task(request, list_id):
             description = form.cleaned_data['description']
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
-            task = Task(title=title, description=description, deadline=deadline, priority=priority)
+            task = Task2(title=title, description=description, deadline=deadline, priority=priority)
             task.save()
-            to_do_list = ToDoList.objects.get(pk=list_id)
+            to_do_list = ToDoList2.objects.get(pk=list_id)
             task.to_do_lists.add(to_do_list)
             task.owner = to_do_list.owner
             task.save()
