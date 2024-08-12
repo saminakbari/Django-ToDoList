@@ -14,3 +14,4 @@ class CreateList3(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super(CreateList3, self).form_valid(form)
+

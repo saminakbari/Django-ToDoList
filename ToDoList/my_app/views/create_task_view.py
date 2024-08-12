@@ -19,7 +19,6 @@ def create_task(request, list_id):
             task.to_do_lists.add(to_do_list)
             task.owner = to_do_list.owner
             task.save()
-            # return redirect(to="http://localhost:8000/to-do-list/get/{}/".format(list_id))
 
             sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
             sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)

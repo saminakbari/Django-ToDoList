@@ -9,6 +9,6 @@ class CreateTaskForm(forms.Form):
     priority = forms.ChoiceField(widget=forms.Select(), label="Priority", choices=Task.PRIORITY_CHOICES, initial='2')
     deadline = forms.DateField(label="Deadline")
 
-    class Meta:
-        models = Task2
-        fields = ['title', 'description', 'priority', 'deadline']
+    # class Meta:
+    #     models = Task2
+    #     fields = ['title', 'description', 'priority', 'deadline']
