@@ -1,4 +1,4 @@
-{% block content %}
+
     <h1>Tasks shared with me</h1>
     <form method="post">
         {% csrf_token %}
@@ -18,4 +18,3 @@
             <a href="http://localhost:8000/to-do-list/get/{{ to_do_list.list_id }}/">back to list</a>
         </p>
     </form>
-{% endblock %}

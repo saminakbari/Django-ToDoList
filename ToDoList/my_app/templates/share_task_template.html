@@ -1,4 +1,4 @@
-{% block content %}
+
     <h1>Share task</h1>
     <form method="post">
         {% csrf_token %}
@@ -9,4 +9,3 @@
         <input id="receiver_username" name="receiver_username" type="text" maxlength="100">
         <input type="submit" value="Share">
     </form>
-{% endblock %}

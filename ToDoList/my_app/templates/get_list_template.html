@@ -1,4 +1,4 @@
-{% block content %}
+
     <h1>{{ to_do_list.title }}</h1>
     <form method="post">
         {% csrf_token %}
@@ -10,33 +10,32 @@
             {% for task in tasks %}
                 <tr>
                     <td>{{ task.title }}</td>
-                    <td><a href="http://localhost:8000/task/get/{{ task.task_id }}/">details</a></td>
+                    <td><a href="{% url 'v1-get-task' task_id=task.task_id %}">details</a></td>
                     {% if task.owner == user %}
                         <td>
-                            <a href="http://localhost:8000/task/edit/{{ task.task_id }}/{{ to_do_list.list_id }}/">edit</a>
+                            <a href="{% url 'v1-edit-task' task_id=task.task_id list_id=to_do_list.list_id %}">edit</a>
                         </td>
                     {% endif %}
                     <td>
-                        <a href="http://localhost:8000/task/delete/{{ task.task_id }}/{{ to_do_list.list_id }}/">delete</a>
+                        <a href="{% url 'v1-delete-task' task_id=task.task_id list_id=to_do_list.list_id %}">delete</a>
                     </td>
                     {% if task.owner == user %}
-                        <td><a href="http://localhost:8000/task/share/{{ task.task_id }}/">share</a></td>
+                        <td><a href="{% url 'v1-share-task' task_id=task.task_id %}">share</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}
         </table>
         <br>
         <p>
-            <a href="http://localhost:8000/task/create/{{ to_do_list.list_id }}/">Create a new task</a>
+            <a href="{% url 'v1-create-task' list_id=to_do_list.list_id %}">Create a new task</a>
         </p>
         <p>
-            <a href="http://localhost:8000/task/shared-tasks/{{ user.username }}/{{ to_do_list.list_id }}/">
+            <a href="{% url 'v1-add-shared-task' list_id=to_do_list.list_id %}">
                 Tasks shared with me</a>
         </p>
         <br>
         <p>
-            <a href="http://localhost:8000/to-do-list/showall/{{ user.username }}/">back</a>
+            <a href="{% url 'v1-show-lists' %}">back</a>
         </p>
 
     </form>
-{% endblock %}

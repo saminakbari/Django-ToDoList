@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from my_app.models import ToDoList, MyUser
 
 
-def edit_to_do_list(request, list_id, username):
+def edit_list(request, list_id, username):
     to_do_list = ToDoList.objects.get(pk=list_id)
     if request.method == 'POST':
         title = request.POST.get('title')
