@@ -10,8 +10,8 @@ def delete_task(request, task_id: int, list_id):
     to_do_list = ToDoList2.objects.get(pk=list_id)
     to_do_list.tasks.remove(task)
     to_do_list.save()
-    sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
-    sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
+
+    sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
     return render(request, "get_list_template.html",
                   {"tasks": sorted_tasks, "user": to_do_list.owner,
                    "message": "Task deleted successfully.", "to_do_list": to_do_list})

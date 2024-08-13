@@ -9,8 +9,7 @@ def get_list(request, list_id):
     if request.method == "GET":
         to_do_list = ToDoList2.objects.get(pk=list_id)
 
-        sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
-        sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
+        sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
 
         return render(
             request,
