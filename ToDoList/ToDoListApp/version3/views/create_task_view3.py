@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 
-from ToDoListApp.forms import CreateTaskForm
 from ToDoListApp.models import Task2, ToDoList2
 
 

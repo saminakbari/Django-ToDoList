@@ -6,7 +6,6 @@ from ToDoListApp.models import ToDoList2
 
 @login_required
 def get_list(request, list_id):
-    jnhkj = 'nvbh'
     if request.method == "GET":
         to_do_list = ToDoList2.objects.get(pk=list_id)
 

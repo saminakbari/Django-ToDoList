@@ -1,4 +1,4 @@
-from django.views.generic import RedirectView, TemplateView
+from django.views.generic import TemplateView
 
 
 class RegisterLogin3(TemplateView):

@@ -7,7 +7,8 @@ from ToDoListApp.models import MyUser, ToDoList
 class EditList(View):
     def get(self, request, list_id, username):
         to_do_list = ToDoList.objects.get(pk=list_id)
-        return render(request, "v2_edit_list_title_template.html", {'to_do_list': to_do_list})
+        return render(request, "v2_edit_list_title_template.html",
+                      {'to_do_list': to_do_list})
 
     def post(self, request, list_id, username):
         to_do_list = ToDoList.objects.get(pk=list_id)

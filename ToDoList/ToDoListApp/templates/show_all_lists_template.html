@@ -10,9 +10,9 @@
         {% for to_do_list in to_do_lists %}
             <tr>
                 <td>{{ to_do_list.title }}</td>
-                <td><a href="{% url 'v1-get-list' list_id=to_do_list.list_id %}">view</a></td>
-                <td><a href="{% url 'v1-edit-list' list_id=to_do_list.list_id %}">change title</a></td>
-                <td><a href="{% url 'v1-delete-list' list_id=to_do_list.list_id %}">delete</a></td>
+                <td><a href="{% url 'v1-get-list' list_id=to_do_list.id %}">view</a></td>
+                <td><a href="{% url 'v1-edit-list' list_id=to_do_list.id %}">change title</a></td>
+                <td><a href="{% url 'v1-delete-list' list_id=to_do_list.id %}">delete</a></td>
             </tr>
         {% endfor %}
     </table>

@@ -10,27 +10,27 @@
             {% for task in tasks %}
                 <tr>
                     <td>{{ task.title }}</td>
-                    <td><a href="{% url 'v1-get-task' task_id=task.task_id %}">details</a></td>
+                    <td><a href="{% url 'v1-get-task' task_id=task.id %}">details</a></td>
                     {% if task.owner == user %}
                         <td>
-                            <a href="{% url 'v1-edit-task' task_id=task.task_id list_id=to_do_list.list_id %}">edit</a>
+                            <a href="{% url 'v1-edit-task' task_id=task.id list_id=to_do_list.id %}">edit</a>
                         </td>
                     {% endif %}
                     <td>
-                        <a href="{% url 'v1-delete-task' task_id=task.task_id list_id=to_do_list.list_id %}">delete</a>
+                        <a href="{% url 'v1-delete-task' task_id=task.id list_id=to_do_list.id %}">delete</a>
                     </td>
                     {% if task.owner == user %}
-                        <td><a href="{% url 'v1-share-task' task_id=task.task_id %}">share</a></td>
+                        <td><a href="{% url 'v1-share-task' task_id=task.id %}">share</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}
         </table>
         <br>
         <p>
-            <a href="{% url 'v1-create-task' list_id=to_do_list.list_id %}">Create a new task</a>
+            <a href="{% url 'v1-create-task' list_id=to_do_list.id %}">Create a new task</a>
         </p>
         <p>
-            <a href="{% url 'v1-add-shared-tasks' list_id=to_do_list.list_id %}">
+            <a href="{% url 'v1-add-shared-tasks' list_id=to_do_list.id %}">
                 Tasks shared with me</a>
         </p>
         <br>

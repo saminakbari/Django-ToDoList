@@ -22,4 +22,5 @@ class ShareTask(View):
                    {"message": "You have already shared this task with this user."})
 
         receiver_user.tasks_shared_with_user.add(task)
-        return render(request, "v2_share_task_template.html", {"message": "Task is shared successfully."})
+        return render(request, "v2_share_task_template.html",
+                      {"message": "Task is shared successfully."})

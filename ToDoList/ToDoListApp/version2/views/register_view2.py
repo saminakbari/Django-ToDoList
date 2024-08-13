@@ -18,4 +18,5 @@ class Register(View):
             user.save()
             return redirect("http://localhost:8000/v2/to-do-list/showall/" + username + "/")
         else:
-            return render(request, "v2_register_template.html", {'message': 'Username already exists.'})
+            return render(request, "v2_register_template.html",
+                          {'message': 'Username already exists.'})

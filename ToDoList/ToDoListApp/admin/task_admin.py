@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from ToDoListApp.models import Task
+from ToDoListApp.models import Task2
 
 
-@admin.register(Task)
+@admin.register(Task2)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_id', 'title', 'description', 'deadline', 'priority', 'owner')
+    list_display = ('id', 'title', 'description', 'deadline', 'priority', 'owner')

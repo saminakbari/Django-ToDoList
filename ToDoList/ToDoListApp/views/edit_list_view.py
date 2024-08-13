@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
-from ToDoListApp.models import MyUser, ToDoList, ToDoList2
+from ToDoListApp.models import ToDoList2
 
 
 @login_required
@@ -17,4 +16,5 @@ def edit_list(request, list_id):
                       {"to_do_lists": user.to_do_lists.all(), "username": user.username,
                        "message": "List edited successfully."})
     else:
-        return render(request, "edit_list_title_template.html", {'to_do_list': to_do_list})
+        return render(request, "edit_list_title_template.html",
+                      {'to_do_list': to_do_list})

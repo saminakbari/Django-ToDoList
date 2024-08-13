@@ -14,7 +14,7 @@
                         </td>
                     {% else %}
                         <td>
-                            <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
                             <button type="submit" value="Add task" name="add"></button>
                         </td>
                     {% endif %}
@@ -23,7 +23,6 @@
             {% endfor %}
         </table>
         <p>
-            <a href="{% url 'v1-get-list' list_id=to_do_list.list_id %}">back to list</a>
-{#            <a href="http://localhost:8000/to-do-list/get/{{ to_do_list.list_id }}/">back to list</a>#}
+            <a href="{% url 'v1-get-list' list_id=to_do_list.id %}">back to list</a>
         </p>
     </form>
