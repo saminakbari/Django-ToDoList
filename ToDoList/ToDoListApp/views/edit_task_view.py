@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -19,6 +20,7 @@ def edit_task(request, task_id, list_id):
         task.save()
         to_do_list = ToDoList2.objects.get(pk=list_id)
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
-        return render(request, "get_list_template.html", {"tasks": sorted_tasks,
-                       "to_do_list": to_do_list, "user": to_do_list.owner,
-                       "message": "Task edited successfully."})
+        messages.add_message(request, messages.INFO, "Task edited successfully.")
+        return render(request, "get_list_template.html",
+                      {"tasks": sorted_tasks, "to_do_list": to_do_list,
+                       "user": to_do_list.owner})

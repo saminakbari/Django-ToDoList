@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -23,9 +24,10 @@ def create_task(request, list_id):
             task.owner = to_do_list.owner
             task.save()
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
+            messages.add_message(request, messages.INFO, "Task created successfully.")
             return render(request, "get_list_template.html",
                           {"tasks": sorted_tasks, "to_do_list": to_do_list,
-                           "user": to_do_list.owner, "message": "Task created successfully."})
+                           "user": to_do_list.owner})
 
     else:
         form = CreateTaskForm(initial={'priority': '2'})

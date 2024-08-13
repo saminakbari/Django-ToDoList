@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.contrib import messages
 
 from ToDoListApp.forms.create_list_form import CreateListForm
 from ToDoListApp.models import ToDoList2
@@ -14,9 +15,11 @@ def create_list(request):
             user = request.user
             to_do_list = ToDoList2(title=title, owner=user)
             to_do_list.save()
+            messages.add_message(request, messages.INFO, "List created successfully.")
             return render(request, "show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(),
-                           "username": user.username, "message": "List created successfully."})
+                           "username": user.username})
+
     else:
         form = CreateListForm()
         return render(request, 'create_list_template.html', {"form": form})

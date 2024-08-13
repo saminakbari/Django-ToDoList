@@ -1,9 +1,13 @@
 {% load static %}
 
 <h1>All to-do lists</h1>
-{% if message %}
-    <script>alert("{{ message }}")</script>
-{% endif %}
+{#{% if message %}#}
+{#    <script>alert("{{ message }}")</script>#}
+{#{% endif %}#}
+
+
+
+
 <form method="post">
     {% csrf_token %}
     <table>
@@ -21,3 +25,12 @@
         <a href="{% url 'v1-create-list' %}">Create a new list</a>
     </p>
 </form>
+
+<br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}

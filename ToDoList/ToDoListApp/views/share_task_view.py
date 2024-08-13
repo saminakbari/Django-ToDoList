@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -12,16 +13,17 @@ def share_task(request, task_id):
         try:
             receiver_user = MyUser.objects.get(username=receiver_username)
         except MyUser.DoesNotExist:
-            return render(request, "share_task_template.html",
-                          {"message": "Username does not exist"})
+            messages.add_message(request, messages.INFO, "Username does not exist")
+            return render(request, "share_task_template.html")
 
         if task in receiver_user.tasks_shared_with_user.all():
-            render(request, "share_task_template.html",
-                   {"message": "You have already shared this task with this user."})
+            messages.add_message(request, messages.INFO,
+                                 "You have already shared this task with this user.")
+            return render(request, "share_task_template.html")
 
         receiver_user.tasks_shared_with_user.add(task)
-        return render(request, "share_task_template.html",
-                      {"message": "Task is shared successfully."})
+        messages.add_message(request, messages.INFO, "Task is shared successfully.")
+        return render(request, "share_task_template.html")
 
     else:
         return render(request, "share_task_template.html")
