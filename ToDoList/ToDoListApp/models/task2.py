@@ -26,12 +26,12 @@ def validate_date(date):
     if not re.match("^\\d{4}-\\d{2}-\\d{2}$", str(date)):
         raise ValidationError("The date format must be: yyyy-mm-dd.")
     if date < Date.today():
-        raise ValidationError("The deadline cannot be in pas.")
+        raise ValidationError("The deadline cannot be in the past!")
 
 
 def validate_priority(priority):
     if not priority == '1' or priority == '2' or priority == '3':
-        raise ValidationError("Priority error!!!!!!!!!")
+        raise ValidationError("Priority can only be 'High', 'Low', or 'Medium'.")
         # TODO: correct this function
 
 

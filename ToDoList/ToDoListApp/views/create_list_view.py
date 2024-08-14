@@ -19,7 +19,10 @@ def create_list(request):
             return render(request, "show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(),
                            "username": user.username})
+        else:
+            errors = form.errors.items()
+            for error in errors:
+                messages.add_message(request, messages.ERROR, error[1][0])
 
-    else:
-        form = CreateListForm()
-        return render(request, 'create_list_template.html', {"form": form})
+    form = CreateListForm()
+    return render(request, 'create_list_template.html', {"form": form})

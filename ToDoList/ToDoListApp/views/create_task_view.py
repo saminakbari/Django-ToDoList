@@ -32,9 +32,6 @@ def create_task(request, list_id):
             errors = form.errors.items()
             for error in errors:
                 messages.add_message(request, messages.ERROR, error[1][0])
-            form = CreateTaskForm(initial={'priority': '2'})
-            return render(request, "create_task_template.html", {"form": form})
 
-    else:
-        form = CreateTaskForm(initial={'priority': '2'})
-        return render(request, "create_task_template.html", {"form": form})
+    form = CreateTaskForm(initial={'priority': '2'})
+    return render(request, "create_task_template.html", {"form": form})
