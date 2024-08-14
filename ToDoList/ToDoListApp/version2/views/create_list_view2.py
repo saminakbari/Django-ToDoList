@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.views import View
 
-from ToDoListApp.forms import CreateListForm
+from ToDoListApp.forms import ListForm
 from ToDoListApp.models import MyUser, ToDoList
 
 
 class CreateList(View):
     def get(self, request, username):
-        form = CreateListForm()
+        form = ListForm()
         return render(request, 'v2_create_list_template.html', {"form": form})
 
     def post(self, request, username):
-        form = CreateListForm(request.POST)
+        form = ListForm(request.POST)
         if form.is_valid():
             title = form.get_title()
             user = MyUser.objects.get(username=username)

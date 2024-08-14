@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.views import View
 
-from ToDoListApp.forms import CreateTaskForm
+from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
 class CreateTask(View):
     def get(self, request, list_id):
-        form = CreateTaskForm(initial={'priority': '2'})
+        form = TaskForm(initial={'priority': '2'})
         return render(request, "v2_create_task_template.html", {"form": form})
 
     def post(self, request, list_id):
-        form = CreateTaskForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']

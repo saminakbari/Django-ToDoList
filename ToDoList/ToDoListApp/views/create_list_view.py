@@ -2,18 +2,20 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib import messages
 
-from ToDoListApp.forms.create_list_form import CreateListForm
+from ToDoListApp.forms.list_form import ListForm
 from ToDoListApp.models import ToDoList2
 
 
 @login_required
 def create_list(request):
     if request.method == 'POST':
-        form = CreateListForm(request.POST)
+        form = ListForm(request.POST)
         if form.is_valid():
-            title = form.get_title()
             user = request.user
-            to_do_list = ToDoList2(title=title, owner=user)
+            to_do_list = ToDoList2(owner=user)
+            title = form.get_title()
+            if title:
+                to_do_list.title = title
             to_do_list.save()
             messages.add_message(request, messages.INFO, "List created successfully.")
             return render(request, "show_all_lists_template.html",
@@ -24,5 +26,5 @@ def create_list(request):
             for error in errors:
                 messages.add_message(request, messages.ERROR, error[1][0])
 
-    form = CreateListForm()
+    form = ListForm()
     return render(request, 'create_list_template.html', {"form": form})

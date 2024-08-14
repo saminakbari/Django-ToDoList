@@ -2,22 +2,30 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from ToDoListApp.forms.create_task_form import CreateTaskForm
+from ToDoListApp.forms.task_form import TaskForm
 from ToDoListApp.models import Task2, ToDoList2
 
 
 @login_required
 def create_task(request, list_id):
     if request.method == 'POST':
-        form = CreateTaskForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data['title']
             description = ''
             if form.data['description']:
                 description = form.cleaned_data['description']
+            title = form.cleaned_data['title']
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
-            task = Task2(title=title, description=description, deadline=deadline, priority=priority)
+
+            file = form.data['attachment']
+            # file = request.FILES['attachment']
+
+            task = Task2(description=description, priority=priority, attachment=file)
+            if title:
+                task.title = title
+            if deadline:
+                task.deadline = deadline
             task.save()
             to_do_list = ToDoList2.objects.get(pk=list_id)
             task.to_do_lists.add(to_do_list)
@@ -33,5 +41,5 @@ def create_task(request, list_id):
             for error in errors:
                 messages.add_message(request, messages.ERROR, error[1][0])
 
-    form = CreateTaskForm(initial={'priority': '2'})
+    form = TaskForm(initial={'priority': '2'})
     return render(request, "create_task_template.html", {"form": form})

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task2, ToDoList2
 
 
@@ -9,18 +10,28 @@ from ToDoListApp.models import Task2, ToDoList2
 def edit_task(request, task_id, list_id):
     task = Task2.objects.get(pk=task_id)
     if request.method == 'GET':
+        form = TaskForm(initial={'title': task.title, 'description': task.description,
+                                 'deadline': task.deadline, 'priority': task.priority})
         return render(request, "edit_task_template.html",
-                      {"task": task})
+                      {"task": task, "form": form})
 
     else:
-        task.title = request.POST.get('title')
-        task.description = request.POST.get('description')
-        task.deadline = request.POST.get('deadline')
-        task.priority = request.POST.get('priority')
-        task.save()
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task.title = form.cleaned_data['title']
+            task.description = form.cleaned_data['description']
+            task.deadline = form.cleaned_data['deadline']
+            task.priority = form.cleaned_data['priority']
+            task.save()
+            messages.add_message(request, messages.INFO, "Task edited successfully.")
+
+        else:
+            errors = form.errors.items()
+            for error in errors:
+                messages.add_message(request, messages.ERROR, error[1][0])
+
         to_do_list = ToDoList2.objects.get(pk=list_id)
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
-        messages.add_message(request, messages.INFO, "Task edited successfully.")
         return render(request, "get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list,
                        "user": to_do_list.owner})

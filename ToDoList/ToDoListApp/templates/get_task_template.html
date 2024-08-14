@@ -1,19 +1,26 @@
-
-    <h1>{{ task.title }}</h1>
-    <form method="post">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>description:</td>
-                <td>{{ task.description }}</td>
-            </tr>
-            <tr>
-                <td>deadline:</td>
-                <td>{{ task.deadline }}</td>
-            </tr>
-            <tr>
-                <td>priority:</td>
-                <td>{{ priority }}</td>
-            </tr>
-        </table>
-    </form>
+<h1>{{ task.title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>description:</td>
+            <td>{{ task.description }}</td>
+        </tr>
+        <tr>
+            <td>deadline:</td>
+            <td>{{ task.deadline }}</td>
+        </tr>
+        <tr>
+            <td>priority:</td>
+            <td>{{ priority }}</td>
+        </tr>
+        <tr>
+            <td>attachment:</td>
+            {% if task.attachment %}
+                <td><button formaction="{{ task.attachment.url }}">{{ task.attachment.name }}</button></td>
+            {% else %}
+                <td>no attachment file</td>
+            {% endif %}
+        </tr>
+    </table>
+</form>
