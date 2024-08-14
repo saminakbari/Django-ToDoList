@@ -58,7 +58,7 @@ class Task2(models.Model):
                               null=True)
 
     attachment = models.FileField(verbose_name='فایل ضمیمه', null=True, blank=True,
-                                  upload_to="")
+                                  upload_to="media_files")
 
     def __str__(self):
         return "task: " + self.title

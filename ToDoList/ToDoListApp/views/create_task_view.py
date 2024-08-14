@@ -18,19 +18,17 @@ def create_task(request, list_id):
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
 
-            file = form.data['attachment']
-            # file = request.FILES['attachment']
+            # file = form.data['attachment']
+            file = request.FILES['attachment']
 
-            task = Task2(description=description, priority=priority, attachment=file)
+            to_do_list = ToDoList2.objects.get(pk=list_id)
+            task = Task2(description=description, priority=priority, attachment=file, owner=to_do_list.owner)
             if title:
                 task.title = title
             if deadline:
                 task.deadline = deadline
             task.save()
-            to_do_list = ToDoList2.objects.get(pk=list_id)
             task.to_do_lists.add(to_do_list)
-            task.owner = to_do_list.owner
-            task.save()
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
             messages.add_message(request, messages.INFO, "Task created successfully.")
             return render(request, "get_list_template.html",
