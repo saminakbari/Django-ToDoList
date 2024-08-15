@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.forms import ListForm
-from ToDoListApp.models import MyUser, ToDoList
+from ToDoListApp.models import ToDoList
 
 
 class CreateList(LoginRequiredMixin, View):
@@ -15,10 +16,10 @@ class CreateList(LoginRequiredMixin, View):
         form = ListForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
-            user = MyUser.objects.get(username=username)
+            user = User.objects.get(username=username)
             to_do_list = ToDoList(title=title, owner=user)
             to_do_list.save()
-            user = MyUser.objects.get(username=username)
+            user = User.objects.get(username=username)
             return render(request, "v2_show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(), "username": username,
                            "message": "List created successfully."})

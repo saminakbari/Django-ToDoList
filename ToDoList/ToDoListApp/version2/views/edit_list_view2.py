@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views import View
 
-from ToDoListApp.models import MyUser, ToDoList
+from ToDoListApp.models import ToDoList
 
 
 class EditList(LoginRequiredMixin, View):
@@ -16,7 +17,7 @@ class EditList(LoginRequiredMixin, View):
         title = request.POST.get('title')
         to_do_list.title = title
         to_do_list.save()
-        user = MyUser.objects.get(username=username)
+        user = User.objects.get(username=username)
         return render(request, "v2_show_all_lists_template.html",
                       {"to_do_lists": user.to_do_lists.all(), "username": username,
                        "message": "List edited successfully."})

@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
-from ToDoListApp.models import MyUser, Task
+from ToDoListApp.models import Task
 
 
 @login_required
@@ -11,8 +12,8 @@ def share_task(request, task_id):
         task = Task.objects.get(pk=task_id)
         receiver_username = request.POST.get('receiver_username')
         try:
-            receiver_user = MyUser.objects.get(username=receiver_username)
-        except MyUser.DoesNotExist:
+            receiver_user = User.objects.get(username=receiver_username)
+        except User.DoesNotExist:
             messages.add_message(request, messages.INFO, "Username does not exist")
             return render(request, "share_task_template.html")
 
