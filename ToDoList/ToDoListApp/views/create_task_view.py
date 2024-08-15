@@ -12,17 +12,20 @@ def create_task(request, list_id):
         form = TaskForm(request.POST)
         if form.is_valid():
             description = ''
-            if form.data['description']:
+            if form.cleaned_data['description']:
                 description = form.cleaned_data['description']
             title = form.cleaned_data['title']
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
-
-            # file = form.data['attachment']
-            file = request.FILES['attachment']
-
             to_do_list = ToDoList2.objects.get(pk=list_id)
-            task = Task2(description=description, priority=priority, attachment=file, owner=to_do_list.owner)
+            task = Task2.objects.create(description=description, priority=priority, owner=to_do_list.owner)
+
+            try:
+                file = request.FILES['attachment']
+                task.attachment = file
+            except:
+                pass
+
             if title:
                 task.title = title
             if deadline:

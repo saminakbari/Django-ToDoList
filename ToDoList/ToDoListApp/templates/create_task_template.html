@@ -1,7 +1,15 @@
 <h1>Create task</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+
+    <table>
+    {% for field in form %}
+        <tr>
+            <td>{{ field.label }} {{ field }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
     <button type="submit">OK</button>
 </form>
 

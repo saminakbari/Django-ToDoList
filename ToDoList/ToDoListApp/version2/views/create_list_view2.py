@@ -13,7 +13,7 @@ class CreateList(View):
     def post(self, request, username):
         form = ListForm(request.POST)
         if form.is_valid():
-            title = form.get_title()
+            title = form.cleaned_data['title']
             user = MyUser.objects.get(username=username)
             to_do_list = ToDoList(title=title, owner=user)
             to_do_list.save()
