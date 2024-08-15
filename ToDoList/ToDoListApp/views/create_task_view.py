@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms.task_form import TaskForm
-from ToDoListApp.models import Task2, ToDoList2
+from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
@@ -17,8 +17,8 @@ def create_task(request, list_id):
             title = form.cleaned_data['title']
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
-            to_do_list = ToDoList2.objects.get(pk=list_id)
-            task = Task2.objects.create(description=description, priority=priority, owner=to_do_list.owner)
+            to_do_list = ToDoList.objects.get(pk=list_id)
+            task = Task.objects.create(description=description, priority=priority, owner=to_do_list.owner)
 
             try:
                 file = request.FILES['attachment']

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from ToDoListApp.forms.list_form import ListForm
-from ToDoListApp.models import ToDoList2
+from ToDoListApp.models import ToDoList
 
 
 @login_required
@@ -12,7 +12,7 @@ def create_list(request):
         form = ListForm(request.POST)
         if form.is_valid():
             user = request.user
-            to_do_list = ToDoList2(owner=user)
+            to_do_list = ToDoList(owner=user)
             title = form.cleaned_data['title']
             if title:
                 to_do_list.title = title

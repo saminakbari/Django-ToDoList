@@ -1,10 +1,14 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-from ToDoListApp.models import MyUser
+from ToDoListApp.models.task import validate_title
 
 
 class ToDoList(models.Model):
-    list_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE,
-                              related_name="to_do_lists", default=None)
+    title = models.CharField(max_length=100, default="new-list", null=False,
+                             verbose_name='عنوان', validators=[validate_title])
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,
+                              related_name="to_do_lists", null=True, verbose_name='صاحب')
+
+    def __str__(self):
+        return "list: " + self.title

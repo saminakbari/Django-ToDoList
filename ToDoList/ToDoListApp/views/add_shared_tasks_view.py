@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from ToDoListApp.models import Task, ToDoList2
+from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
 def add_shared_tasks(request, list_id):
     user = request.user
-    to_do_list = ToDoList2.objects.get(id=list_id)
+    to_do_list = ToDoList.objects.get(id=list_id)
     shared_tasks = user.tasks_shared_with_user.all()
     if request.method == 'POST':
         task_id = request.POST.get('task_id')

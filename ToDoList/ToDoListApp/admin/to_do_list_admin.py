@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from ToDoListApp.models import ToDoList2
+from ToDoListApp.models import ToDoList
 
 
-@admin.register(ToDoList2)
+@admin.register(ToDoList)
 class ToDoListAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import Task
-from ToDoListApp.models.task2 import get_priority
+from ToDoListApp.models.task import get_priority
 
 
 class GetTask(View):

@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms import TaskForm
-from ToDoListApp.models import Task2, ToDoList2
-from ToDoListApp.models.task2 import get_priority
+from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models.task import get_priority
 
 
 @login_required
 def edit_task(request, task_id, list_id):
-    task = Task2.objects.get(pk=task_id)
+    task = Task.objects.get(pk=task_id)
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -35,7 +35,7 @@ def edit_task(request, task_id, list_id):
             for error in errors:
                 messages.add_message(request, messages.ERROR, error[1][0])
 
-        to_do_list = ToDoList2.objects.get(pk=list_id)
+        to_do_list = ToDoList.objects.get(pk=list_id)
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
         return render(request, "get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list,

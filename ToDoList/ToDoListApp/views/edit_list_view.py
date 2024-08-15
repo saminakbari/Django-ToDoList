@@ -3,12 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms import ListForm
-from ToDoListApp.models import ToDoList2
+from ToDoListApp.models import ToDoList
 
 
 @login_required
 def edit_list(request, list_id):
-    to_do_list = ToDoList2.objects.get(pk=list_id)
+    to_do_list = ToDoList.objects.get(pk=list_id)
     if request.method == 'POST':
         form = ListForm(request.POST)
         if form.is_valid():
