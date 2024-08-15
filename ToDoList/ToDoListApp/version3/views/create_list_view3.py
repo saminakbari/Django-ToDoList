@@ -8,7 +8,7 @@ class CreateList3(LoginRequiredMixin, CreateView):
     model = ToDoList
     fields = ["title"]
     template_name = "v3/v3_create_list_template.html"
-    success_url = "http://localhost:8000/v3/to-do-list/showall/"
+    success_url = "'ToDoListApp.version3.urls.v3_urlpatterns.show_lists'"
 
     def form_valid(self, form):
         form.instance.owner = self.request.user

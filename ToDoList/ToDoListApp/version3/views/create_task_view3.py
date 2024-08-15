@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 from django.views.generic import CreateView
 
 from ToDoListApp.models import Task, ToDoList
@@ -14,15 +15,6 @@ class CreateTask3(LoginRequiredMixin, CreateView):
         list_id = self.kwargs['list_id']
         to_do_list = ToDoList.objects.get(pk=list_id)
         form.instance.to_do_lists.add(to_do_list)
-        self.success_url = "http://localhost:8000/v3/to-do-list/get/" + str(list_id) + "/"
+        # self.success_url = "http://localhost:8000/v3/to-do-list/get/" + str(list_id) + "/"
+        reverse('v3-get-list', kwargs={'list_id': list_id})
         return super(CreateTask3, self).form_valid(form)
-
-    def post(self, request, *args, **kwargs):
-        list_id = self.kwargs['list_id']
-        self.success_url = "http://localhost:8000/v3/to-do-list/get/" + str(list_id) + "/"
-        return super(CreateTask3, self).post(request)
-
-    def get(self, request, *args, **kwargs):
-        list_id = self.kwargs['list_id']
-        self.success_url = "http://localhost:8000/v3/to-do-list/get/" + str(list_id) + "/"
-        return super(CreateTask3, self).get(request)
