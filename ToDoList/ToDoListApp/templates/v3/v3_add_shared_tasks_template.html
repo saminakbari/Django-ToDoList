@@ -15,6 +15,6 @@
             <br>
         {% endfor %}
         <p>
-            <a href="http://localhost:8000/to-do-list/get/{{ to_do_list.list_id }}/">back to list</a>
+            <a href="{% url 'v3-get-list' list_id=to_do_list.list_id %}">back to list</a>
         </p>
     </form>

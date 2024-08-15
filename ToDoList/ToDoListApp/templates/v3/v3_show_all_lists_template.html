@@ -9,18 +9,13 @@
 
         {% for to_do_list in to_do_lists %}
             <p>{{ to_do_list.title }}
-                <a href="http://localhost:8000/v3/to-do-list/get/{{ to_do_list.list_id }}/">view</a>
-                <a href="http://localhost:8000/v3/to-do-list/edit/{{ to_do_list.list_id }}/">change
-                    title</a>
-                <a href="http://localhost:8000/v3/to-do-list/delete/{{ to_do_list.list_id }}/">delete</a>
+                <a href="{% url 'v3-get-list' list_id=to_do_list.list_id %}">view</a>
+                <a href="{% url 'v3-edit-list' list_id=to_do_list.list_id %}">change title</a>
+                <a href="{% url 'v3-delete-list' list_id=to_do_list.list_id %}">delete</a>
             </p>
         {% endfor %}
         <br>
         <p>
-            <a href="http://localhost:8000/v3/to-do-list/create/">Create a new list</a>
-        </p>
-        <br>
-        <p>
-            <a href="http://localhost:8000/admin/logout/">log out</a>
+            <a href="{% url 'v3-create-list' %}">Create a new list</a>
         </p>
     </form>
