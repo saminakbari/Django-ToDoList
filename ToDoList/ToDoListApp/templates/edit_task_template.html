@@ -5,7 +5,11 @@
     <table>
         {% for field in form %}
             <tr>
-                <td>{{ field.label }} {{ field }}</td>
+                {% if field.label ==  'Attachment' %}
+                    <td>{{ field.label }}: {{ field }}</td>
+                {% else %}
+                    <td>{{ field.label }}: {{ field }}</td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

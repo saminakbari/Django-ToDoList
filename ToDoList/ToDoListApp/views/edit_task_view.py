@@ -22,6 +22,11 @@ def edit_task(request, task_id, list_id):
                 task.attachment = file
             except:
                 pass
+            try:
+                if form.data['attachment-clear'] == 'on':
+                    task.attachment.delete()
+            except:
+                pass
             task.save()
             messages.add_message(request, messages.INFO, "Task edited successfully.")
 
@@ -38,6 +43,7 @@ def edit_task(request, task_id, list_id):
 
     else:
         form = TaskForm(initial={'title': task.title, 'description': task.description,
-                                 'deadline': task.deadline, 'priority': task.priority})
+                                 'deadline': task.deadline, 'priority': task.priority,
+                                 'attachment': task.attachment})
         return render(request, "edit_task_template.html",
                       {"task": task, "form": form})
