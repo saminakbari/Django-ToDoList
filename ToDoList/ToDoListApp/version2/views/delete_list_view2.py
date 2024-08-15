@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import MyUser, ToDoList
 
 
-class DeleteList(View):
+class DeleteList(LoginRequiredMixin, View):
     def get(self, request, list_id, username):
         to_do_list = ToDoList.objects.get(pk=list_id)
         to_do_list.delete()

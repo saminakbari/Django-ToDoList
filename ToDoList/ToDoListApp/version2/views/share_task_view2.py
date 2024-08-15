@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import MyUser, Task
 
 
-class ShareTask(View):
+class ShareTask(LoginRequiredMixin, View):
     def get(self, request, task_id):
         return render(request, "v2_share_task_template.html")
 

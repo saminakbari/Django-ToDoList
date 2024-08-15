@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
@@ -5,7 +6,7 @@ from ToDoListApp.forms import ListForm
 from ToDoListApp.models import MyUser, ToDoList
 
 
-class CreateList(View):
+class CreateList(LoginRequiredMixin, View):
     def get(self, request, username):
         form = ListForm()
         return render(request, 'v2_create_list_template.html', {"form": form})

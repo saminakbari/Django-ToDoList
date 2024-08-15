@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import Task, ToDoList
 
 
-class EditTask(View):
+class EditTask(LoginRequiredMixin, View):
     def get(self, request, list_id, task_id):
         task = Task.objects.get(pk=task_id)
         return render(request, "v2_edit_task_template.html", {"task": task})

@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import MyUser
 
 
-class ShowLists(View):
+class ShowLists(LoginRequiredMixin, View):
     def get(self, request, username):
         user = MyUser.objects.get(username=username)
         to_do_lists = user.to_do_lists.all()

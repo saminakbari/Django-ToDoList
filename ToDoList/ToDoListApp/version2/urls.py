@@ -9,16 +9,10 @@ from .views.edit_list_view2 import EditList
 from .views.edit_task_view2 import EditTask
 from .views.get_list_view2 import GetList
 from .views.get_task_view2 import GetTask
-from .views.login_view2 import Login
-from .views.register_login_view2 import RegisterLogin
-from .views.register_view2 import Register
 from .views.share_task_view2 import ShareTask
 from .views.show_lists_view2 import ShowLists
 
 v2_urlpatterns = [
-    path("to-do-list/app/opening/", RegisterLogin.as_view()),
-    path("user/register/", Register.as_view()),
-    path("user/login/", Login.as_view()),
     path("to-do-list/showall/<str:username>/", ShowLists.as_view()),
     path("to-do-list/create/<str:username>/", CreateList.as_view()),
     path("to-do-list/edit/<int:list_id>/<str:username>/", EditList.as_view()),

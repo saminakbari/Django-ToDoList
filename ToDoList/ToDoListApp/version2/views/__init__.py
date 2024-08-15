@@ -7,8 +7,5 @@ from .edit_list_view2 import EditList
 from .edit_task_view2 import EditTask
 from .get_list_view2 import GetList
 from .get_task_view2 import GetTask
-from .login_view2 import Login
-from .register_login_view2 import RegisterLogin
-from .register_view2 import Register
 from .share_task_view2 import ShareTask
 from .show_lists_view2 import ShowLists
