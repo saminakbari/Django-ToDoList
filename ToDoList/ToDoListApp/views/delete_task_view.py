@@ -14,6 +14,6 @@ def delete_task(request, task_id: int, list_id):
 
     sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
     messages.add_message(request, messages.INFO, "Task deleted successfully.")
-    return render(request, "get_list_template.html",
+    return render(request, "v1/get_list_template.html",
                   {"tasks": sorted_tasks, "user": to_do_list.owner,
                    "to_do_list": to_do_list})

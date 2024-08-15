@@ -21,7 +21,7 @@ def edit_list(request, list_id):
             to_do_list.save()
             user = request.user
             messages.add_message(request, messages.INFO, message_text)
-            return render(request, "show_all_lists_template.html",
+            return render(request, "v1/show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(), "username": user.username})
         else:
             errors = form.errors.items()
@@ -30,5 +30,5 @@ def edit_list(request, list_id):
     else:
         form = ListForm(initial={'title': to_do_list.title})
         print(form.fields)
-        return render(request, "edit_list_title_template.html",
+        return render(request, "v1/edit_list_title_template.html",
                       {'to_do_list': to_do_list, 'form': form})

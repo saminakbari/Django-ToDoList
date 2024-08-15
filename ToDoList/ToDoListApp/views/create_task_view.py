@@ -34,7 +34,7 @@ def create_task(request, list_id):
             task.to_do_lists.add(to_do_list)
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
             messages.add_message(request, messages.INFO, "Task created successfully.")
-            return render(request, "get_list_template.html",
+            return render(request, "v1/get_list_template.html",
                           {"tasks": sorted_tasks, "to_do_list": to_do_list,
                            "user": to_do_list.owner})
         else:
@@ -43,4 +43,4 @@ def create_task(request, list_id):
                 messages.add_message(request, messages.ERROR, error[1][0])
 
     form = TaskForm(initial={'priority': '2'})
-    return render(request, "create_task_template.html", {"form": form})
+    return render(request, "v1/create_task_template.html", {"form": form})

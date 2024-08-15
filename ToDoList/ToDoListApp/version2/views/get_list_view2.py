@@ -12,5 +12,5 @@ class GetList(LoginRequiredMixin, View):
         sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
         sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
 
-        return render(request, "v2_get_list_template.html",
+        return render(request, "v2/v2_get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list, "user": to_do_list.owner})

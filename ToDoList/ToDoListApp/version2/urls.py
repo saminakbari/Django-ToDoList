@@ -13,15 +13,15 @@ from .views.share_task_view2 import ShareTask
 from .views.show_lists_view2 import ShowLists
 
 v2_urlpatterns = [
-    path("to-do-list/showall/<str:username>/", ShowLists.as_view()),
-    path("to-do-list/create/<str:username>/", CreateList.as_view()),
-    path("to-do-list/edit/<int:list_id>/<str:username>/", EditList.as_view()),
-    path("to-do-list/delete/<int:list_id>/<str:username>/", DeleteList.as_view()),
-    path("to-do-list/get/<int:list_id>/", GetList.as_view()),
-    path("task/create/<int:list_id>/", CreateTask.as_view()),
-    path("task/edit/<int:task_id>/<int:list_id>/", EditTask.as_view()),
-    path("task/delete/<int:task_id>/<int:list_id>/", DeleteTask.as_view()),
-    path("task/get/<int:task_id>/", GetTask.as_view()),
-    path("task/share/<int:task_id>/", ShareTask.as_view()),
-    path("task/shared-tasks/<str:username>/<int:list_id>/", AddSharedTasks.as_view()),
+    path("to-do-list/showall/", ShowLists.as_view, name="v2-show-lists"),
+    path("to-do-list/create/", CreateList.as_view, name="v2-create-list"),
+    path("to-do-list/<int:list_id>/edit/", EditList.as_view, name="v2-edit-list"),
+    path("to-do-list/<int:list_id>/delete/", DeleteList.as_view, name="v2-delete-list"),
+    path("to-do-list/<int:list_id>/get/", GetList.as_view, name="v2-get-list"),
+    path("to-do-list/<int:list_id>/task/create/", CreateTask.as_view, name="v2-create-task"),
+    path("to-do-list/<int:list_id>/task/<int:task_id>/edit/", EditTask.as_view, name="v2-edit-task"),
+    path("to-do-list/<int:list_id>/task/<int:task_id>/delete/", DeleteTask.as_view, name="v2-delete-task"),
+    path("task/<int:task_id>/get/", GetTask.as_view, name="v2-get-task"),
+    path("task/<int:task_id>/share/", ShareTask.as_view, name="v2-share-task"),
+    path("to-do-list/<int:list_id>/task/shared-tasks/", AddSharedTasks.as_view, name="v2-add-shared-task"),
 ]

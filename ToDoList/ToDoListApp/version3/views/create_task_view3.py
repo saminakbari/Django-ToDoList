@@ -6,7 +6,7 @@ from ToDoListApp.models import Task, ToDoList
 
 class CreateTask3(LoginRequiredMixin, CreateView):
     model = Task
-    template_name = "v3_create_task_template.html"
+    template_name = "v3/v3_create_task_template.html"
     fields = ['title', 'description', 'priority', 'deadline']
 
     def form_valid(self, form):

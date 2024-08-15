@@ -18,7 +18,7 @@ def create_list(request):
                 to_do_list.title = title
             to_do_list.save()
             messages.add_message(request, messages.INFO, "List created successfully.")
-            return render(request, "show_all_lists_template.html",
+            return render(request, "v1/show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all(),
                            "username": user.username})
         else:
@@ -27,4 +27,4 @@ def create_list(request):
                 messages.add_message(request, messages.ERROR, error[1][0])
 
     form = ListForm()
-    return render(request, 'create_list_template.html', {"form": form})
+    return render(request, 'v1/create_list_template.html', {"form": form})

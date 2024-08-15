@@ -11,7 +11,7 @@ def get_list(request, list_id):
     sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
     return render(
         request,
-        "get_list_template.html",
+        "v1/get_list_template.html",
         {"tasks": sorted_tasks, "to_do_list": to_do_list,
          "user": to_do_list.owner},
     )

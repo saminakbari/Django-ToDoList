@@ -12,6 +12,6 @@ class DeleteTask(LoginRequiredMixin, View):
         to_do_list.tasks.remove(task)
         to_do_list.save()
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
-        return render(request, "v2_get_list_template.html",
+        return render(request, "v2/v2_get_list_template.html",
                       {"tasks": sorted_tasks, "user": to_do_list.owner,
                        "message": "Task deleted successfully.", "to_do_list": to_do_list})

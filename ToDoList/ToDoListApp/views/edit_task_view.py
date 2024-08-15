@@ -37,7 +37,7 @@ def edit_task(request, task_id, list_id):
 
         to_do_list = ToDoList.objects.get(pk=list_id)
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
-        return render(request, "get_list_template.html",
+        return render(request, "v1/get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list,
                        "user": to_do_list.owner})
 
@@ -45,5 +45,5 @@ def edit_task(request, task_id, list_id):
         form = TaskForm(initial={'title': task.title, 'description': task.description,
                                  'deadline': task.deadline, 'priority': task.priority,
                                  'attachment': task.attachment})
-        return render(request, "edit_task_template.html",
+        return render(request, "v1/edit_task_template.html",
                       {"task": task, "form": form})

@@ -7,7 +7,7 @@ from ToDoListApp.models.to_do_list import ToDoList
 class CreateList3(LoginRequiredMixin, CreateView):
     model = ToDoList
     fields = ["title"]
-    template_name = "v3_create_list_template.html"
+    template_name = "v3/v3_create_list_template.html"
     success_url = "http://localhost:8000/v3/to-do-list/showall/"
 
     def form_valid(self, form):

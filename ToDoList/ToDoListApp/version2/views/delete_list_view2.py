@@ -7,10 +7,10 @@ from ToDoListApp.models import ToDoList
 
 
 class DeleteList(LoginRequiredMixin, View):
-    def get(self, request, list_id, username):
+    def get(self, request, list_id):
         to_do_list = ToDoList.objects.get(pk=list_id)
         to_do_list.delete()
-        user = User.objects.get(username=username)
-        return render(request, "v2_show_all_lists_template.html",
-                      {"to_do_lists": user.to_do_lists.all(), "username": username,
+        user = request.user
+        return render(request, "v2/v2_show_all_lists_template.html",
+                      {"to_do_lists": user.to_do_lists.all(), "username": user.username,
                        "message": "List deleted successfully."})

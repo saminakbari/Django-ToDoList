@@ -5,7 +5,7 @@ from ToDoListApp.models.to_do_list import ToDoList
 
 
 class EditList3(LoginRequiredMixin, UpdateView):
-    template_name = "v3_edit_list_title_template.html"
+    template_name = "v3/v3_edit_list_title_template.html"
     fields = ["title"]
     model = ToDoList
     pk_url_kwarg = 'list_id'

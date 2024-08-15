@@ -8,5 +8,5 @@ from ToDoListApp.models.task import get_priority
 @login_required
 def get_task(request, task_id):
     task = Task.objects.get(pk=task_id)
-    return render(request, "get_task_template.html",
+    return render(request, "v1/get_task_template.html",
                   {'task': task, 'priority': get_priority(task.priority)})
