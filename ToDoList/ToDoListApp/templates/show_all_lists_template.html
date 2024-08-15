@@ -6,9 +6,18 @@
         {% for to_do_list in to_do_lists %}
             <tr>
                 <td>{{ to_do_list.title }}</td>
-                <td><a href="{% url 'v1-get-list' list_id=to_do_list.id %}">view</a></td>
-                <td><a href="{% url 'v1-edit-list' list_id=to_do_list.id %}">change title</a></td>
-                <td><a href="{% url 'v1-delete-list' list_id=to_do_list.id %}">delete</a></td>
+                <td>
+                    <button><a href="{% url 'v1-get-list' list_id=to_do_list.id %}"
+                               style="text-decoration: none;">view</a></button>
+                </td>
+                <td>
+                    <button><a href="{% url 'v1-edit-list' list_id=to_do_list.id %}"
+                               style="text-decoration: none;">change title</a></button>
+                </td>
+                <td>
+                    <button><a href="{% url 'v1-delete-list' list_id=to_do_list.id %}"
+                               style="text-decoration: none;">delete</a></button>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -23,7 +32,7 @@ message:
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            {{ message }}
+            <li>{{ message }}</li>
         {% endfor %}
     </ul>
 {% endif %}

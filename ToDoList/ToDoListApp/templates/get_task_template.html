@@ -18,7 +18,10 @@
         <tr>
             <td>attachment:</td>
             {% if task.attachment %}
-                <td><a href="{{ task.attachment.url }}">{{ task.attachment.name }}</a></td>
+                <td>
+                    <button><a href="{{ task.attachment.url }}" style="text-decoration: none;">
+                        {{ task.attachment.name }}</a></button>
+                </td>
             {% else %}
                 <td>no attachment file</td>
             {% endif %}

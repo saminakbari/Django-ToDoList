@@ -2,11 +2,7 @@
 <form method="post">
     {% csrf_token %}
 
-    {% if message %}
-        <script>alert("{{message}}")</script>
-    {% endif %}
     <table>
-
         {% for task in tasks %}
             <tr>
                 <td>{{ task.title }}</td>
@@ -25,27 +21,29 @@
             </tr>
         {% endfor %}
     </table>
+
     <br>
     <p>
-        <a href="{% url 'v1-create-task' list_id=to_do_list.id %}">Create a new task</a>
+        <button><a href="{% url 'v1-create-task' list_id=to_do_list.id %}" style="text-decoration: none;">
+            create task</a></button>
     </p>
     <p>
-        <a href="{% url 'v1-add-shared-tasks' list_id=to_do_list.id %}">
-            Tasks shared with me</a>
+        <button><a href="{% url 'v1-add-shared-tasks' list_id=to_do_list.id %}" style="text-decoration: none;">
+            Tasks shared with me</a></button>
     </p>
     <br>
     <p>
-        <a href="{% url 'v1-show-lists' %}">back</a>
+        <button><a href="{% url 'v1-show-lists' %}" style="text-decoration: none">back</a></button>
     </p>
 
 </form>
 
 <br>
-message:
+messages:
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            {{ message }}
+            <li>{{ message }}</li>
         {% endfor %}
     </ul>
 {% endif %}

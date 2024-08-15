@@ -1,29 +1,27 @@
-
-    <h1>Tasks shared with me</h1>
-    <form method="post">
-        {% csrf_token %}
-        <table>
-            {% for task in tasks %}
-                <tr>
+<h1>Tasks shared with me</h1>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        {% for task in tasks %}
+            <tr>
+                <td>
+                    {{ task.owner.username }} has shared {{ task.title }} with you.
+                </td>
+                {% if task in to_do_list.tasks.all %}
                     <td>
-                        {{ task.owner.username }} has shared {{ task.title }} with you.
+                        <button type="submit" disabled="disabled">Added</button>
                     </td>
-                    {% if task in to_do_list.tasks.all %}
-                        <td>
-                            <button type="submit" disabled="disabled">Added</button>
-                        </td>
-                    {% else %}
-                        <td>
-                            <input type="hidden" name="task_id" value="{{ task.id }}">
-                            <button type="submit" name="add">Add task</button>
-                        </td>
-                    {% endif %}
-                    <br>
-                </tr>
-            {% endfor %}
-        </table>
-        <p>
-{#            <a href="{% url 'v1-get-list' list_id=to_do_list.id %}">back to list</a>#}
-            <button formaction="{% url 'v1-get-list' list_id=to_do_list.id %}">back to list</button>
-        </p>
-    </form>
+                {% else %}
+                    <td>
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit" name="add">Add task</button>
+                    </td>
+                {% endif %}
+                <br>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>
+        <button formaction="{% url 'v1-get-list' list_id=to_do_list.id %}">back to list</button>
+    </p>
+</form>

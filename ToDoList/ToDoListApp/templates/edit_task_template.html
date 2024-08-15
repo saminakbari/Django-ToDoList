@@ -5,15 +5,11 @@
     <table>
         {% for field in form %}
             <tr>
-                {% if field.label ==  'Attachment' %}
-                    <td>{{ field.label }}: {{ field }}</td>
-                {% else %}
-                    <td>{{ field.label }}: {{ field }}</td>
-                {% endif %}
+                <td>{{ field.label }}: {{ field }}</td>
             </tr>
         {% endfor %}
     </table>
 
-    <br>
+    <br><br>
     <button type="submit">OK</button>
 </form>
