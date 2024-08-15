@@ -1,26 +1,21 @@
 {% load static %}
 
-    <h1>All to-do lists</h1>
-    {% if message %}
-        <script>alert("{{ message }}")</script>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
+<h1>All to-do lists</h1>
+{% if message %}
+    <script>alert("{{ message }}")</script>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
 
-        {% for to_do_list in to_do_lists %}
-            <p>{{ to_do_list.title }}
-                <a href="http://localhost:8000/v2/to-do-list/get/{{ to_do_list.list_id }}/">view</a>
-                <a href="http://localhost:8000/v2/to-do-list/edit/{{ to_do_list.list_id }}/{{ username }}/">change
-                    title</a>
-                <a href="http://localhost:8000/v2/to-do-list/delete/{{ to_do_list.list_id }}/{{ username }}/">delete</a>
-            </p>
-        {% endfor %}
-        <br>
-        <p>
-            <a href="http://localhost:8000/v2/to-do-list/create/{{ username }}/">Create a new list</a>
+    {% for to_do_list in to_do_lists %}
+        <p>{{ to_do_list.title }}
+            <a href="{% url 'v2-get-list' list_id=to_do_list.list_id %}">view</a>
+            <a href="{% url 'v2-edit-list' list_id=to_do_list.list_id %}">change title</a>
+            <a href="{% url 'v2-delete-list' list_id=to_do_list.list_id %}">delete</a>
         </p>
-        <br>
-        <p>
-            <a href="http://localhost:8000/v2/to-do-list/app/opening/">log out</a>
-        </p>
-    </form>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'v2-create-list' %}">Create a new list</a>
+    </p>
+</form>

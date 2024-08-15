@@ -14,7 +14,7 @@
         <br>
     {% endfor %}
     <p>
-        <button><a href="http://localhost:8000/v2/to-do-list/get/{{ to_do_list.list_id }}/"
+        <button><a href="{% url 'v2-get-list' list_id=to_do_list.list_id %}"
                    style="text-decoration: none;">back to list</a></button>
     </p>
 </form>
