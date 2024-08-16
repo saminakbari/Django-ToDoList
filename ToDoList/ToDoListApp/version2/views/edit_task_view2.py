@@ -18,8 +18,7 @@ class EditTask(LoginRequiredMixin, View):
         task.priority = request.POST.get('priority')
         task.save()
         to_do_list = ToDoList.objects.get(pk=list_id)
-        sorted_tasks = sorted(to_do_list.tasks.all(), key=lambda x: x.deadline)
-        sorted_tasks = sorted(sorted_tasks, key=lambda x: x.priority)
+        sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
         return render(request, "v2/v2_get_list_template.html",
                       {"tasks": sorted_tasks, "to_do_list": to_do_list,
                        "user": to_do_list.owner, "message": "Task edited successfully."})

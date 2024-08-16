@@ -1,5 +1,5 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views import View
 
@@ -19,6 +19,6 @@ class CreateList(LoginRequiredMixin, View):
             user = request.user
             to_do_list = ToDoList(title=title, owner=user)
             to_do_list.save()
+            messages.add_message(request, messages.INFO, "List created successfully.")
             return render(request, "v2/v2_show_all_lists_template.html",
-                          {"to_do_lists": user.to_do_lists.all(), "username": user.username,
-                           "message": "List created successfully."})
+                          {"to_do_lists": user.to_do_lists.all()})

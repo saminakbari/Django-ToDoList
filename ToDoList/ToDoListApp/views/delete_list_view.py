@@ -12,4 +12,4 @@ def delete_list(request, list_id):
     user = request.user
     messages.add_message(request, messages.INFO, "List deleted successfully.")
     return render(request, "v1/show_all_lists_template.html",
-                  {"to_do_lists": user.to_do_lists.all(), "username": user.username})
+                  {"to_do_lists": user.to_do_lists.all()})

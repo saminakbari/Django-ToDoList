@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
@@ -26,6 +27,7 @@ class CreateTask(LoginRequiredMixin, View):
             task.save()
 
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
+            messages.add_message(request, messages.INFO, "Task created successfully.")
             return render(request, "v2/v2_get_list_template.html",
                           {"tasks": sorted_tasks, "to_do_list": to_do_list,
-                           "user": to_do_list.owner, "message": "Task created successfully."})
+                           "user": to_do_list.owner})

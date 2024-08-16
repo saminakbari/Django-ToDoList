@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
@@ -12,6 +13,7 @@ class DeleteTask(LoginRequiredMixin, View):
         to_do_list.tasks.remove(task)
         to_do_list.save()
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
+        messages.add_message(request, messages.INFO, "Task deleted successfully.")
         return render(request, "v2/v2_get_list_template.html",
                       {"tasks": sorted_tasks, "user": to_do_list.owner,
-                       "message": "Task deleted successfully.", "to_do_list": to_do_list})
+                       "to_do_list": to_do_list})

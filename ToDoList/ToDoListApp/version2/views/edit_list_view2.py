@@ -1,5 +1,5 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views import View
 
@@ -18,6 +18,6 @@ class EditList(LoginRequiredMixin, View):
         to_do_list.title = title
         to_do_list.save()
         user = request.user
+        messages.add_message(request, messages.INFO, "List edited successfully.")
         return render(request, "v2/v2_show_all_lists_template.html",
-                      {"to_do_lists": user.to_do_lists.all(), "username": user.username,
-                       "message": "List edited successfully."})
+                      {"to_do_lists": user.to_do_lists.all()})

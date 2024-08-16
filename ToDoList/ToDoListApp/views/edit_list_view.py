@@ -22,7 +22,7 @@ def edit_list(request, list_id):
             user = request.user
             messages.add_message(request, messages.INFO, message_text)
             return render(request, "v1/show_all_lists_template.html",
-                          {"to_do_lists": user.to_do_lists.all(), "username": user.username})
+                          {"to_do_lists": user.to_do_lists.all()})
         else:
             errors = form.errors.items()
             for error in errors:

@@ -1,20 +1,25 @@
+<form method="post">
+    {% csrf_token %}
 
-    <form method="post">
-        {% csrf_token %}
+    <p>
+        <label for="username">Username: </label>
+        <input id="username" type="text" name="username" maxlength="100">
+    </p>
+    <p>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" maxlength="100">
+    </p>
+    <p>
+        <input type="submit" value="Log in">
+    </p>
+</form>
 
-        {% if message %}
-            <script>alert("{{ message }}")</script>
-        {% endif %}
-
-        <p>
-            <label for="username">Username: </label>
-            <input id="username" type="text" name="username" maxlength="100">
-        </p>
-        <p>
-            <label for="password">Password</label>
-            <input id="password" type="password" name="password" maxlength="100">
-        </p>
-        <p>
-            <input type="submit" value="Log in">
-        </p>
-    </form>
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

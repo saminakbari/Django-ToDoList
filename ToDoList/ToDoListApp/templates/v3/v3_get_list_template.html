@@ -2,10 +2,6 @@
 <form method="post">
     {% csrf_token %}
 
-    {% if message %}
-        <script>alert("{{message}}")</script>
-    {% endif %}
-
     {% for task in tasks %}
         <p>{{ task.title }}
         <a href="{% url 'v3-get-task' task_id=task.task_id %}">details</a>
@@ -30,3 +26,13 @@
     </p>
 
 </form>
+
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -16,13 +17,14 @@ class ShareTask(LoginRequiredMixin, View):
         try:
             receiver_user = User.objects.get(username=receiver_username)
         except User.DoesNotExist:
-            return render(request, "v2/v2_share_task_template.html",
-                          {"message": "Username does not exist"})
+            messages.add_message(request, messages.ERROR, "Username does not exist")
+            return render(request, "v2/v2_share_task_template.html")
 
         if task in receiver_user.tasks_shared_with_user.all():
-            render(request, "v2/v2_share_task_template.html",
-                   {"message": "You have already shared this task with this user."})
+            messages.add_message(request, messages.ERROR,
+                                 "You have already shared this task with this user.")
+            render(request, "v2/v2_share_task_template.html")
 
         receiver_user.tasks_shared_with_user.add(task)
-        return render(request, "v2/v2_share_task_template.html",
-                      {"message": "Task is shared successfully."})
+        messages.add_message(request, messages.INFO, "Task is shared successfully.")
+        return render(request, "v2/v2_share_task_template.html")
