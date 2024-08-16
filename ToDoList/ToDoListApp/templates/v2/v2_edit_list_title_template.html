@@ -1,8 +1,15 @@
 <h1>Edit list</h1>
 <form method="post">
     {% csrf_token %}
-    <label for="title">Title: </label>
-    <input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}>
+    
+    <table>
+        {% for field in form %}
+            <tr>
+                <td>{{ field.label }} {{ field }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
     <br><br>
     <button type="submit">OK</button>
     <br>

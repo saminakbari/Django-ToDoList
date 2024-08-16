@@ -19,11 +19,16 @@ class CreateTask(LoginRequiredMixin, View):
             description = form.cleaned_data['description']
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
-            task = Task(title=title, description=description, deadline=deadline, priority=priority)
-            task.save()
             to_do_list = ToDoList.objects.get(pk=list_id)
+            task = Task(title=title, description=description, deadline=deadline, priority=priority,
+                        owner=to_do_list.owner)
+            try:
+                file = request.FILES['attachment']
+                task.attachment = file
+            except:
+                pass
+
             task.to_do_lists.add(to_do_list)
-            task.owner = to_do_list.owner
             task.save()
 
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
@@ -31,3 +36,9 @@ class CreateTask(LoginRequiredMixin, View):
             return render(request, "v2/v2_get_list_template.html",
                           {"tasks": sorted_tasks, "to_do_list": to_do_list,
                            "user": to_do_list.owner})
+
+        else:
+            for error in form.errors:
+                messages.add_message(request, messages.ERROR, error)
+            form = TaskForm(initial={'priority': '2'})
+            return render(request, "v2/v2_create_task_template.html", {"form": form})

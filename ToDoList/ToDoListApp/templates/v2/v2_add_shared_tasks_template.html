@@ -1,18 +1,24 @@
 <h1>Tasks shared with me</h1>
 <form method="post">
     {% csrf_token %}
-    {% for task in tasks %}
-        <p>
-            {{ task.owner.username }} has shared {{ task.title }} with you.
-            {% if task in to_do_list.tasks.all %}
-                <button type="submit" value="" disabled="disabled">Added</button>
-            {% else %}
-                <input type="hidden" name="task_id" value="{{ task.task_id }}">
-                <button type="submit" value="Add task" name="add">Add task</button>
-            {% endif %}
-        </p>
-        <br>
-    {% endfor %}
+    <table>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.owner.username }} has shared {{ task.title }} with you.</td>
+                {% if task in to_do_list.tasks.all %}
+                    <td>
+                        <button type="submit" value="" disabled="disabled">Added</button>
+                    </td>
+                {% else %}
+                    <td>
+                        <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                        <button type="submit" value="Add task" name="add">Add task</button>
+                    </td>
+                {% endif %}
+            </tr>
+            <br>
+        {% endfor %}
+    </table>
     <p>
         <button><a href="{% url 'v2-get-list' list_id=to_do_list.list_id %}"
                    style="text-decoration: none;">back to list</a></button>

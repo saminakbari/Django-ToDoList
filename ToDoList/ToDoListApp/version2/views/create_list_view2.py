@@ -22,3 +22,10 @@ class CreateList(LoginRequiredMixin, View):
             messages.add_message(request, messages.INFO, "List created successfully.")
             return render(request, "v2/v2_show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all()})
+
+        else:
+            errors = form.errors
+            for error in errors:
+                messages.add_message(request, messages.ERROR, error)
+            form = ListForm()
+            return render(request, 'v2/v2_create_list_template.html', {"form": form})

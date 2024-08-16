@@ -1,24 +1,51 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
+from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
 class EditTask(LoginRequiredMixin, View):
     def get(self, request, list_id, task_id):
         task = Task.objects.get(pk=task_id)
-        return render(request, "v2/v2_edit_task_template.html", {"task": task})
+        form = TaskForm(initial={'title': task.title, 'description': task.description,
+                                 'deadline': task.deadline, 'priority': task.priority,
+                                 'attachment': task.attachment})
+        return render(request, "v2/v2_edit_task_template.html",
+                      {"task": task, "form": form})
 
     def post(self, request, list_id, task_id):
+        form = TaskForm(request.POST)
         task = Task.objects.get(pk=task_id)
-        task.title = request.POST.get('title')
-        task.description = request.POST.get('description')
-        task.deadline = request.POST.get('deadline')
-        task.priority = request.POST.get('priority')
-        task.save()
-        to_do_list = ToDoList.objects.get(pk=list_id)
-        sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
-        return render(request, "v2/v2_get_list_template.html",
-                      {"tasks": sorted_tasks, "to_do_list": to_do_list,
-                       "user": to_do_list.owner, "message": "Task edited successfully."})
+        if form.is_valid():
+            task.title = form.cleaned_data['title']
+            task.description = form.cleaned_data['description']
+            task.deadline = form.cleaned_data['deadline']
+            task.priority = form.cleaned_data['priority']
+            try:
+                file = request.FILES['attachment']
+                task.attachment = file
+            except:
+                pass
+            try:
+                if form.data['attachment-clear'] == 'on':
+                    task.attachment.delete()
+            except:
+                pass
+            task.save()
+            to_do_list = ToDoList.objects.get(pk=list_id)
+            sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
+            return render(request, "v2/v2_get_list_template.html",
+                          {"tasks": sorted_tasks, "to_do_list": to_do_list,
+                           "user": to_do_list.owner, "message": "Task edited successfully."})
+
+        else:
+            for error in form.errors:
+                messages.add_message(request, messages.ERROR, error)
+            form = TaskForm(initial={'title': task.title, 'description': task.description,
+                                     'deadline': task.deadline, 'priority': task.priority,
+                                     'attachment': task.attachment})
+            return render(request, "v2/v2_edit_task_template.html",
+                          {"task": task, "form": form})
