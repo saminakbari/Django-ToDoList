@@ -1,11 +1,10 @@
-
-    <h1>Share task</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="receiver_username">Share with:</label>
-        <input id="receiver_username" name="receiver_username" type="text" maxlength="100">
-        <input type="submit" value="Share">
-    </form>
+<h1>Share task</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="receiver_username">Share with:</label>
+    <input id="receiver_username" name="receiver_username" type="text" maxlength="100">
+    <button type="submit">Share</button>
+</form>
 
 <br>
 messages:

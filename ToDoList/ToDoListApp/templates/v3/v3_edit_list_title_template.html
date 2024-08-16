@@ -1,10 +1,9 @@
-
-    <h1>Edit list</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="title">Title: </label>
-        <input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}>
-        <br><br>
-        <input type="submit" value="OK">
-        <br>
-    </form>
+<h1>Edit list</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="title">Title: </label>
+    <input id="title" type="text" name="title" maxlength="100" value={{ to_do_list.title }}>
+    <br><br>
+    <button type="submit">OK</button>
+    <br>
+</form>

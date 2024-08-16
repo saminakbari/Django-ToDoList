@@ -1,5 +1,3 @@
-{% load static %}
-
 <h1>All to-do lists</h1>
 
 <form method="post">
@@ -7,14 +5,14 @@
 
     {% for to_do_list in to_do_lists %}
         <p>{{ to_do_list.title }}
-            <a href="{% url 'v2-get-list' list_id=to_do_list.list_id %}">view</a>
-            <a href="{% url 'v2-edit-list' list_id=to_do_list.list_id %}">change title</a>
-            <a href="{% url 'v2-delete-list' list_id=to_do_list.list_id %}">delete</a>
+            <button><a href="{% url 'v2-get-list' list_id=to_do_list.list_id %}">view</a></button>
+            <button><a href="{% url 'v2-edit-list' list_id=to_do_list.list_id %}">change title</a></button>
+            <button><a href="{% url 'v2-delete-list' list_id=to_do_list.list_id %}">delete</a></button>
         </p>
     {% endfor %}
     <br>
     <p>
-        <a href="{% url 'v2-create-list' %}">Create a new list</a>
+        <button><a href="{% url 'v2-create-list' %}">Create a new list</a></button>
     </p>
 </form>
 
