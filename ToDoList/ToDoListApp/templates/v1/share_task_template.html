@@ -1,11 +1,13 @@
 <h1>Share task</h1>
 <form method="post">
     {% csrf_token %}
-    
+
     <label for="receiver_username">Share with:</label>
     <input id="receiver_username" name="receiver_username" type="text" maxlength="100">
     <button type="submit">Share</button>
 </form>
+
+<button><a href="{% url 'v1-get-list' list_id=to_do_list.list_id %}">back to list</a></button>
 
 <br>
 messages:

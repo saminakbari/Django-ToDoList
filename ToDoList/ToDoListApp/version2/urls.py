@@ -22,6 +22,6 @@ v2_urlpatterns = [
     path("to-do-list/<int:list_id>/task/<int:task_id>/edit/", EditTask.as_view, name="v2-edit-task"),
     path("to-do-list/<int:list_id>/task/<int:task_id>/delete/", DeleteTask.as_view, name="v2-delete-task"),
     path("task/<int:task_id>/get/", GetTask.as_view, name="v2-get-task"),
-    path("task/<int:task_id>/share/", ShareTask.as_view, name="v2-share-task"),
+    path("to-do-list/<int:list_id>/task/<int:task_id>/share/", ShareTask.as_view, name="v2-share-task"),
     path("to-do-list/<int:list_id>/task/shared-tasks/", AddSharedTasks.as_view, name="v2-add-shared-tasks"),
 ]

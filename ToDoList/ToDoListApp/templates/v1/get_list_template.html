@@ -16,7 +16,7 @@
                     <a href="{% url 'v1-delete-task' task_id=task.id list_id=to_do_list.id %}">delete</a>
                 </td>
                 {% if task.owner == user %}
-                    <td><a href="{% url 'v1-share-task' task_id=task.id %}">share</a></td>
+                    <td><a href="{% url 'v1-share-task' task_id=task.id list_id=to_do_list.list_id %}">share</a></td>
                 {% endif %}
             </tr>
         {% endfor %}

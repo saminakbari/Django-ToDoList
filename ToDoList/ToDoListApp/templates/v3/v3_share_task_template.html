@@ -6,6 +6,8 @@
     <button type="submit">Share</button>
 </form>
 
+<button><a href="{% url 'v3-get-list' list_id=list_id %}">back to list</a></button>
+
 <br>
 messages:
 {% if messages %}

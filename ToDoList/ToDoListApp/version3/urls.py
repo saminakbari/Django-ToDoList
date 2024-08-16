@@ -19,6 +19,6 @@ v3_urlpatterns = [
     # path("to-do-list/<int:list_id>/task/<int:task_id>/edit/", EditTask3.as_view, name='v3-edit-task'),
     # path("to-do-list/<int:list_id>/task/<int:task_id>/delete/", DeleteTask3.as_view, name='v3-delete-task'),
     # path("task/<int:task_id>/get/", GetTask3.as_view, name='v3-get-task'),
-    # path("task/<int:task_id>/share/", ShareTask3.as_view, name='v3-share-task'),
+    # path("to-do-list/<int:list_id>/task/<int:task_id>/share/", ShareTask3.as_view, name='v3-share-task'),
     # path("to-do-list/<int:list_id>/task/shared-tasks/", AddSharedTasks3.as_view, name='v3-add-shared-tasks),
 ]
