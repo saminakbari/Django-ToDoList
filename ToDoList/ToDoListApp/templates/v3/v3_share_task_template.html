@@ -8,8 +8,8 @@
 
 <button><a href="{% url 'v3-get-list' list_id=list_id %}">back to list</a></button>
 
-<br>
-messages:
+<br><br>
+message:
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}

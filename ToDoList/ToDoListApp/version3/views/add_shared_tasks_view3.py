@@ -3,4 +3,6 @@ from django.views.generic import TemplateView
 
 
 class AddSharedTasks3(LoginRequiredMixin, TemplateView):
-    pass
+    template_name = 'v3/v3_add_shared_tasks_template.html'
+
+    
