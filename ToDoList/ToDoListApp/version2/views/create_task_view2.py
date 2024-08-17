@@ -32,7 +32,6 @@ class CreateTask(LoginRequiredMixin, View):
                 file = request.FILES['attachment']
                 task.attachment = file
             except:
-                print("did not find the file")
                 pass
 
             task.save()

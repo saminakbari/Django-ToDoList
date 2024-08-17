@@ -2,13 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView
 
+from ToDoListApp.forms.task_model_form import TaskModelForm
 from ToDoListApp.models import Task, ToDoList
 
 
 class CreateTask3(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "v3/v3_create_task_template.html"
-    fields = ['title', 'description', 'priority', 'deadline']
+    form_class = TaskModelForm
+    success_url = ""
 
     def form_valid(self, form):
         form.instance.owner = self.request.user

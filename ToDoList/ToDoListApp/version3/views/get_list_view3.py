@@ -10,9 +10,7 @@ class GetList3(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         list_id = self.kwargs['list_id']
-        print(list_id)
         to_do_list = ToDoList.objects.get(pk=list_id)
         context['tasks'] = to_do_list.tasks.all()
         context['to_do_list'] = to_do_list
         return context
-

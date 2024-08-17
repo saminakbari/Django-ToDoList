@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from ToDoListApp.forms import ListForm
 from ToDoListApp.models import ToDoList
 
 
