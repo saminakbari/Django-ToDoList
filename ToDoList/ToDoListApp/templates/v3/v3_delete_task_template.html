@@ -1,6 +1,6 @@
-<h1>Delete task</h1>
+<h1>Confirm Delete</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit">OK</button>
+    <p>Are you sure you want to delete {{ task.title }}?</p>
+    <button type="submit">Yes</button>
 </form>

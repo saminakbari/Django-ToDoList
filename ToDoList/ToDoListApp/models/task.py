@@ -39,7 +39,7 @@ class Task(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان',
                              null=False, default="new-task", validators=[validate_title])
 
-    description = models.CharField(max_length=1000, verbose_name='توضیحات', null=False, default="")
+    description = models.CharField(max_length=1000, verbose_name='توضیحات', null=False, default="", blank=True)
 
     deadline = models.DateField(max_length=10, verbose_name='زمان سرسید',
                                 null=False, default=django.utils.timezone.now().date(), validators=[validate_date])

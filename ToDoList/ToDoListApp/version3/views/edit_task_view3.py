@@ -11,4 +11,7 @@ class EditTask3(LoginRequiredMixin, UpdateView):
     model = Task
     pk_url_kwarg = 'task_id'
     form_class = TaskModelForm
-    success_url = reverse_lazy('')  # ToDo:...
+
+    def get_success_url(self):
+        list_id = self.kwargs['list_id']
+        return reverse_lazy('v3-get-list', kwargs={'list_id': list_id})

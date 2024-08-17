@@ -1,19 +1,32 @@
 <h1>{{ to_do_list.title }}</h1>
 <form method="post">
     {% csrf_token %}
-
-    {% for task in tasks %}
-        <p>{{ task.title }}
-        <button><a href="{% url 'v3-get-task' task_id=task.id %}">details</a></button>
-        {% if task.owner == user %}
-            <button><a href="{% url 'v3-edit-task' list_id=to_do_list.id task_id=task.id %}">edit</a></button>
-        {% endif %}
-        <button><a href="{% url 'v3-delete-task' list_id=to_do_list.id task_id=task.id %}">delete</a></button>
-        {% if task.owner == user %}
-            <button><a href="{% url 'v3-share-task' task_id=task.id list_id=to_do_list.id %}">share</a></button>
-        {% endif %}
-    {% endfor %}
-
+    <table>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>
+                    <button><a href="{% url 'v3-get-task' task_id=task.id %}">details</a></button>
+                </td>
+                {% if task.owner == user %}
+                    <td>
+                        <button><a href="{% url 'v3-edit-task' list_id=to_do_list.id task_id=task.id %}">edit</a>
+                        </button>
+                    </td>
+                {% endif %}
+                <td>
+                    <button><a href="{% url 'v3-delete-task' list_id=to_do_list.id task_id=task.id %}">delete</a>
+                    </button>
+                </td>
+                {% if task.owner == user %}
+                    <td>
+                        <button><a href="{% url 'v3-share-task' task_id=task.id list_id=to_do_list.id %}">share</a>
+                        </button>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
     <p>
         <button><a href="{% url 'v3-create-task' list_id=to_do_list.id %}">Create a new task</a></button>
     </p>
