@@ -1,6 +1,22 @@
 <h1>Create task</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        {% for field in form %}
+            <tr>
+                <td>{{ field.label }}: {{ field }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <button type="submit">OK</button>
 </form>
+
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -4,21 +4,21 @@
 
     {% for task in tasks %}
         <p>{{ task.title }}
-        <button><a href="{% url 'v3-get-task' task_id=task.task_id %}">details</a></button>
+        <button><a href="{% url 'v3-get-task' task_id=task.id %}">details</a></button>
         {% if task.owner == user %}
-            <button><a href="{% url 'v3-edit-task' list_id=to_do_list.list_id task_id=task.task_id %}">edit</a></button>
+            <button><a href="{% url 'v3-edit-task' list_id=to_do_list.id task_id=task.id %}">edit</a></button>
         {% endif %}
-        <button><a href="{% url 'v3-delete-task' list_id=to_do_list.list_id task_id=task.task_id %}">delete</a></button>
+        <button><a href="{% url 'v3-delete-task' list_id=to_do_list.id task_id=task.id %}">delete</a></button>
         {% if task.owner == user %}
-            <button><a href="{% url 'v3-share-task' task_id=task.task_id list_id=to_do_list.list_id %}">share</a></button>
+            <button><a href="{% url 'v3-share-task' task_id=task.id list_id=to_do_list.id %}">share</a></button>
         {% endif %}
     {% endfor %}
 
     <p>
-        <button><a href="{% url 'v3-create-task' list_id=to_do_list.list_id %}">Create a new task</a></button>
+        <button><a href="{% url 'v3-create-task' list_id=to_do_list.id %}">Create a new task</a></button>
     </p>
     <p>
-        <button><a href="{% url 'v3-add-shared-tasks' list_id=to_do_list.list_id %}">Tasks shared with me</a></button>
+        <button><a href="{% url 'v3-add-shared-tasks' list_id=to_do_list.id %}">Tasks shared with me</a></button>
     </p>
     <br>
     <p>
@@ -32,7 +32,7 @@ messages:
 {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            <li>{{ message }}</li>
+            {{ message }}
         {% endfor %}
     </ul>
 {% endif %}

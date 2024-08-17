@@ -23,7 +23,7 @@ def create_list(request):
         else:
             errors = form.errors.items()
             for error in errors:
-                messages.add_message(request, messages.ERROR, error[1][0])
+                messages.add_message(request, messages.ERROR, error[1])
 
     form = ListForm()
     return render(request, 'v1/create_list_template.html', {"form": form})

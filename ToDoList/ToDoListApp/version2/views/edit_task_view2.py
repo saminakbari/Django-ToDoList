@@ -42,7 +42,8 @@ class EditTask(LoginRequiredMixin, View):
                            "user": to_do_list.owner, "message": "Task edited successfully."})
 
         else:
-            for error in form.errors:
+            errors = form.errors.items()
+            for error in errors:
                 messages.add_message(request, messages.ERROR, error)
             form = TaskForm(initial={'title': task.title, 'description': task.description,
                                      'deadline': task.deadline, 'priority': task.priority,

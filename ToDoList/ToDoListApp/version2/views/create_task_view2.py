@@ -20,16 +20,23 @@ class CreateTask(LoginRequiredMixin, View):
             deadline = form.cleaned_data['deadline']
             priority = form.cleaned_data['priority']
             to_do_list = ToDoList.objects.get(pk=list_id)
-            task = Task(title=title, description=description, deadline=deadline, priority=priority,
-                        owner=to_do_list.owner)
+            task = Task(priority=priority, owner=to_do_list.owner)
+            if title:
+                task.title = title
+            if deadline:
+                task.deadline = deadline
+            if description:
+                task.description = description
+
             try:
                 file = request.FILES['attachment']
                 task.attachment = file
             except:
+                print("did not find the file")
                 pass
 
-            task.to_do_lists.add(to_do_list)
             task.save()
+            task.to_do_lists.add(to_do_list)
 
             sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
             messages.add_message(request, messages.INFO, "Task created successfully.")
@@ -38,7 +45,8 @@ class CreateTask(LoginRequiredMixin, View):
                            "user": to_do_list.owner})
 
         else:
-            for error in form.errors:
-                messages.add_message(request, messages.ERROR, error)
+            errors = form.errors.items()
+            for error in errors:
+                messages.add_message(request, messages.ERROR, error[1])
             form = TaskForm(initial={'priority': '2'})
             return render(request, "v2/v2_create_task_template.html", {"form": form})

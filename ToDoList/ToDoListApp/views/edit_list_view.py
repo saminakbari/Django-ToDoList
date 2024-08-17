@@ -26,7 +26,7 @@ def edit_list(request, list_id):
         else:
             errors = form.errors.items()
             for error in errors:
-                messages.add_message(request, messages.ERROR, error[1][0])
+                messages.add_message(request, messages.ERROR, error[1])
     else:
         form = ListForm(initial={'title': to_do_list.title})
         print(form.fields)

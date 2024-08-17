@@ -10,4 +10,13 @@
     <p>
         priority: {{ priority }}
     </p>
+    <p>
+        attachment:
+        {% if task.attachment %}
+            <a href="{{ task.attachment.url }}">
+                {{ task.attachment.name }}</a>
+        {% else %}
+            no attachment file
+        {% endif %}
+    </p>
 </form>

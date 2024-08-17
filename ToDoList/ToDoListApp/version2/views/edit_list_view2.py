@@ -26,7 +26,8 @@ class EditList(LoginRequiredMixin, View):
             return render(request, "v2/v2_show_all_lists_template.html",
                           {"to_do_lists": user.to_do_lists.all()})
         else:
-            for error in form.errors:
+            errors = form.errors.items()
+            for error in errors:
                 messages.add_message(request, messages.ERROR, error)
             form = ListForm(initial={'title': to_do_list.title})
             return render(request, "v2/v2_edit_list_title_template.html",

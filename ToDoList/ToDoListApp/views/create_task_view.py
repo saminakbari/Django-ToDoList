@@ -40,7 +40,7 @@ def create_task(request, list_id):
         else:
             errors = form.errors.items()
             for error in errors:
-                messages.add_message(request, messages.ERROR, error[1][0])
+                messages.add_message(request, messages.ERROR, error[1])
 
     form = TaskForm(initial={'priority': '2'})
     return render(request, "v1/create_task_template.html", {"form": form})

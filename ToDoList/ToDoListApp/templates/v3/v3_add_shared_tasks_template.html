@@ -7,13 +7,13 @@
             {% if task in to_do_list.tasks.all %}
                 <buttno type="submit" value="Added" disabled="disabled">Added</buttno>
             {% else %}
-                <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                <input type="hidden" name="task_id" value="{{ task.id }}">
                 <button type="submit" value="Add task" name="add">Add task</button>
             {% endif %}
         </p>
         <br>
     {% endfor %}
     <p>
-        <button><a href="{% url 'v3-get-list' list_id=to_do_list.list_id %}">back to list</a></button>
+        <button><a href="{% url 'v3-get-list' list_id=to_do_list.id %}">back to list</a></button>
     </p>
 </form>

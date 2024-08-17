@@ -33,7 +33,7 @@ def edit_task(request, task_id, list_id):
         else:
             errors = form.errors.items()
             for error in errors:
-                messages.add_message(request, messages.ERROR, error[1][0])
+                messages.add_message(request, messages.ERROR, error[1])
 
         to_do_list = ToDoList.objects.get(pk=list_id)
         sorted_tasks = to_do_list.tasks.all().order_by('deadline', 'priority')
