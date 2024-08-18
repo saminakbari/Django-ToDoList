@@ -22,3 +22,8 @@ class ShareTask3(LoginRequiredMixin, TemplateView):
         receiver_user.tasks_shared_with_user.add(task)
         messages.add_message(request, messages.INFO, "Task is shared successfully.")
         return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['list_id'] = self.kwargs['list_id']
+        return context

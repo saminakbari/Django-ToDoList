@@ -20,7 +20,7 @@
                 </td>
                 {% if task.owner == user %}
                     <td>
-                        <button><a href="{% url 'v3-share-task' task_id=task.id list_id=to_do_list.id %}">share</a>
+                        <button><a href="{% url 'v3-share-task' list_id=to_do_list.id task_id=task.id %}">share</a>
                         </button>
                     </td>
                 {% endif %}
