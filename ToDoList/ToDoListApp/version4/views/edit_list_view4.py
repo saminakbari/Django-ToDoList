@@ -8,7 +8,7 @@ from ToDoListApp.serializers import ToDoListSerializer
 
 class EditList4(LoginRequiredMixin, generics.UpdateAPIView):
     serializer_class = ToDoListSerializer
-    lookup_field = 'list_id'
+    lookup_field = 'id'
 
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
