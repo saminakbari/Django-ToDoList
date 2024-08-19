@@ -10,7 +10,7 @@ from ToDoListApp.version3.views import (
 )
 
 v3_urlpatterns = [
-    path("to-do-list/showall/", ShowLists3.as_view(), name='v3-show-lists'),
+    path("to-do-list/show-all/", ShowLists3.as_view(), name='v3-show-lists'),
     path("to-do-list/create/", CreateList3.as_view(), name='v3-create-list'),
     path("to-do-list/<int:list_id>/edit/", EditList3.as_view(), name='v3-edit-list'),
     path("to-do-list/<int:list_id>/delete/", DeleteList3.as_view(), name='v3-delete-list'),

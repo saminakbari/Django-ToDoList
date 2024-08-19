@@ -13,7 +13,7 @@ from .views.share_task_view2 import ShareTask
 from .views.show_lists_view2 import ShowLists
 
 v2_urlpatterns = [
-    path("to-do-list/showall/", ShowLists.as_view(), name="v2-show-lists"),
+    path("to-do-list/show-all/", ShowLists.as_view(), name="v2-show-lists"),
     path("to-do-list/create/", CreateList.as_view(), name="v2-create-list"),
     path("to-do-list/<int:list_id>/edit/", EditList.as_view(), name="v2-edit-list"),
     path("to-do-list/<int:list_id>/delete/", DeleteList.as_view(), name="v2-delete-list"),

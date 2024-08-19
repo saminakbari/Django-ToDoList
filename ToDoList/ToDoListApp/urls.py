@@ -13,7 +13,7 @@ from ToDoListApp.views.share_task_view import share_task
 from ToDoListApp.views.show_all_lists_view import show_all_lists
 
 v1_urlpatterns = [
-    path("to-do-list/showall/", show_all_lists, name='v1-show-lists'),
+    path("to-do-list/show-all/", show_all_lists, name='v1-show-lists'),
     path("to-do-list/create/", create_list, name='v1-create-list'),
     path("to-do-list/<int:list_id>/edit/", edit_list, name='v1-edit-list'),
     path("to-do-list/<int:list_id>/delete/", delete_list, name='v1-delete-list'),

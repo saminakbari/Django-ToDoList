@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-LOGIN_URL = 'admin_url'
+LOGIN_URL = '/admin/'
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ToDoListApp',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
