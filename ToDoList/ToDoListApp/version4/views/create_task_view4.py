@@ -11,7 +11,7 @@ class CreateTask4(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         task = serializer.save()
-        to_do_list = ToDoList.objects.get(pk=self.kwargs['list_id'])
+        to_do_list = ToDoList.objects.get(pk=self.kwargs['id'])
         task.to_do_lists.add(to_do_list)
         task.owner = self.request.user
         task.save()
