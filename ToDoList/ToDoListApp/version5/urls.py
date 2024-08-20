@@ -4,10 +4,10 @@ from ToDoListApp.version5.views.to_do_list_view_set import ToDoListViewSet
 
 v5_urlpatterns = [
     path("to-do-list/show-all/", ToDoListViewSet.as_view({'get': 'list'}), name='v5-show-lists'),
-    # path("to-do-list/create/", CreateList5.as_view(), name='v5-create-list'),
+    path("to-do-list/create/", ToDoListViewSet.as_view({'post': 'create'}), name='v5-create-list'),
     # path("to-do-list/<int:id>/edit/", EditList5.as_view(), name='v5-edit-list'),
     # path("to-do-list/<int:id>/delete/", DeleteList5.as_view(), name='v5-delete-list'),
-    # path("to-do-list/<int:id>/get/", GetList5.as_view(), name='v5-get-list'),
+    path("to-do-list/<int:pk>/get/", ToDoListViewSet.as_view({'get': 'retrieve'}), name='v5-get-list'),
     # path("to-do-list/<int:id>/task/create/", CreateTask5.as_view(),
     #      name='v5-create-task'),
     # path("task/<int:id>/edit/", EditTask5.as_view(), name='v5-edit-task'),

@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -12,10 +13,22 @@ class ToDoListViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        pass
+        serializer = ToDoListSerializer(data=request.data)
+        if serializer.is_valid():
+            to_do_list = serializer.save()
+            to_do_list.owner = request.user
+            to_do_list.save()
+            print(to_do_list.title)
+            return Response("To-do list added successfully.")
+        else:
+            return Response("Invalid data")
 
     def retrieve(self, request, pk=None):
-        pass
+        queryset = ToDoList.objects.filter(owner=request.user)
+        to_do_list = get_object_or_404(queryset, pk=pk)
+        serializer = ToDoListSerializer(to_do_list)
+        return Response(serializer.data)
+
 
     def update(self, request, pk=None):
         pass
