@@ -12,4 +12,4 @@ class TaskSerializer(serializers.ModelSerializer):
 class ToDoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoList
-        fields = ['title']
+        fields = ['title', 'tasks']
