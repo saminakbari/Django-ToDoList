@@ -19,7 +19,7 @@ v4_urlpatterns = [
     path("to-do-list/<int:id>/task/create/", CreateTask4.as_view(), name='v4-create-task'),
     path("task/<int:id>/edit/", EditTask4.as_view(), name='v4-edit-task'),
     path("task/<int:id>/get/", GetTask4.as_view(), name='v4-get-task'),
-    path("task/<int:id>/delete/", DeleteTask4.as_view(), name='v4-delete-task'),
+    path("to-do-list/<int:list_id>/task/<int:id>/delete/", DeleteTask4.as_view(), name='v4-delete-task'),
     # path("task/<int:id>/share/", ShareTask4.as_view(), name='v4-share-task'),
     # path("to-do-list/<int:list_id>/task/shared-tasks/", AddSharedTasks4.as_view(), name='v4-add-shared-tasks'),
 ]
