@@ -22,6 +22,6 @@ v1_urlpatterns = [
     path("to-do-list/<int:list_id>/task/<int:task_id>/edit/", edit_task, name='v1-edit-task'),
     path("to-do-list/<int:list_id>/task/<int:task_id>/delete/", delete_task, name='v1-delete-task'),
     path("task/<int:task_id>/get/", get_task, name='v1-get-task'),
-    path("to-do-list/<int:list_id>task/<int:task_id>/share/", share_task, name='v1-share-task'),
+    path("to-do-list/<int:list_id>/task/<int:task_id>/share/", share_task, name='v1-share-task'),
     path("to-do-list/<int:list_id>/shared-tasks/", add_shared_tasks, name='v1-add-shared-tasks'),
 ]
