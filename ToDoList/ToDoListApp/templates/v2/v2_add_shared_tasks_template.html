@@ -11,14 +11,14 @@
                     </td>
                 {% else %}
                     <td>
-                        <input type="hidden" name="task_id" value="{{ task.id }}">
-                        <button type="submit" value="Add task" name="add">Add task</button>
+                        <button type="submit" value="{{ task.id}}" name="add">Add task</button>
                     </td>
                 {% endif %}
             </tr>
             <br>
         {% endfor %}
     </table>
+    
     <p>
         <button><a href="{% url 'v2-get-list' list_id=to_do_list.id %}"
                    style="text-decoration: none;">back to list</a></button>

@@ -10,7 +10,7 @@ class AddSharedTasks3(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         list_id = kwargs['list_id']
         to_do_list = ToDoList.objects.get(id=list_id)
-        task_id = request.POST['task_id']
+        task_id = request.POST['add']
         task = Task.objects.get(id=task_id)
         to_do_list.tasks.add(task)
         return self.get(request, *args, **kwargs)

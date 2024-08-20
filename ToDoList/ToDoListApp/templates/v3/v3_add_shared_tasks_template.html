@@ -10,8 +10,8 @@
                         <button type="submit" value="Added" disabled="disabled">Added</button>
                     </td>
                 {% else %}
-                    <td><input type="hidden" name="task_id" value="{{ task.id }}">
-                        <button type="submit" value="Add task" name="add">Add task</button>
+                    <td>
+                        <button type="submit" value="{{ task.id}}" name="add">Add task</button>
                     </td>
                 {% endif %}
             </tr>
