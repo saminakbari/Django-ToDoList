@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from ToDoListApp.models import Task, ToDoList
@@ -13,3 +14,9 @@ class ToDoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoList
         fields = ['title', 'tasks']
+
+
+class UserSerializer:
+    class Meta:
+        model = User
+        fields = ['username']
