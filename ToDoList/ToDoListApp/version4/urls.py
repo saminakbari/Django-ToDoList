@@ -3,6 +3,7 @@ from django.urls import path
 from ToDoListApp.version4.views.create_list_view4 import CreateList4
 from ToDoListApp.version4.views.create_task_view4 import CreateTask4
 from ToDoListApp.version4.views.delete_list_view4 import DeleteList4
+from ToDoListApp.version4.views.delete_task_view4 import DeleteTask4
 from ToDoListApp.version4.views.edit_list_view4 import EditList4
 from ToDoListApp.version4.views.edit_task_view4 import EditTask4
 from ToDoListApp.version4.views.get_list_view4 import GetList4
@@ -18,7 +19,7 @@ v4_urlpatterns = [
     path("to-do-list/<int:id>/task/create/", CreateTask4.as_view(), name='v4-create-task'),
     path("task/<int:id>/edit/", EditTask4.as_view(), name='v4-edit-task'),
     path("task/<int:id>/get/", GetTask4.as_view(), name='v4-get-task'),
-    # path("task/<int:id>/delete/", DeleteTask4.as_view(), name='v4-delete-task'),
+    path("task/<int:id>/delete/", DeleteTask4.as_view(), name='v4-delete-task'),
     # path("task/<int:id>/share/", ShareTask4.as_view(), name='v4-share-task'),
     # path("to-do-list/<int:list_id>/task/shared-tasks/", AddSharedTasks4.as_view(), name='v4-add-shared-tasks'),
 ]
