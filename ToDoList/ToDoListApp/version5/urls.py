@@ -1,4 +1,3 @@
-from django.urls import path
 from rest_framework import routers
 
 from ToDoListApp.version5.view_sets.task_view_set import TaskViewSet
@@ -20,8 +19,6 @@ v5_urlpatterns = router.urls
 #          name='v5-delete-list'),
 #     path("to-do-list/<int:pk>/get/", ToDoListViewSet.as_view({'get': 'retrieve'}),
 #          name='v5-get-list'),
-#     path("to-do-list/<int:pk>/add-shared-task/",
-#          ToDoListViewSet.as_view({'post': 'add_shared_task'}),
 #          name='v5-add-shared-task'),
 #     path("task/show-all/", TaskViewSet.as_view({'get': 'list'}), name='v5-show-tasks'),
 #     path("task/create/", TaskViewSet.as_view({'post': 'create'}), name='v5-create-task'),
@@ -34,4 +31,5 @@ v5_urlpatterns = router.urls
 #     path("task/<int:task_id>/share/", TaskViewSet.as_view({'post': 'share_task'}),
 #          name='v5-share-task'),
 #     path("task/get-shared/", TaskViewSet.as_view({'get': 'get_shared_tasks'}), name='v5-get-shared-tasks'),
+#     path("task/<int:pk>/add-shared-task/", ToDoListViewSet.as_view({'post': 'add_shared_task'}),
 # ]

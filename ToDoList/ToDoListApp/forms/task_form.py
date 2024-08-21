@@ -1,6 +1,6 @@
 from django import forms
 
-from ToDoListApp.models.task import validate_title, validate_date, Task
+from ToDoListApp.models.task import Task, validate_date, validate_title
 
 
 class TaskForm(forms.Form):

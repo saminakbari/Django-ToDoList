@@ -1,12 +1,17 @@
 from django.urls import path
 
 from ToDoListApp.version3.views import (
+    AddSharedTasks3,
     CreateList3,
     CreateTask3,
     DeleteList3,
+    DeleteTask3,
     EditList3,
+    EditTask3,
     GetList3,
-    ShowLists3, EditTask3, DeleteTask3, GetTask3, ShareTask3, AddSharedTasks3,
+    GetTask3,
+    ShareTask3,
+    ShowLists3,
 )
 
 v3_urlpatterns = [

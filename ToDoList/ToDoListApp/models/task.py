@@ -18,7 +18,8 @@ def get_priority(priority_number):
 
 def validate_title(title):
     if not re.match("^[a-zA-Z0-9_\\-]+$", title):
-        raise ValidationError("The name can only contain letters, numbers, dashes and underlines.")
+        message = "The name can only contain letters, numbers, dashes and underlines."
+        raise ValidationError(message)
 
 
 def validate_date(date):
@@ -39,10 +40,12 @@ class Task(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان',
                              null=False, default="new-task", validators=[validate_title])
 
-    description = models.CharField(max_length=1000, verbose_name='توضیحات', null=False, default="", blank=True)
+    description = models.CharField(max_length=1000, verbose_name='توضیحات',
+                                   null=False, default="", blank=True)
 
     deadline = models.DateField(max_length=10, verbose_name='زمان سرسید',
-                                null=False, default=django.utils.timezone.now().date(), validators=[validate_date])
+                                null=False, default=django.utils.timezone.now().date(),
+                                validators=[validate_date])
 
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES,
                                 verbose_name='اولویت', null=False, default='2',
@@ -51,10 +54,11 @@ class Task(models.Model):
     to_do_lists = models.ManyToManyField(to='ToDoListApp.ToDoList', related_name='tasks',
                                          verbose_name='لیست‌ها')
 
-    users_shared_with = models.ManyToManyField(to=User, related_name='tasks_shared_with_user',
+    users_shared_with = models.ManyToManyField(to=User,
+                                               related_name='tasks_shared_with_user',
                                                verbose_name='افرادی که با آنها به اشتراک گذاشته شده')
 
-    owner = models.ForeignKey(to=User, on_delete=models.SET_NULL, verbose_name='صاحب',
+    owner = models.ForeignKey(to=User, on_delete=models.SET_NULL, verbose_name='صاحب تسک',
                               null=True, related_name='tasks')
 
     attachment = models.FileField(verbose_name='فایل ضمیمه', null=True, blank=True,

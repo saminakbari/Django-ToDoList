@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
-from ToDoListApp.models.task import get_priority
 
 
 @login_required

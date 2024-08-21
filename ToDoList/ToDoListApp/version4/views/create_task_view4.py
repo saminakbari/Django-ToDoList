@@ -1,5 +1,4 @@
 from rest_framework import generics
-from rest_framework.response import Response
 
 from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
-from ToDoListApp.models import ToDoList, Task
+from ToDoListApp.models import Task, ToDoList
 
 
 class AddSharedTasks3(LoginRequiredMixin, TemplateView):
