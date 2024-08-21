@@ -1,7 +1,7 @@
 from django.urls import path
 
-from ToDoListApp.version5.views.task_view_set import TaskViewSet
-from ToDoListApp.version5.views.to_do_list_view_set import ToDoListViewSet
+from ToDoListApp.version5.view_sets.task_view_set import TaskViewSet
+from ToDoListApp.version5.view_sets.to_do_list_view_set import ToDoListViewSet
 
 v5_urlpatterns = [
     path("to-do-list/show-all/", ToDoListViewSet.as_view({'get': 'list'}),
