@@ -9,7 +9,7 @@ from ToDoListApp.serializers import TaskSerializer
 class TaskViewSet(viewsets.ViewSet):
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
-        to_do_list = user_to_do_lists.get(pk=self.kwargs['list_id'])
+        to_do_list = user_to_do_lists.get(pk=request.POST['list_id'])
         queryset = filter(lambda task: task in to_do_list.tasks.all(),
                           Task.objects.filter(owner=request.user))
         serializer = TaskSerializer(queryset, many=True)
@@ -20,7 +20,7 @@ class TaskViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             task = serializer.save()
             user_to_do_lists = request.user.to_do_lists.all()
-            to_do_list = user_to_do_lists.get(pk=self.kwargs['list_id'])
+            to_do_list = user_to_do_lists.get(pk=request.POST['list_id'])
             task.to_do_lists.add(to_do_list)
             task.owner = request.user
             task.save()
@@ -43,3 +43,11 @@ class TaskViewSet(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response("Invalid data.")
+
+    def destroy(self, request, task_id=None):
+        queryset = Task.objects.filter(owner=request.user)
+        task = get_object_or_404(queryset, pk=task_id)
+        user_lists = request.user.to_do_lists
+        to_do_list = user_lists.get(pk=request.POST['list_id'])
+        to_do_list.tasks.remove(task)
+        return Response("Task deleted successfully.")
