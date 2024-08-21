@@ -27,14 +27,21 @@ class ToDoListViewSet(viewsets.ViewSet):
         queryset = ToDoList.objects.filter(owner=request.user)
         to_do_list = get_object_or_404(queryset, pk=pk)
         serializer = ToDoListSerializer(to_do_list)
+        print(serializer.data)
         return Response(serializer.data)
 
-
-    def update(self, request, pk=None):
-        pass
-
     def partial_update(self, request, pk=None):
-        pass
+        queryset = ToDoList.objects.filter(owner=request.user)
+        to_do_list = get_object_or_404(queryset, pk=pk)
+        serializer = ToDoListSerializer(to_do_list, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response("Invalid data")
 
     def destroy(self, request, pk=None):
-        pass
+        queryset = ToDoList.objects.filter(owner=request.user)
+        to_do_list = get_object_or_404(queryset, pk=pk)
+        to_do_list.delete()
+        return Response("To-do list deleted successfully.")
