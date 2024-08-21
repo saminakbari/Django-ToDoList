@@ -14,7 +14,7 @@ v5_urlpatterns = [
     path("to-do-list/<int:list_id>/tasks/show-all/", TaskViewSet.as_view({'get': 'list'})),
     path("to-do-list/<int:list_id>/task/create/", TaskViewSet.as_view({'post': 'create'}),
          name='v5-create-task'),
-    # path("task/<int:id>/edit/", EditTask5.as_view(), name='v5-edit-task'),
+    path("task/<int:task_id>/edit/", TaskViewSet.as_view({'post': 'partial_update'}), name='v5-edit-task'),
     path("task/<int:task_id>/get/", TaskViewSet.as_view({'get': 'retrieve'}), name='v5-get-task'),
     # path("to-do-list/<int:list_id>/task/<int:id>/delete/",
     #      DeleteTask5.as_view(), name='v5-delete-task'),

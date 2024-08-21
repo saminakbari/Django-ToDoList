@@ -22,7 +22,7 @@ class TaskViewSet(viewsets.ViewSet):
             user_to_do_lists = request.user.to_do_lists.all()
             to_do_list = user_to_do_lists.get(pk=self.kwargs['list_id'])
             task.to_do_lists.add(to_do_list)
-            task.user = request.user
+            task.owner = request.user
             task.save()
             return Response("Task created successfully.")
         else:
@@ -33,3 +33,13 @@ class TaskViewSet(viewsets.ViewSet):
         task = get_object_or_404(queryset, pk=task_id)
         serializer = TaskSerializer(task)
         return Response(serializer.data)
+
+    def partial_update(self, request, task_id=None):
+        queryset = Task.objects.filter(owner=request.user)
+        task = get_object_or_404(queryset, pk=task_id)
+        serializer = TaskSerializer(task, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response("Invalid data.")

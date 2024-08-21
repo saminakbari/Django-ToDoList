@@ -14,6 +14,8 @@ class ToDoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoList
         fields = ['id', 'title', 'tasks']
+        tasks = serializers.ReadOnlyField(source='tasks')
+        id = serializers.ReadOnlyField(source='id')
 
 
 class UserSerializer:
