@@ -20,7 +20,7 @@ class ToDoListViewSet(LoginRequiredMixin, viewsets.ViewSet):
             to_do_list.owner = request.user
             to_do_list.save()
             print(to_do_list.title)
-            return Response("To-do list added successfully.")
+            return Response("To-do list created successfully.")
         else:
             return Response(serializer.errors)
 
@@ -55,15 +55,3 @@ class ToDoListViewSet(LoginRequiredMixin, viewsets.ViewSet):
         to_do_list.delete()
         return Response("To-do list deleted successfully.")
 
-    @action(detail=True, methods=['post'])
-    def add_shared_task(self, request, pk=None):
-        try:
-            task = Task.objects.all().get(pk=request.POST['task_id'])
-        except Task.DoesNotExist:
-            return Response("Task with this id has not been shared with you.")
-        to_do_list = request.user.to_do_lists.get(pk=pk)
-        if task in to_do_list.tasks.all():
-            return Response("You already have this task in this list.")
-        else:
-            to_do_list.tasks.add(task)
-            return Response("Task added successfully.")
