@@ -14,5 +14,16 @@ class TaskViewSet(viewsets.ViewSet):
         serializer = TaskSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    # def create(self, request, **kwargs):
-        
+    def create(self, request, **kwargs):
+        serializer = TaskSerializer(data=request.data)
+        if serializer.is_valid():
+            task = serializer.save()
+            user_to_do_lists = request.user.to_do_lists.all()
+            to_do_list = user_to_do_lists.get(pk=self.kwargs['list_id'])
+            task.to_do_lists.add(to_do_list)
+            task.save()
+            return Response("Task created successfully.")
+        else:
+            return Response("Invalid data.")
+
+
