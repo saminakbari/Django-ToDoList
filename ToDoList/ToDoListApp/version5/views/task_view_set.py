@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -21,9 +22,14 @@ class TaskViewSet(viewsets.ViewSet):
             user_to_do_lists = request.user.to_do_lists.all()
             to_do_list = user_to_do_lists.get(pk=self.kwargs['list_id'])
             task.to_do_lists.add(to_do_list)
+            task.user = request.user
             task.save()
             return Response("Task created successfully.")
         else:
             return Response("Invalid data.")
 
-
+    def retrieve(self, request, task_id=None):
+        queryset = Task.objects.filter(owner=request.user)
+        task = get_object_or_404(queryset, pk=task_id)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)

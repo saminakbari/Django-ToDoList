@@ -27,7 +27,6 @@ class ToDoListViewSet(viewsets.ViewSet):
         queryset = ToDoList.objects.filter(owner=request.user)
         to_do_list = get_object_or_404(queryset, pk=pk)
         serializer = ToDoListSerializer(to_do_list)
-        print(serializer.data)
         return Response(serializer.data)
 
     def partial_update(self, request, pk=None):
