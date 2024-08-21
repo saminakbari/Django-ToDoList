@@ -1,5 +1,7 @@
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from ToDoListApp.models import Task
@@ -51,3 +53,17 @@ class TaskViewSet(viewsets.ViewSet):
         to_do_list = user_lists.get(pk=request.POST['list_id'])
         to_do_list.tasks.remove(task)
         return Response("Task deleted successfully.")
+
+    @action(detail=True, methods=['post'])
+    def share_task(self, request, task_id=None):
+        user_to_be_shared_with = User.objects.get(username=request.POST['username'])
+        user_tasks = request.user.tasks
+        task = user_tasks.get(id=task_id)
+        user_to_be_shared_with.tasks_shared_with_user.add(task)
+        result = "Task shared with " + user_to_be_shared_with.username + " successfully."
+        return Response(result)
+
+    @action(detail=True, method=['get'])
+    def get_shared_tasks(self, request):
+        serializer = TaskSerializer(request.user.tasks_shared_with_user.all(), many=True)
+        return Response(serializer.data)

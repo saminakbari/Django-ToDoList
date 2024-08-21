@@ -55,7 +55,7 @@ class Task(models.Model):
                                                verbose_name='افرادی که با آنها به اشتراک گذاشته شده')
 
     owner = models.ForeignKey(to=User, on_delete=models.SET_NULL, verbose_name='صاحب',
-                              null=True)
+                              null=True, related_name='tasks')
 
     attachment = models.FileField(verbose_name='فایل ضمیمه', null=True, blank=True,
                                   upload_to="media_files")
