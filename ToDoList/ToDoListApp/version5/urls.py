@@ -1,5 +1,6 @@
 from django.urls import path
 
+from ToDoListApp.version5.views.task_view_set import TaskViewSet
 from ToDoListApp.version5.views.to_do_list_view_set import ToDoListViewSet
 
 v5_urlpatterns = [
@@ -8,7 +9,8 @@ v5_urlpatterns = [
     path("to-do-list/<int:pk>/edit/", ToDoListViewSet.as_view({'post': 'partial_update'}), name='v5-edit-list'),
     path("to-do-list/<int:pk>/delete/", ToDoListViewSet.as_view({'post': 'destroy'}), name='v5-delete-list'),
     path("to-do-list/<int:pk>/get/", ToDoListViewSet.as_view({'get': 'retrieve'}), name='v5-get-list'),
-    # path("to-do-list/<int:id>/task/create/", CreateTask5.as_view(),
+    path("to-do-list/<int:list_id>/tasks/show-all/", TaskViewSet.as_view({'get': 'list'})),
+    # path("to-do-list/<int:id>/task/create/", TaskViewSet.as_view({}),
     #      name='v5-create-task'),
     # path("task/<int:id>/edit/", EditTask5.as_view(), name='v5-edit-task'),
     # path("task/<int:id>/get/", GetTask5.as_view(), name='v5-get-task'),
