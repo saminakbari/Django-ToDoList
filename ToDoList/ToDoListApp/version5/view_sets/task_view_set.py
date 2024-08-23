@@ -92,7 +92,7 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
             task = user_tasks.get(id=task_id)
         except Task.DoesNotExist:
             return "You don't have a task with this id."
-        if task not in user_to_be_shared_with.tasks_shared_with_user:
+        if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = ("Task shared with " + user_to_be_shared_with.username
                       + " successfully.")
