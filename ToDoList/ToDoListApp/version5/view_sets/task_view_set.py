@@ -86,12 +86,12 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
         try:
             user_to_be_shared_with = User.objects.get(username=request.POST['username'])
         except User.DoesNotExist:
-            return "There is no user with this id."
+            return Response("There is no user with this id.")
         user_tasks = request.user.tasks
         try:
             task = user_tasks.get(id=task_id)
         except Task.DoesNotExist:
-            return "You don't have a task with this id."
+            return Response("You don't have a task with this id.")
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = ("Task shared with " + user_to_be_shared_with.username

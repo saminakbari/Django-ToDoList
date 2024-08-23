@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
@@ -14,9 +14,12 @@ class TaskModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.action == 'list' or self.action == 'destroy':
-            user_lists = self.request.user.to_do_lists
-            to_do_list = get_object_or_404(user_lists, pk=self.request.POST['list_id'])
+            to_do_list = self.get_list_by_id()
             return to_do_list.tasks.all()
+        if self.action == 'get_shared_tasks':
+            return self.request.user.tasks_shared_with_user.all()
+        if self.action in ['update', 'partial_update']:
+            return Task.objects.all()
         return Task.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
@@ -29,6 +32,18 @@ class TaskModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     def perform_destroy(self, instance):
         to_do_list = self.get_list_by_id()
         to_do_list.tasks.remove(instance)
+
+    def perform_update(self, serializer):
+        task = self.get_object()
+        if task.owner != self.request.user:
+            return Response("You don't own this task.")
+        return super(TaskModelViewSet, self).perform_update(serializer)
+
+    def partial_update(self, request, *args, **kwargs):
+        task = self.get_object()
+        if task.owner != self.request.user:
+            return Response("You don't own this task.")
+        return super(TaskModelViewSet, self).partial_update(request, *args, **kwargs)
 
     @action(detail=True, methods=['post'])
     def share_task(self, request, *args, **kwargs):
@@ -49,7 +64,24 @@ class TaskModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
         else:
             return Response("You have already shared this task with this user.")
 
+    @action(methods=['get'], detail=False)
+    def get_shared_tasks(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    @action(methods=['post'], detail=True)
+    def add_shared_task(self, request, *args, **kwargs):
+        try:
+            task = Task.objects.all().get(pk=kwargs['pk'])
+        except Task.DoesNotExist:
+            return Response("Task with this id has not been shared with you.")
+        to_do_list = request.user.to_do_lists.get(pk=request.POST['list_id'])
+        if task in to_do_list.tasks.all():
+            return Response("You already have this task in this list.")
+        else:
+            to_do_list.tasks.add(task)
+            return Response("Task added successfully.")
+
     def get_list_by_id(self):
         user_lists = self.request.user.to_do_lists
-        to_do_list = user_lists.get(pk=self.request.POST['list_id'])
+        to_do_list = get_object_or_404(user_lists, pk=self.request.POST['list_id'])
         return to_do_list
