@@ -22,6 +22,6 @@ class EditList4(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
             return Response("To-do list edited successfully.")
 
         else:
-            return Response({"message": "failed", "details": serializer.errors})
+            return Response(serializer.errors)
 
 

@@ -11,7 +11,6 @@ class CreateList4(LoginRequiredMixin, generics.CreateAPIView):
 
     def perform_create(self, serializer):
         to_do_list = serializer.save()
-        print(to_do_list.id)
         to_do_list.owner = self.request.user
         to_do_list.save()
         return super(CreateList4, self).perform_create(serializer)

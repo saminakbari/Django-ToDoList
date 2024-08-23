@@ -26,5 +26,3 @@ class ToDoListModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
             return super(ToDoListModelViewSet, self).update(serializer)
         else:
             return Response(serializer.errors)
-
-    
