@@ -4,3 +4,12 @@
     <p>Are you sure you want to delete {{ to_do_list.title }}?</p>
     <button type="submit">Yes</button>
 </form>
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -6,3 +6,12 @@
     <button type="submit">OK</button>
     <br>
 </form>
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}

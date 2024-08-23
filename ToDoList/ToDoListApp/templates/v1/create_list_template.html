@@ -1,7 +1,7 @@
 <h1>Create to-do list</h1>
 <form method="post">
     {% csrf_token %}
-    
+
     <table>
         {% for field in form %}
             <tr>
@@ -12,3 +12,13 @@
 
     <button type="submit">OK</button>
 </form>
+
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}

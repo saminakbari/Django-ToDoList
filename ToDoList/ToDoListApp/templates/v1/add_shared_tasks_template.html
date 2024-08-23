@@ -24,3 +24,12 @@
         <button formaction="{% url 'v1-get-list' list_id=to_do_list.id %}">back to list</button>
     </p>
 </form>
+<br>
+messages:
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}
