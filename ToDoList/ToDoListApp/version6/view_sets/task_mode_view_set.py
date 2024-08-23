@@ -14,7 +14,7 @@ class TaskModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
             user_lists = self.request.user.to_do_lists
             to_do_list = get_object_or_404(user_lists, pk=self.request.POST['list_id'])
             return to_do_list.tasks.all()
-        return Task.objects.filter(owner=self.request.owner)
+        return Task.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         task = serializer.save()
