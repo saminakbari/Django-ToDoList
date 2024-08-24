@@ -8,11 +8,11 @@ from ToDoListApp.models.task import get_priority
 class GetTask3(LoginRequiredMixin, DetailView):
     template_name = "v3/v3_get_task_template.html"
     model = Task
-    pk_url_kwarg = 'task_id'
+    pk_url_kwarg = "task_id"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         task = self.object
-        context['task'] = task
-        context['priority'] = get_priority(task.priority)
+        context["task"] = task
+        context["priority"] = get_priority(task.priority)
         return context

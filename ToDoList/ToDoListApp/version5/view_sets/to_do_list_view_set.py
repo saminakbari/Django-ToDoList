@@ -53,4 +53,3 @@ class ToDoListViewSet(LoginRequiredMixin, viewsets.ViewSet):
             return Response("You don't have a to-do list with this id.")
         to_do_list.delete()
         return Response("To-do list deleted successfully.")
-

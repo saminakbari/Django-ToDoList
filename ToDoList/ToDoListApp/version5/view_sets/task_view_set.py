@@ -12,11 +12,13 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
         try:
-            to_do_list = user_to_do_lists.get(pk=request.POST['list_id'])
+            to_do_list = user_to_do_lists.get(pk=request.POST["list_id"])
         except ToDoList.DoesNotExist:
             return Response("You don't have a to-do list with this id.")
-        queryset = filter(lambda task: task in to_do_list.tasks.all(),
-                          Task.objects.filter(owner=request.user))
+        queryset = filter(
+            lambda task: task in to_do_list.tasks.all(),
+            Task.objects.filter(owner=request.user),
+        )
         serializer = TaskSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -26,7 +28,7 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
             task = serializer.save()
             user_to_do_lists = request.user.to_do_lists.all()
             try:
-                to_do_list = user_to_do_lists.get(pk=request.POST['list_id'])
+                to_do_list = user_to_do_lists.get(pk=request.POST["list_id"])
             except ToDoList.DoesNotExist:
                 return Response("You don't have a to-do list with this id.")
             task.to_do_lists.add(to_do_list)
@@ -40,7 +42,7 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
         queryset = Task.objects.filter(owner=request.user)
         try:
             task = queryset.get(pk=task_id)
-        except:
+        except Task.DoesNotExist:
             return Response("You don't have a task with this id.")
         serializer = TaskSerializer(task)
         return Response(serializer.data)
@@ -72,7 +74,7 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
             return Response("You don't have a task with this id.")
         user_lists = request.user.to_do_lists
         try:
-            to_do_list = user_lists.get(pk=request.POST['list_id'])
+            to_do_list = user_lists.get(pk=request.POST["list_id"])
         except ToDoList.DoesNotExist:
             return Response("You don't have a list with this id.")
         if task in to_do_list.tasks.all():
@@ -81,10 +83,10 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
         else:
             return Response("There is no task with this id in the list.")
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=["post"])
     def share_task(self, request, task_id=None):
         try:
-            user_to_be_shared_with = User.objects.get(username=request.POST['username'])
+            user_to_be_shared_with = User.objects.get(username=request.POST["username"])
         except User.DoesNotExist:
             return Response("There is no user with this id.")
         user_tasks = request.user.tasks
@@ -94,24 +96,27 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
             return Response("You don't have a task with this id.")
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
-            result = ("Task shared with " + user_to_be_shared_with.username
-                      + " successfully.")
+            result = (
+                "Task shared with " + user_to_be_shared_with.username + " successfully."
+            )
             return Response(result)
         else:
             return Response("You have already shared this task with this user.")
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def get_shared_tasks(self, request):
-        serializer = TaskSerializer(request.user.tasks_shared_with_user.all(), many=True)
+        serializer = TaskSerializer(
+            request.user.tasks_shared_with_user.all(), many=True
+        )
         return Response(serializer.data)
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=["post"])
     def add_shared_task(self, request, pk=None):
         try:
             task = Task.objects.all().get(pk=pk)
         except Task.DoesNotExist:
             return Response("Task with this id has not been shared with you.")
-        to_do_list = request.user.to_do_lists.get(pk=request.POST['list_id'])
+        to_do_list = request.user.to_do_lists.get(pk=request.POST["list_id"])
         if task in to_do_list.tasks.all():
             return Response("You already have this task in this list.")
         else:

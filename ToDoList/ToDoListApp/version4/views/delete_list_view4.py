@@ -7,7 +7,7 @@ from ToDoListApp.serializers import ToDoListSerializer
 
 class DeleteList4(LoginRequiredMixin, generics.DestroyAPIView):
     serializer_class = ToDoListSerializer
-    lookup_field = 'id'
+    lookup_field = "id"
 
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)

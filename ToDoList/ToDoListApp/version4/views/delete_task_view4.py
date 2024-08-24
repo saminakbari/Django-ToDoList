@@ -8,13 +8,13 @@ from ToDoListApp.serializers import TaskSerializer
 
 class DeleteTask4(LoginRequiredMixin, generics.DestroyAPIView):
     serializer_class = TaskSerializer
-    lookup_field = 'id'
+    lookup_field = "id"
 
     def get_queryset(self):
         return Task.objects.filter(owner=self.request.user)
 
     def perform_destroy(self, instance):
         task = self.get_object()
-        to_do_list = ToDoList.objects.get(pk=self.kwargs['list_id'])
+        to_do_list = ToDoList.objects.get(pk=self.kwargs["list_id"])
         to_do_list.tasks.remove(task)
         return Response("Task deleted from list successfully.")

@@ -14,19 +14,26 @@ from ToDoListApp.version4.views.share_task_view4 import ShareTask4
 from ToDoListApp.version4.views.show_lists_view4 import ShowLists4
 
 v4_urlpatterns = [
-    path("to-do-list/show-all/", ShowLists4.as_view(), name='v4-show-lists'),
-    path("to-do-list/create/", CreateList4.as_view(), name='v4-create-list'),
-    path("to-do-list/<int:id>/edit/", EditList4.as_view(), name='v4-edit-list'),
-    path("to-do-list/<int:id>/delete/", DeleteList4.as_view(), name='v4-delete-list'),
-    path("to-do-list/<int:id>/get/", GetList4.as_view(), name='v4-get-list'),
-    path("to-do-list/<int:id>/task/create/", CreateTask4.as_view(),
-         name='v4-create-task'),
-    path("task/<int:id>/edit/", EditTask4.as_view(), name='v4-edit-task'),
-    path("task/<int:id>/get/", GetTask4.as_view(), name='v4-get-task'),
-    path("to-do-list/<int:list_id>/task/<int:id>/delete/",
-         DeleteTask4.as_view(), name='v4-delete-task'),
-    path("task/<int:id>/share/", ShareTask4.as_view(), name='v4-share-task'),
-    path("to-do-list/<int:id>/add-shared-tasks/", AddSharedTask4.as_view(),
-         name='v4-add-shared-tasks'),
-    path("task/get/shared/", GetSharedTasks4.as_view(), name='v4-get-shared-tasks'),
+    path("to-do-list/show-all/", ShowLists4.as_view(), name="v4-show-lists"),
+    path("to-do-list/create/", CreateList4.as_view(), name="v4-create-list"),
+    path("to-do-list/<int:id>/edit/", EditList4.as_view(), name="v4-edit-list"),
+    path("to-do-list/<int:id>/delete/", DeleteList4.as_view(), name="v4-delete-list"),
+    path("to-do-list/<int:id>/get/", GetList4.as_view(), name="v4-get-list"),
+    path(
+        "to-do-list/<int:id>/task/create/", CreateTask4.as_view(), name="v4-create-task"
+    ),
+    path("task/<int:id>/edit/", EditTask4.as_view(), name="v4-edit-task"),
+    path("task/<int:id>/get/", GetTask4.as_view(), name="v4-get-task"),
+    path(
+        "to-do-list/<int:list_id>/task/<int:id>/delete/",
+        DeleteTask4.as_view(),
+        name="v4-delete-task",
+    ),
+    path("task/<int:id>/share/", ShareTask4.as_view(), name="v4-share-task"),
+    path(
+        "to-do-list/<int:id>/add-shared-tasks/",
+        AddSharedTask4.as_view(),
+        name="v4-add-shared-tasks",
+    ),
+    path("task/get/shared/", GetSharedTasks4.as_view(), name="v4-get-shared-tasks"),
 ]

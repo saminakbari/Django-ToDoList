@@ -19,8 +19,9 @@ class ToDoListModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
         return super(ToDoListModelViewSet, self).perform_create(serializer)
 
     def update(self, request, *args, **kwargs):
-        serializer = self.serializer_class(self.get_object(),
-                                           data=request.data, partial=True)
+        serializer = self.serializer_class(
+            self.get_object(), data=request.data, partial=True
+        )
         if serializer.is_valid():
             serializer.save()
             return super(ToDoListModelViewSet, self).update(serializer)

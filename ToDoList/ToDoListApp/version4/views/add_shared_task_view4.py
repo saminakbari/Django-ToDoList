@@ -7,15 +7,14 @@ from ToDoListApp.serializers import ToDoListSerializer
 
 
 class AddSharedTask4(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
-
     serializer_class = ToDoListSerializer
-    lookup_field = 'id'
+    lookup_field = "id"
 
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
 
     def perform_update(self, serializer):
-        task_id = self.request.data['task_id']
+        task_id = self.request.data["task_id"]
         task = Task.objects.get(pk=task_id)
         to_do_list = self.get_object()
         to_do_list.tasks.add(task)

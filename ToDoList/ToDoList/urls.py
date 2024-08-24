@@ -11,7 +11,7 @@ from ToDoListApp.version5.urls import v5_urlpatterns
 from ToDoListApp.version6.urls import v6_urlpatterns
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin_url'),
+    path("admin/", admin.site.urls, name="admin_url"),
     path("v1/", include(v1_urlpatterns)),
     path("v2/", include(v2_urlpatterns)),
     path("v3/", include(v3_urlpatterns)),

@@ -10,6 +10,5 @@ class EditList3(LoginRequiredMixin, UpdateView):
     template_name = "v3/v3_edit_list_title_template.html"
     form_class = ListModelForm
     model = ToDoList
-    pk_url_kwarg = 'list_id'
-    success_url = reverse_lazy('v3-show-lists')
-
+    pk_url_kwarg = "list_id"
+    success_url = reverse_lazy("v3-show-lists")

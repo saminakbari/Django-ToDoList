@@ -13,10 +13,9 @@ class CreateTask3(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        list_id = self.kwargs['list_id']
+        list_id = self.kwargs["list_id"]
         task = form.save()
         to_do_list = ToDoList.objects.get(pk=list_id)
         task.to_do_lists.add(to_do_list)
-        self.success_url = reverse_lazy('v3-get-list', kwargs={'list_id': list_id})
+        self.success_url = reverse_lazy("v3-get-list", kwargs={"list_id": list_id})
         return super(CreateTask3, self).form_valid(form)
-

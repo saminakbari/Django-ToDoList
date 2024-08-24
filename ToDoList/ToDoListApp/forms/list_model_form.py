@@ -6,4 +6,4 @@ from ToDoListApp.models import ToDoList
 class ListModelForm(forms.ModelForm):
     class Meta:
         model = ToDoList
-        fields = ['title']
+        fields = ["title"]

@@ -7,12 +7,12 @@ from ToDoListApp.models import Task
 
 
 class ShareTask3(LoginRequiredMixin, TemplateView):
-    template_name = 'v3/v3_share_task_template.html'
+    template_name = "v3/v3_share_task_template.html"
 
     def post(self, request, *args, **kwargs):
-        task_id = kwargs['task_id']
+        task_id = kwargs["task_id"]
         task = Task.objects.get(pk=task_id)
-        receiver_username = request.POST.get('receiver_username')
+        receiver_username = request.POST.get("receiver_username")
         try:
             receiver_user = User.objects.get(username=receiver_username)
         except User.DoesNotExist:
@@ -25,5 +25,5 @@ class ShareTask3(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['list_id'] = self.kwargs['list_id']
+        context["list_id"] = self.kwargs["list_id"]
         return context

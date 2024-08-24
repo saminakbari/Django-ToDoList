@@ -7,18 +7,18 @@ from ToDoListApp.models import Task, ToDoList
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'deadline', 'priority', 'attachment']
+        fields = ["id", "title", "description", "deadline", "priority", "attachment"]
 
 
 class ToDoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoList
-        fields = ['id', 'title', 'tasks']
-        tasks = serializers.ReadOnlyField(source='tasks')
-        id = serializers.ReadOnlyField(source='id')
+        fields = ["id", "title", "tasks"]
+        tasks = serializers.ReadOnlyField(source="tasks")
+        id = serializers.ReadOnlyField(source="id")
 
 
 class UserSerializer:
     class Meta:
         model = User
-        fields = ['username']
+        fields = ["username"]
