@@ -1,14 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.viewsets import ViewSet
 
 from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer
 
 
-class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
+class TaskViewSet(LoginRequiredMixin, ViewSet):
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
         try:
@@ -97,7 +97,7 @@ class TaskViewSet(LoginRequiredMixin, viewsets.ViewSet):
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = (
-                "Task shared with " + user_to_be_shared_with.username + " successfully."
+                    "Task shared with " + user_to_be_shared_with.username + " successfully."
             )
             return Response(result)
         else:

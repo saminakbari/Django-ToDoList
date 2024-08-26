@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework.generics import DestroyAPIView
 
 from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class DeleteList(LoginRequiredMixin, generics.DestroyAPIView):
+class DeleteList(LoginRequiredMixin, DestroyAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 

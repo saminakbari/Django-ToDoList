@@ -1,10 +1,10 @@
-from rest_framework import generics
+from rest_framework.generics import CreateAPIView
 
 from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer
 
 
-class CreateTask(generics.CreateAPIView):
+class CreateTask(CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 

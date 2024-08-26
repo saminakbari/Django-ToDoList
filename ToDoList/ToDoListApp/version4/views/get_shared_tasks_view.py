@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetSharedTasks(LoginRequiredMixin, generics.ListAPIView):
+class GetSharedTasks(LoginRequiredMixin, ListAPIView):
     model = Task
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]

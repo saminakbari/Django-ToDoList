@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class ToDoListModelViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
+class ToDoListModelViewSet(LoginRequiredMixin, ModelViewSet):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):

@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework.generics import CreateAPIView
 
 from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class CreateList(LoginRequiredMixin, generics.CreateAPIView):
+class CreateList(LoginRequiredMixin, CreateAPIView):
     queryset = ToDoList.objects.all()
     serializer_class = ToDoListSerializer
 

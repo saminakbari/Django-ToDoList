@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
 from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class AddSharedTask(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
+class AddSharedTask(LoginRequiredMixin, RetrieveUpdateAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 

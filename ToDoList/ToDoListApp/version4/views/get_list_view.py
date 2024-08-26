@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
 from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class GetList(LoginRequiredMixin, generics.RetrieveAPIView):
+class GetList(LoginRequiredMixin, RetrieveAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 
