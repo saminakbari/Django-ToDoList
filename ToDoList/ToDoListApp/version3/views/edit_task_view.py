@@ -6,7 +6,7 @@ from ToDoListApp.forms.task_model_form import TaskModelForm
 from ToDoListApp.models import Task
 
 
-class EditTask3(LoginRequiredMixin, UpdateView):
+class EditTask(LoginRequiredMixin, UpdateView):
     template_name = "v3/v3_edit_task_template.html"
     model = Task
     pk_url_kwarg = "task_id"

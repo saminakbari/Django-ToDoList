@@ -4,7 +4,7 @@ from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer
 
 
-class CreateTask4(generics.CreateAPIView):
+class CreateTask(generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -14,4 +14,4 @@ class CreateTask4(generics.CreateAPIView):
         task.to_do_lists.add(to_do_list)
         task.owner = self.request.user
         task.save()
-        return super(CreateTask4, self).perform_create(serializer)
+        return super(CreateTask, self).perform_create(serializer)

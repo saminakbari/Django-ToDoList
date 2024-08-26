@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from ToDoListApp.models import Task
 
 
-class ShareTask3(LoginRequiredMixin, TemplateView):
+class ShareTask(LoginRequiredMixin, TemplateView):
     template_name = "v3/v3_share_task_template.html"
 
     def post(self, request, *args, **kwargs):

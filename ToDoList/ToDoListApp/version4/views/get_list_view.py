@@ -2,20 +2,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics
 from rest_framework.response import Response
 
-from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class AddSharedTask4(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
+class GetList(LoginRequiredMixin, generics.RetrieveAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
 
-    def perform_update(self, serializer):
-        task_id = self.request.data["task_id"]
-        task = Task.objects.get(pk=task_id)
+    def get(self, request, *args, **kwargs):
         to_do_list = self.get_object()
-        to_do_list.tasks.add(task)
-        return Response("Added.")
+        result = {"title:": to_do_list.title}
+        tasks = ""
+        for task in to_do_list.tasks.all():
+            tasks += task.title + " - "
+        result["tasks"] = tasks
+        return Response(result)

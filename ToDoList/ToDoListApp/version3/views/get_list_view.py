@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from ToDoListApp.models.to_do_list import ToDoList
 
 
-class GetList3(LoginRequiredMixin, TemplateView):
+class GetList(LoginRequiredMixin, TemplateView):
     template_name = "v3/v3_get_list_template.html"
 
     def get_context_data(self, **kwargs):

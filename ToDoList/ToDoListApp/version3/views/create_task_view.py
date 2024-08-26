@@ -6,7 +6,7 @@ from ToDoListApp.forms.task_model_form import TaskModelForm
 from ToDoListApp.models import Task, ToDoList
 
 
-class CreateTask3(LoginRequiredMixin, CreateView):
+class CreateTask(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "v3/v3_create_task_template.html"
     form_class = TaskModelForm
@@ -18,4 +18,4 @@ class CreateTask3(LoginRequiredMixin, CreateView):
         to_do_list = ToDoList.objects.get(pk=list_id)
         task.to_do_lists.add(to_do_list)
         self.success_url = reverse_lazy("v3-get-list", kwargs={"list_id": list_id})
-        return super(CreateTask3, self).form_valid(form)
+        return super(CreateTask, self).form_valid(form)

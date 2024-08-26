@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from ToDoList import settings
-from ToDoListApp.urls import v1_urlpatterns
+from ToDoListApp.version1.urls import v1_urlpatterns
 from ToDoListApp.version2.urls import v2_urlpatterns
 from ToDoListApp.version3.urls import v3_urlpatterns
 from ToDoListApp.version4.urls import v4_urlpatterns

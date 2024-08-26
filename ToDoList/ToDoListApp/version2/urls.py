@@ -1,16 +1,16 @@
 from django.urls import path
 
-from .views.add_shared_tasks_view2 import AddSharedTasks
-from .views.create_list_view2 import CreateList
-from .views.create_task_view2 import CreateTask
-from .views.delete_list_view2 import DeleteList
-from .views.delete_task_view2 import DeleteTask
-from .views.edit_list_view2 import EditList
-from .views.edit_task_view2 import EditTask
-from .views.get_list_view2 import GetList
-from .views.get_task_view2 import GetTask
-from .views.share_task_view2 import ShareTask
-from .views.show_lists_view2 import ShowLists
+from .views.add_shared_tasks_view import AddSharedTasks
+from .views.create_list_view import CreateList
+from .views.create_task_view import CreateTask
+from .views.delete_list_view import DeleteList
+from .views.delete_task_view import DeleteTask
+from .views.edit_list_view import EditList
+from .views.edit_task_view import EditTask
+from .views.get_list_view import GetList
+from .views.get_task_view import GetTask
+from .views.share_task_view import ShareTask
+from .views.show_lists_view import ShowLists
 
 v2_urlpatterns = [
     path("to-do-list/show-all/", ShowLists.as_view(), name="v2-show-lists"),

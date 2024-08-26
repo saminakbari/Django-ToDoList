@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from ToDoListApp.models import Task, ToDoList
 
 
-class AddSharedTasks3(LoginRequiredMixin, TemplateView):
+class AddSharedTasks(LoginRequiredMixin, TemplateView):
     template_name = "v3/v3_add_shared_tasks_template.html"
 
     def post(self, request, *args, **kwargs):

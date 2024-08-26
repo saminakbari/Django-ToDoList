@@ -1,15 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
 
 from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetSharedTasks4(LoginRequiredMixin, generics.ListAPIView):
-    model = Task
+class EditTask(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
+    lookup_field = "id"
 
     def get_queryset(self):
-        return self.request.user.tasks_shared_with_user.all()
+        return Task.objects.filter(owner=self.request.user)

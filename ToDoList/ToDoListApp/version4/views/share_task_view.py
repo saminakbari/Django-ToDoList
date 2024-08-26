@@ -7,7 +7,7 @@ from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
-class ShareTask4(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
+class ShareTask(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
     serializer_class = TaskSerializer
     lookup_field = "id"
 

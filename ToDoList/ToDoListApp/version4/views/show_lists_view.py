@@ -5,7 +5,7 @@ from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class ShowLists4(LoginRequiredMixin, generics.ListAPIView):
+class ShowLists(LoginRequiredMixin, generics.ListAPIView):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):

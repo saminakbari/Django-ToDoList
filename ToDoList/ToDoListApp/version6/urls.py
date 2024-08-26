@@ -1,7 +1,7 @@
 from rest_framework import routers
 
-from ToDoListApp.version6.view_sets.task_model_view_set import TaskModelViewSet
-from ToDoListApp.version6.view_sets.to_do_list_model_view_set import (
+from ToDoListApp.version6.view_sets import (
+    TaskModelViewSet,
     ToDoListModelViewSet,
 )
 

@@ -5,7 +5,7 @@ from ToDoListApp.models import Task
 from ToDoListApp.models.task import get_priority
 
 
-class GetTask3(LoginRequiredMixin, DetailView):
+class GetTask(LoginRequiredMixin, DetailView):
     template_name = "v3/v3_get_task_template.html"
     model = Task
     pk_url_kwarg = "task_id"
