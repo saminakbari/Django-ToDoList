@@ -2,11 +2,13 @@ import os
 
 from celery import Celery
 
+from ToDoList import settings
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ToDoList.settings')
 
 app = Celery('ToDoList')
 # app.config_from_object('django.conf:settings', namespace='CELERY')
-app.conf.broker_url = 'redis://localhost:6379/0'
+app.conf.broker_url = settings.REDIS_HOST
 
 app.conf.beat_schedule = {
     'check-task': {
