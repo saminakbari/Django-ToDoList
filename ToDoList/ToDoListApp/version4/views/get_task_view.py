@@ -3,6 +3,7 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
 from ToDoListApp.models import Task
+from ToDoListApp.models.task import get_priority, get_state
 from ToDoListApp.serializers import TaskSerializer
 
 
@@ -19,7 +20,8 @@ class GetTask(LoginRequiredMixin, RetrieveAPIView):
             "title": task.title,
             "description": task.description,
             "deadline": task.deadline,
-            "priority": task.priority,
+            "priority": get_priority(task.priority),
+            "state": get_state(task.state)
         }
         if task.attachment:
             result["attachment"] = task.attachment

@@ -14,6 +14,7 @@ class TaskAdmin(admin.ModelAdmin):
         "owner",
         "attachment",
         "all_lists",
+        "state",
     )
 
     def all_lists(self, obj):

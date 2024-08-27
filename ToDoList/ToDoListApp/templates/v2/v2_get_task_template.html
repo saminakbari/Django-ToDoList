@@ -1,24 +1,29 @@
 <h1>{{ task.title }}</h1>
 <form method="post">
     {% csrf_token %}
-    <p>
-        description: {{ task.description }}
-    </p>
-    <p>
-        deadline: {{ task.deadline }}
-    </p>
-    <p>
-        priority: {{ priority }}
-    </p>
-    <p>
-        attachment:
-        {% if task.attachment %}
-            <a href="{{ task.attachment.url }}">
-                {{ task.attachment.name }}</a>
-        {% else %}
-            no attachment file
-        {% endif %}
-    </p>
+    <table>
+        <tr>
+            <td>description:</td>
+            <td>{{ task.description }}</td>
+        </tr>
+        <tr>
+            <td>deadline:</td>
+            <td>{{ task.deadline }}</td>
+        </tr>
+        <tr>
+            <td>priority:</td>
+            <td>{{ priority }}</td>
+        </tr>
+        <tr>
+            <td>attachment:</td>
+            {% if task.attachment %}
+                <td><a href="{{ task.attachment.url }}">
+                    {{ task.attachment.name }}</a></td>
+            {% else %}
+                <td>no attachment file</td>
+            {% endif %}
+        </tr>
+    </table>
 </form>
 <br>
 messages:

@@ -6,6 +6,12 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
+def get_state(state):
+    if state:
+        return "Done"
+    return "Not Done"
+
+
 def get_priority(priority_number):
     match priority_number:
         case "1":
@@ -36,6 +42,7 @@ def validate_priority(priority):
 
 class Task(models.Model):
     PRIORITY_CHOICES = (("1", "High"), ("2", "Medium"), ("3", "Low"))
+    STATE_CHOICES = ((False, "Not Done"), (True, "Done"))
 
     title = models.CharField(
         max_length=100,
@@ -86,6 +93,10 @@ class Task(models.Model):
 
     attachment = models.FileField(
         verbose_name="فایل ضمیمه", null=True, blank=True, upload_to="media_files"
+    )
+
+    state = models.BooleanField(
+        verbose_name="وضعیت", choices=STATE_CHOICES, default=False
     )
 
     def __str__(self):

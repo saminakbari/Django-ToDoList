@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ToDoListApp",
     "rest_framework",
+    "django_filters",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [

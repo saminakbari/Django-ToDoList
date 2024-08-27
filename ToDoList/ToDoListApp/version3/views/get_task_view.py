@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
 from ToDoListApp.models import Task
-from ToDoListApp.models.task import get_priority
+from ToDoListApp.models.task import get_priority, get_state
 
 
 class GetTask(LoginRequiredMixin, DetailView):
@@ -15,4 +15,5 @@ class GetTask(LoginRequiredMixin, DetailView):
         task = self.object
         context["task"] = task
         context["priority"] = get_priority(task.priority)
+        context["state"] = get_state(task.state)
         return context

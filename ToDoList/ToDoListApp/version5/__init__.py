@@ -1,2 +1,2 @@
 from . import view_sets
-from urls import v5_urlpatterns
+from .urls import v5_urlpatterns
