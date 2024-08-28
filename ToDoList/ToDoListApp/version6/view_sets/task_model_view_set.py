@@ -20,8 +20,6 @@ class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
             return to_do_list.tasks.all()
         if self.action == "get_shared_tasks":
             return self.request.user.tasks_shared_with_user.all()
-        # if self.action in ["update", "partial_update"]:
-        #     return Task.objects.all()
         return Task.objects.filter(owner=self.request.user)
 
     @method_decorator(cache_page(60 * 30))

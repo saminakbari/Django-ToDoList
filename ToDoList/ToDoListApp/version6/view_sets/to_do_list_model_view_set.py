@@ -19,9 +19,7 @@ class ToDoListModelViewSet(LoginRequiredMixin, ModelViewSet):
         return super(ToDoListModelViewSet, self).list(request, *args, **kwargs)
 
     def perform_create(self, serializer):
-        to_do_list = serializer.save()
-        to_do_list.owner = self.request.user
-        to_do_list.save()
+        serializer.context['user'] = self.request.user
         return super(ToDoListModelViewSet, self).perform_create(serializer)
 
     def update(self, request, *args, **kwargs):

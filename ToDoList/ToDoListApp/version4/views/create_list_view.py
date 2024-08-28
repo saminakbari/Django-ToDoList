@@ -9,8 +9,7 @@ class CreateListView(LoginRequiredMixin, CreateAPIView):
     queryset = ToDoList.objects.all()
     serializer_class = ToDoListSerializer
 
-    def perform_create(self, serializer):
-        to_do_list = serializer.save()
-        to_do_list.owner = self.request.user
-        to_do_list.save()
-        return super(CreateListView, self).perform_create(serializer)
+    def get_serializer_context(self):
+        context = super(CreateListView, self).get_serializer_context()
+        context['user'] = self.request.user
+        return context

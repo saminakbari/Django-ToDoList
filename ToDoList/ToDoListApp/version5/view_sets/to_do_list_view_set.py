@@ -18,13 +18,12 @@ class ToDoListViewSet(LoginRequiredMixin, ViewSet):
 
     def create(self, request):
         serializer = ToDoListSerializer(data=request.data)
+        serializer.context['user'] = request.user
         if serializer.is_valid():
-            to_do_list = serializer.save()
-            to_do_list.owner = request.user
-            to_do_list.save()
-            return Response("To-do list created successfully.")
+            serializer.save()
+            return Response("To-do list created successfully.", status=201)
         else:
-            return Response(serializer.errors)
+            return Response(serializer.errors, status=400)
 
     def retrieve(self, request, pk=None):
         queryset = ToDoList.objects.filter(owner=request.user)

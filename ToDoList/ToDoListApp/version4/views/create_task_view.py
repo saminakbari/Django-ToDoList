@@ -10,9 +10,7 @@ class CreateTaskView(LoginRequiredMixin, CreateAPIView):
     serializer_class = TaskSerializer
 
     def perform_create(self, serializer):
-        task = serializer.save()
-        to_do_list = ToDoList.objects.get(pk=self.kwargs["id"])
-        task.to_do_lists.add(to_do_list)
-        task.owner = self.request.user
-        task.save()
+        serializer.context['user'] = self.request.user
+        to_do_list = ToDoList.objects.get(pk=self.kwargs["pk"])
+        serializer.context['to_do_list'] = to_do_list
         return super(CreateTaskView, self).perform_create(serializer)

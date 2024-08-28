@@ -9,7 +9,6 @@ from ToDoListApp.serializers import TaskSerializer
 
 class GetTaskView(LoginRequiredMixin, RetrieveAPIView):
     serializer_class = TaskSerializer
-    lookup_field = "id"
 
     def get_queryset(self):
         return Task.objects.filter(owner=self.request.user)
