@@ -13,7 +13,7 @@ class ShowLists(LoginRequiredMixin, ListAPIView):
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def get(self, request, *args, **kwargs):
         # print("get is called") --> for testing
         return super(ShowLists, self).get(request, *args, **kwargs)

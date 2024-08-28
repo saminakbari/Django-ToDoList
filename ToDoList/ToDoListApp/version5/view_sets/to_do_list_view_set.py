@@ -10,7 +10,7 @@ from ToDoListApp.serializers import ToDoListSerializer
 
 class ToDoListViewSet(LoginRequiredMixin, ViewSet):
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def list(self, request):
         queryset = ToDoList.objects.filter(owner=request.user)
         serializer = ToDoListSerializer(queryset, many=True)
@@ -22,7 +22,6 @@ class ToDoListViewSet(LoginRequiredMixin, ViewSet):
             to_do_list = serializer.save()
             to_do_list.owner = request.user
             to_do_list.save()
-            print(to_do_list.title)
             return Response("To-do list created successfully.")
         else:
             return Response(serializer.errors)

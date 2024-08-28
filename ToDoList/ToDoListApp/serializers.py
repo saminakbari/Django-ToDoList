@@ -14,11 +14,10 @@ class ToDoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoList
         fields = ["id", "title", "tasks"]
-        tasks = serializers.ReadOnlyField(source="tasks")
-        id = serializers.ReadOnlyField(source="id")
+        read_only_fields = ["tasks"]
 
 
-class UserSerializer:
-    class Meta:
-        model = User
-        fields = ["username"]
+# class UserSerializer:
+#     class Meta:
+#         model = User
+#         fields = ["username"]

@@ -20,11 +20,11 @@ class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
             return to_do_list.tasks.all()
         if self.action == "get_shared_tasks":
             return self.request.user.tasks_shared_with_user.all()
-        if self.action in ["update", "partial_update"]:
-            return Task.objects.all()
+        # if self.action in ["update", "partial_update"]:
+        #     return Task.objects.all()
         return Task.objects.filter(owner=self.request.user)
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def list(self, request, *args, **kwargs):
         return super(TaskModelViewSet, self).list(request, *args, **kwargs)
 
@@ -71,7 +71,7 @@ class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
         else:
             return Response("You have already shared this task with this user.")
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     @action(methods=["get"], detail=False)
     def get_shared_tasks(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

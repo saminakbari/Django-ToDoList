@@ -14,7 +14,7 @@ class ToDoListModelViewSet(LoginRequiredMixin, ModelViewSet):
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def list(self, request, *args, **kwargs):
         return super(ToDoListModelViewSet, self).list(request, *args, **kwargs)
 

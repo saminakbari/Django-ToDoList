@@ -12,7 +12,7 @@ from ToDoListApp.serializers import TaskSerializer
 
 class TaskViewSet(LoginRequiredMixin, ViewSet):
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(cache_page(60 * 30))
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
         try:
