@@ -7,7 +7,7 @@ from django.views import View
 from ToDoListApp.models import Task
 
 
-class ShareTask(LoginRequiredMixin, View):
+class ShareTaskView(LoginRequiredMixin, View):
     def get(self, request, task_id, list_id):
         return render(request, "v2/v2_share_task_template.html", {"list_id": list_id})
 

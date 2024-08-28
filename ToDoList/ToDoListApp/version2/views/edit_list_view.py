@@ -7,7 +7,7 @@ from ToDoListApp.forms import ListForm
 from ToDoListApp.models import ToDoList
 
 
-class EditList(LoginRequiredMixin, View):
+class EditListView(LoginRequiredMixin, View):
     def get(self, request, list_id):
         to_do_list = ToDoList.objects.get(pk=list_id)
         form = ListForm(initial={"title": to_do_list.title})

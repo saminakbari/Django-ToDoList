@@ -7,7 +7,7 @@ from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
-def create_task(request, list_id):
+def create_task_view(request, list_id):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():

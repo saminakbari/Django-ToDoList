@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View
 
 
-class ShowLists(LoginRequiredMixin, View):
+class ShowListsView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         to_do_lists = user.to_do_lists.all()

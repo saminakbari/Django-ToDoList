@@ -6,7 +6,7 @@ from django.views import View
 from ToDoListApp.models import ToDoList
 
 
-class DeleteList(LoginRequiredMixin, View):
+class DeleteListView(LoginRequiredMixin, View):
     def get(self, request, list_id):
         to_do_list = ToDoList.objects.get(pk=list_id)
         to_do_list.delete()

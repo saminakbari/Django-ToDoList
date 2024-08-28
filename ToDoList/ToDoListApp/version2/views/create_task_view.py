@@ -7,7 +7,7 @@ from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
-class CreateTask(LoginRequiredMixin, View):
+class CreateTaskView(LoginRequiredMixin, View):
     def get(self, request, list_id):
         form = TaskForm(initial={"priority": "2"})
         return render(request, "v2/v2_create_task_template.html", {"form": form})

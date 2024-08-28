@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 
 @login_required
-def show_all_lists(request):
+def show_all_lists_view(request):
     user = request.user
     to_do_lists = user.to_do_lists.all()
     return render(

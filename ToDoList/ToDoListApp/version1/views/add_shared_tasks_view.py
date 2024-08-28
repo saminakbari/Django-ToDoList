@@ -5,7 +5,7 @@ from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
-def add_shared_tasks(request, list_id):
+def add_shared_tasks_view(request, list_id):
     user = request.user
     to_do_list = ToDoList.objects.get(id=list_id)
     shared_tasks = user.tasks_shared_with_user.all()

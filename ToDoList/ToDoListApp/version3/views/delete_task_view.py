@@ -5,7 +5,7 @@ from django.views.generic import RedirectView
 from ToDoListApp.models import Task, ToDoList
 
 
-class DeleteTask(LoginRequiredMixin, RedirectView):
+class DeleteTaskView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, **kwargs):
         task_id = self.kwargs["task_id"]
         list_id = self.kwargs["list_id"]

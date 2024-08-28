@@ -6,7 +6,7 @@ from rest_framework.generics import ListAPIView
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetSharedTasks(LoginRequiredMixin, ListAPIView):
+class GetSharedTasksView(LoginRequiredMixin, ListAPIView):
     # model = Task
     serializer_class = TaskSerializer
 
@@ -16,4 +16,4 @@ class GetSharedTasks(LoginRequiredMixin, ListAPIView):
     @method_decorator(cache_page(60 * 30))
     def get(self, request, *args, **kwargs):
         # print("get is called") --> for testing
-        return super(GetSharedTasks, self).get(request, *args, **kwargs)
+        return super(GetSharedTasksView, self).get(request, *args, **kwargs)

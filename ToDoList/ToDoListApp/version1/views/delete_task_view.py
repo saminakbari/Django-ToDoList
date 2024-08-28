@@ -6,7 +6,7 @@ from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
-def delete_task(request, task_id: int, list_id):
+def delete_task_view(request, task_id: int, list_id):
     task = Task.objects.get(pk=task_id)
     to_do_list = ToDoList.objects.get(pk=list_id)
     to_do_list.tasks.remove(task)

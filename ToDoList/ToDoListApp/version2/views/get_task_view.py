@@ -6,7 +6,7 @@ from ToDoListApp.models import Task
 from ToDoListApp.models.task import get_priority, get_state
 
 
-class GetTask(LoginRequiredMixin, View):
+class GetTaskView(LoginRequiredMixin, View):
     def get(self, request, task_id):
         task = Task.objects.get(pk=task_id)
         return render(

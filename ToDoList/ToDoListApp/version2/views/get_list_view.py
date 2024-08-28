@@ -5,7 +5,7 @@ from django.views import View
 from ToDoListApp.models import ToDoList
 
 
-class GetList(LoginRequiredMixin, View):
+class GetListView(LoginRequiredMixin, View):
     def get(self, request, list_id):
         to_do_list = ToDoList.objects.get(pk=list_id)
 

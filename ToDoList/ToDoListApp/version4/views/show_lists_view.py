@@ -7,7 +7,7 @@ from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class ShowLists(LoginRequiredMixin, ListAPIView):
+class ShowListsView(LoginRequiredMixin, ListAPIView):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):
@@ -16,4 +16,4 @@ class ShowLists(LoginRequiredMixin, ListAPIView):
     @method_decorator(cache_page(60 * 30))
     def get(self, request, *args, **kwargs):
         # print("get is called") --> for testing
-        return super(ShowLists, self).get(request, *args, **kwargs)
+        return super(ShowListsView, self).get(request, *args, **kwargs)

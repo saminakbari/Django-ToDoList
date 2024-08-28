@@ -5,7 +5,7 @@ from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class DeleteList(LoginRequiredMixin, DestroyAPIView):
+class DeleteListView(LoginRequiredMixin, DestroyAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 

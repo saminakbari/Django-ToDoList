@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from ToDoListApp.models import Task, ToDoList
 
 
-class AddSharedTask(LoginRequiredMixin, APIView):
+class AddSharedTaskView(LoginRequiredMixin, APIView):
     def post(self, request):
         task_id = self.request.data["task_id"]
         task = Task.objects.get(pk=task_id)

@@ -5,7 +5,7 @@ from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer
 
 
-class CreateTask(LoginRequiredMixin, CreateAPIView):
+class CreateTaskView(LoginRequiredMixin, CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -15,4 +15,4 @@ class CreateTask(LoginRequiredMixin, CreateAPIView):
         task.to_do_lists.add(to_do_list)
         task.owner = self.request.user
         task.save()
-        return super(CreateTask, self).perform_create(serializer)
+        return super(CreateTaskView, self).perform_create(serializer)

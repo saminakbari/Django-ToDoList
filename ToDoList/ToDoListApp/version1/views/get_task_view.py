@@ -6,7 +6,7 @@ from ToDoListApp.models.task import get_priority, get_state
 
 
 @login_required
-def get_task(request, task_id):
+def get_task_view(request, task_id):
     task = Task.objects.get(pk=task_id)
     return render(
         request,

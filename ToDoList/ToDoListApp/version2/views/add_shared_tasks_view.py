@@ -5,7 +5,7 @@ from django.views import View
 from ToDoListApp.models import Task, ToDoList
 
 
-class AddSharedTasks(LoginRequiredMixin, View):
+class AddSharedTasksView(LoginRequiredMixin, View):
     def get(self, request, list_id):
         user = request.user
         to_do_list = ToDoList.objects.get(id=list_id)

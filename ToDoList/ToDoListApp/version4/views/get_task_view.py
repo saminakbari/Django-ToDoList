@@ -7,7 +7,7 @@ from ToDoListApp.models.task import get_priority, get_state
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetTask(LoginRequiredMixin, RetrieveAPIView):
+class GetTaskView(LoginRequiredMixin, RetrieveAPIView):
     serializer_class = TaskSerializer
     lookup_field = "id"
 

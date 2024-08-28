@@ -5,7 +5,7 @@ from ToDoListApp.models import ToDoList
 
 
 @login_required
-def get_list(request, list_id):
+def get_list_view(request, list_id):
     to_do_list = ToDoList.objects.get(pk=list_id)
     sorted_tasks = to_do_list.tasks.all().order_by("deadline", "priority")
     return render(

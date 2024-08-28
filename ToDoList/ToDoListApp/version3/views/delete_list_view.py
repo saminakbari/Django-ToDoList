@@ -5,7 +5,7 @@ from django.views.generic import DeleteView
 from ToDoListApp.models.to_do_list import ToDoList
 
 
-class DeleteList(LoginRequiredMixin, DeleteView):
+class DeleteListView(LoginRequiredMixin, DeleteView):
     template_name = "v3/v3_delete_list_template.html"
     model = ToDoList
     pk_url_kwarg = "list_id"

@@ -7,7 +7,7 @@ from ToDoListApp.forms import ListForm
 from ToDoListApp.models import ToDoList
 
 
-class CreateList(LoginRequiredMixin, View):
+class CreateListView(LoginRequiredMixin, View):
     def get(self, request):
         form = ListForm()
         return render(request, "v2/v2_create_list_template.html", {"form": form})

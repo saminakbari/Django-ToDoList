@@ -7,7 +7,7 @@ from ToDoListApp.models import Task, ToDoList
 
 
 @login_required
-def edit_task(request, task_id, list_id):
+def edit_task_view(request, task_id, list_id):
     task = Task.objects.get(pk=task_id)
     if request.method == "POST":
         form = TaskForm(request.POST)

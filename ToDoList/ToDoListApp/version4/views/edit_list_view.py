@@ -5,7 +5,7 @@ from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class EditList(LoginRequiredMixin, RetrieveUpdateAPIView):
+class EditListView(LoginRequiredMixin, RetrieveUpdateAPIView):
     serializer_class = ToDoListSerializer
     lookup_field = "id"
 

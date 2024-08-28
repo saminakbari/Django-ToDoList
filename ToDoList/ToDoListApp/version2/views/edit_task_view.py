@@ -7,7 +7,7 @@ from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
-class EditTask(LoginRequiredMixin, View):
+class EditTaskView(LoginRequiredMixin, View):
     def get(self, request, list_id, task_id):
         task = Task.objects.get(pk=task_id)
         form = TaskForm(
