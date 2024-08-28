@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework.generics import ListAPIView
@@ -6,7 +5,7 @@ from rest_framework.generics import ListAPIView
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetSharedTasksView(LoginRequiredMixin, ListAPIView):
+class GetSharedTasksView(ListAPIView):
     # model = Task
     serializer_class = TaskSerializer
 

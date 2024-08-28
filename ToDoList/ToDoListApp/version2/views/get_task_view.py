@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
@@ -6,7 +5,7 @@ from ToDoListApp.models import Task
 from ToDoListApp.models.task import get_priority, get_state
 
 
-class GetTaskView(LoginRequiredMixin, View):
+class GetTaskView(View):
     def get(self, request, task_id):
         task = Task.objects.get(pk=task_id)
         return render(

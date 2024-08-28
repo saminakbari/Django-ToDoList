@@ -1,12 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
-@login_required
 def edit_task_view(request, task_id, list_id):
     task = Task.objects.get(pk=task_id)
     if request.method == "POST":
@@ -22,8 +20,8 @@ def edit_task_view(request, task_id, list_id):
                 task.attachment = file
 
             if (
-                "attachment-clear" in form.data
-                and form.data["attachment-clear"] == "on"
+                    "attachment-clear" in form.data
+                    and form.data["attachment-clear"] == "on"
             ):
                 task.attachment.delete()
 

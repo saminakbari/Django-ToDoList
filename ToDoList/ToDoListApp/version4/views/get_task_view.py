@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
@@ -7,7 +6,7 @@ from ToDoListApp.models.task import get_priority, get_state
 from ToDoListApp.serializers import TaskSerializer
 
 
-class GetTaskView(LoginRequiredMixin, RetrieveAPIView):
+class GetTaskView(RetrieveAPIView):
     serializer_class = TaskSerializer
 
     def get_queryset(self):

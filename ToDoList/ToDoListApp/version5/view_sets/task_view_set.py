@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -10,7 +9,7 @@ from ToDoListApp.models import Task, ToDoList
 from ToDoListApp.serializers import TaskSerializer
 
 
-class TaskViewSet(LoginRequiredMixin, ViewSet):
+class TaskViewSet(ViewSet):
 
     @method_decorator(cache_page(60 * 30))
     def list(self, request, **kwargs):

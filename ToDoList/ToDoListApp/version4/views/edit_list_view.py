@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.generics import RetrieveUpdateAPIView
 
 from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class EditListView(LoginRequiredMixin, RetrieveUpdateAPIView):
+class EditListView(RetrieveUpdateAPIView):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):

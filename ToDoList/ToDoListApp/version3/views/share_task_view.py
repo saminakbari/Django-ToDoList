@@ -1,12 +1,11 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 
 from ToDoListApp.models import Task
 
 
-class ShareTaskView(LoginRequiredMixin, TemplateView):
+class ShareTaskView(TemplateView):
     template_name = "v3/v3_share_task_template.html"
 
     def post(self, request, *args, **kwargs):

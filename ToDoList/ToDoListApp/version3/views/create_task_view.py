@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -6,7 +5,7 @@ from ToDoListApp.forms.task_model_form import TaskModelForm
 from ToDoListApp.models import Task, ToDoList
 
 
-class CreateTaskView(LoginRequiredMixin, CreateView):
+class CreateTaskView(CreateView):
     model = Task
     template_name = "v3/v3_create_task_template.html"
     form_class = TaskModelForm

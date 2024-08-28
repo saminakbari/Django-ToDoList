@@ -1,11 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.models import ToDoList
 
 
-@login_required
 def delete_list_view(request, list_id):
     to_do_list = ToDoList.objects.get(pk=list_id)
     to_do_list.delete()

@@ -1,12 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.forms.list_form import ListForm
 from ToDoListApp.models import ToDoList
 
 
-@login_required
 def create_list_view(request):
     if request.method == "POST":
         form = ListForm(request.POST)

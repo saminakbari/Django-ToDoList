@@ -1,16 +1,15 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.generics import CreateAPIView
 
-from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
-class CreateTaskView(LoginRequiredMixin, CreateAPIView):
+class CreateTaskView(CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-    def perform_create(self, serializer):
-        serializer.context['user'] = self.request.user
-        to_do_list = ToDoList.objects.get(pk=self.kwargs["pk"])
-        serializer.context['to_do_list'] = to_do_list
-        return super(CreateTaskView, self).perform_create(serializer)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['user'] = self.request.user
+        context['to_do_list'] = self.request.user.to_do_lists.get(pk=self.kwargs["pk"])
+        return context

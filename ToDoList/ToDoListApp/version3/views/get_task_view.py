@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
 from ToDoListApp.models import Task
 from ToDoListApp.models.task import get_priority, get_state
 
 
-class GetTaskView(LoginRequiredMixin, DetailView):
+class GetTaskView(DetailView):
     template_name = "v3/v3_get_task_template.html"
     model = Task
     pk_url_kwarg = "task_id"

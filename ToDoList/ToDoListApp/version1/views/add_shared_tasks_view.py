@@ -1,10 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.models import Task, ToDoList
 
 
-@login_required
 def add_shared_tasks_view(request, list_id):
     user = request.user
     to_do_list = ToDoList.objects.get(id=list_id)

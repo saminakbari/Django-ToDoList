@@ -9,8 +9,10 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description", "deadline", "priority", "attachment"]
 
     def create(self, validated_data):
-        validated_data['owner'] = self.context['user']
-        validated_data['to_do_list'] = self.context['to_do_list']
+        user = self.context['user']
+        validated_data['owner'] = user
+        to_do_list = self.context['to_do_list']
+        validated_data['to_do_lists'] = [to_do_list, ]
         return super().create(validated_data)
 
 

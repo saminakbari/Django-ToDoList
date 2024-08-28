@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
@@ -7,7 +6,7 @@ from ToDoListApp.forms import TaskForm
 from ToDoListApp.models import Task, ToDoList
 
 
-class EditTaskView(LoginRequiredMixin, View):
+class EditTaskView(View):
     def get(self, request, list_id, task_id):
         task = Task.objects.get(pk=task_id)
         form = TaskForm(

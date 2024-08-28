@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from ToDoListApp.models import Task, ToDoList
 
 
-class AddSharedTasksView(LoginRequiredMixin, View):
+class AddSharedTasksView(View):
     def get(self, request, list_id):
         user = request.user
         to_do_list = ToDoList.objects.get(id=list_id)

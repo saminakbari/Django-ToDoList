@@ -1,9 +1,8 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 
-class ShowListsView(LoginRequiredMixin, View):
+class ShowListsView(View):
     def get(self, request):
         user = request.user
         to_do_lists = user.to_do_lists.all()

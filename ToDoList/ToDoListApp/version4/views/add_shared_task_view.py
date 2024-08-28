@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ToDoListApp.models import Task, ToDoList
 
 
-class AddSharedTaskView(LoginRequiredMixin, APIView):
+class AddSharedTaskView(APIView):
     def post(self, request):
         task_id = self.request.data["task_id"]
         task = Task.objects.get(pk=task_id)

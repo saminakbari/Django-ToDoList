@@ -1,10 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ToDoListApp.models import ToDoList
 
 
-@login_required
 def get_list_view(request, list_id):
     to_do_list = ToDoList.objects.get(pk=list_id)
     sorted_tasks = to_do_list.tasks.all().order_by("deadline", "priority")

@@ -1,12 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from ToDoListApp.models import Task, ToDoList
 
 
-@login_required
 def share_task_view(request, task_id, list_id):
     to_do_list = ToDoList.objects.get(pk=list_id)
     if request.method == "POST":

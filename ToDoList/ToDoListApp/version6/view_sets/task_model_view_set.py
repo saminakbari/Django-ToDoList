@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -11,7 +10,7 @@ from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
-class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
+class TaskModelViewSet(ModelViewSet):
     serializer_class = TaskSerializer
 
     def get_queryset(self):

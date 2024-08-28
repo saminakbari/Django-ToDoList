@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 
 from ToDoListApp.models import Task, ToDoList
 
 
-class DeleteTaskView(LoginRequiredMixin, RedirectView):
+class DeleteTaskView(RedirectView):
     def get_redirect_url(self, **kwargs):
         task_id = self.kwargs["task_id"]
         list_id = self.kwargs["list_id"]

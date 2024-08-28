@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
@@ -6,7 +5,7 @@ from ToDoListApp.forms.list_model_form import ListModelForm
 from ToDoListApp.models.to_do_list import ToDoList
 
 
-class EditListView(LoginRequiredMixin, UpdateView):
+class EditListView(UpdateView):
     template_name = "v3/v3_edit_list_title_template.html"
     form_class = ListModelForm
     model = ToDoList
