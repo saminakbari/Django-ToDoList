@@ -1,2 +1,2 @@
 from . import views
-from . import urls
+from .urls import v1_urlpatterns

@@ -4,7 +4,7 @@ from ToDoListApp.models import ToDoList
 from ToDoListApp.serializers import ToDoListSerializer
 
 
-class DeleteListView(RetrieveUpdateDestroyAPIView):
+class GetEditDeleteListView(RetrieveUpdateDestroyAPIView):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):

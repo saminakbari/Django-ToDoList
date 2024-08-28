@@ -16,11 +16,18 @@ class TaskSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
+class TaskSerializerForList(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ["id", "title"]
+
+
 class ToDoListSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializerForList(many=True, read_only=True)
+
     class Meta:
         model = ToDoList
         fields = ["id", "title", "tasks"]
-        read_only_fields = ["tasks"]
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['user']
