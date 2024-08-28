@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -9,6 +11,8 @@ from ToDoListApp.serializers import TaskSerializer
 
 
 class TaskViewSet(LoginRequiredMixin, ViewSet):
+
+    @method_decorator(cache_page(60 * 60 * 2))
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
         try:

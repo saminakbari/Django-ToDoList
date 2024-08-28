@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -21,6 +23,10 @@ class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
         if self.action in ["update", "partial_update"]:
             return Task.objects.all()
         return Task.objects.filter(owner=self.request.user)
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def list(self, request, *args, **kwargs):
+        return super(TaskModelViewSet, self).list(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         task = serializer.save()
@@ -65,6 +71,7 @@ class TaskModelViewSet(LoginRequiredMixin, ModelViewSet):
         else:
             return Response("You have already shared this task with this user.")
 
+    @method_decorator(cache_page(60 * 60 * 2))
     @action(methods=["get"], detail=False)
     def get_shared_tasks(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

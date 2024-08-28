@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -11,6 +13,10 @@ class ToDoListModelViewSet(LoginRequiredMixin, ModelViewSet):
 
     def get_queryset(self):
         return ToDoList.objects.filter(owner=self.request.user)
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def list(self, request, *args, **kwargs):
+        return super(ToDoListModelViewSet, self).list(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         to_do_list = serializer.save()

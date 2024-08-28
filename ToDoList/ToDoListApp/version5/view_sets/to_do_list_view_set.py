@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
@@ -7,6 +9,8 @@ from ToDoListApp.serializers import ToDoListSerializer
 
 
 class ToDoListViewSet(LoginRequiredMixin, ViewSet):
+
+    @method_decorator(cache_page(60 * 60 * 2))
     def list(self, request):
         queryset = ToDoList.objects.filter(owner=request.user)
         serializer = ToDoListSerializer(queryset, many=True)
