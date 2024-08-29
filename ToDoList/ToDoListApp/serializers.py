@@ -18,7 +18,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if instance.owner != self.context['user']:
-            return Response("You don't own this task.", status=400)
+            return Response("You don't own this task.", status=404)
         return super().update(instance, validated_data)
 
 
@@ -38,3 +38,8 @@ class ToDoListSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['owner'] = self.context['user']
         return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if instance.owner != self.context['user']:
+            return Response("You don't own this list.", status=404)
+        return super().update(instance, validated_data)

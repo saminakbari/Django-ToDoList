@@ -30,3 +30,4 @@ idee
 
 media_files
 venv
+*.sqlite3
