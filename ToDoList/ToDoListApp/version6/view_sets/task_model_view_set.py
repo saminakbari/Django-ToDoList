@@ -25,8 +25,8 @@ class TaskModelViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        context['user'] = self.request.user
-        context['to_do_list'] = self.get_list_by_id()
+        context["user"] = self.request.user
+        context["to_do_list"] = self.get_list_by_id()
 
     @method_decorator(cache_page(60 * 30))
     def list(self, request, *args, **kwargs):
@@ -50,29 +50,18 @@ class TaskModelViewSet(ModelViewSet):
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = (
-                    "Task shared with " + user_to_be_shared_with.username + " successfully."
+                "Task shared with " + user_to_be_shared_with.username + " successfully."
             )
             return Response(result, status=200)
         else:
-            return Response("You have already shared this task with this user.", status=200)
+            return Response(
+                "You have already shared this task with this user.", status=200
+            )
 
     @method_decorator(cache_page(60 * 30))
     @action(methods=["get"], detail=False)
     def get_shared_tasks(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-
-    @action(methods=["post"], detail=True)
-    def add_shared_task(self, request, *args, **kwargs):
-        try:
-            task = Task.objects.all().get(pk=kwargs["pk"])
-        except Task.DoesNotExist:
-            return Response("Task with this id has not been shared with you.", status=404)
-        to_do_list = request.user.to_do_lists.get(pk=request.POST["list_id"])
-        if task in to_do_list.tasks.all():
-            return Response("You already have this task in this list.", status=200)
-        else:
-            to_do_list.tasks.add(task)
-            return Response("Task added successfully.", status=200)
 
     def get_list_by_id(self):
         user_lists = self.request.user.to_do_lists

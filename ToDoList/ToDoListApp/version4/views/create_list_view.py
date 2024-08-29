@@ -10,5 +10,5 @@ class CreateListView(CreateAPIView):
 
     def get_serializer_context(self):
         context = super(CreateListView, self).get_serializer_context()
-        context['user'] = self.request.user
+        context["user"] = self.request.user
         return context

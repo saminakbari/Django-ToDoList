@@ -11,6 +11,9 @@ class GetTaskView(View):
         return render(
             request,
             "v2/v2_get_task_template.html",
-            {"task": task, "priority": get_priority(task.priority),
-             "state": get_state(task.state)},
+            {
+                "task": task,
+                "priority": get_priority(task.priority),
+                "state": get_state(task.state),
+            },
         )

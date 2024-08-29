@@ -19,7 +19,9 @@ v3_urlpatterns = [
     path("to-do-list/create/", CreateListView.as_view(), name="v3-create-list"),
     path("to-do-list/<int:list_id>/edit/", EditListView.as_view(), name="v3-edit-list"),
     path(
-        "to-do-list/<int:list_id>/delete/", DeleteListView.as_view(), name="v3-delete-list"
+        "to-do-list/<int:list_id>/delete/",
+        DeleteListView.as_view(),
+        name="v3-delete-list",
     ),
     path("to-do-list/<int:list_id>/get/", GetListView.as_view(), name="v3-get-list"),
     path(

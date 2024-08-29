@@ -9,6 +9,9 @@ def get_task_view(request, task_id):
     return render(
         request,
         "v1/get_task_template.html",
-        {"task": task, "priority": get_priority(task.priority),
-         "state": get_state(task.state)},
+        {
+            "task": task,
+            "priority": get_priority(task.priority),
+            "state": get_state(task.state),
+        },
     )

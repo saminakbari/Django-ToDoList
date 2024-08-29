@@ -99,5 +99,12 @@ class Task(models.Model):
         verbose_name="وضعیت", choices=STATE_CHOICES, default=False
     )
 
+    users_who_can_see = models.ManyToManyField(
+        to=User,
+        verbose_name="همه کاربرانی که تسک را می‌بینند",
+        null=True,
+        related_name="all_tasks",
+    )
+
     def __str__(self):
         return "task: " + self.title

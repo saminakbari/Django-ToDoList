@@ -10,16 +10,21 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description", "deadline", "priority", "attachment"]
 
     def create(self, validated_data):
-        user = self.context['user']
-        validated_data['owner'] = user
-        to_do_list = self.context['to_do_list']
-        validated_data['to_do_lists'] = [to_do_list, ]
+        user = self.context["user"]
+        to_do_list = self.context["to_do_list"]
+        if user != to_do_list.owner:
+            raise Exception("You don't own this list.")
+        validated_data["owner"] = user
+        validated_data["to_do_lists"] = [
+            to_do_list,
+        ]
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        if instance.owner != self.context['user']:
-            return Response("You don't own this task.", status=404)
-        return super().update(instance, validated_data)
+        if instance.owner != self.context["user"]:
+            raise Exception("You don't own this task.")
+        else:
+            return super().update(instance, validated_data)
 
 
 class TaskSerializerForList(serializers.ModelSerializer):
@@ -36,10 +41,10 @@ class ToDoListSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "tasks"]
 
     def create(self, validated_data):
-        validated_data['owner'] = self.context['user']
+        validated_data["owner"] = self.context["user"]
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        if instance.owner != self.context['user']:
-            return Response("You don't own this list.", status=404)
+        if instance.owner != self.context["user"]:
+            raise Exception("You don't own this task.")
         return super().update(instance, validated_data)

@@ -10,7 +10,7 @@ class CreateTaskView(CreateAPIView):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        context['user'] = self.request.user
+        context["user"] = self.request.user
         to_do_list = self.request.user.to_do_lists.get(pk=self.request.data["list_id"])
-        context['to_do_list'] = to_do_list
+        context["to_do_list"] = to_do_list
         return context

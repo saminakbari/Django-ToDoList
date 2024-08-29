@@ -17,7 +17,9 @@ v2_urlpatterns = [
     path("to-do-list/create/", CreateListView.as_view(), name="v2-create-list"),
     path("to-do-list/<int:list_id>/edit/", EditListView.as_view(), name="v2-edit-list"),
     path(
-        "to-do-list/<int:list_id>/delete/", DeleteListView.as_view(), name="v2-delete-list"
+        "to-do-list/<int:list_id>/delete/",
+        DeleteListView.as_view(),
+        name="v2-delete-list",
     ),
     path("to-do-list/<int:list_id>/get/", GetListView.as_view(), name="v2-get-list"),
     path(

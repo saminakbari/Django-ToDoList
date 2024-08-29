@@ -20,7 +20,9 @@ v1_urlpatterns = [
     path("to-do-list/<int:list_id>/edit/", edit_list_view, name="v1-edit-list"),
     path("to-do-list/<int:list_id>/delete/", delete_list_view, name="v1-delete-list"),
     path("to-do-list/<int:list_id>/get/", get_list_view, name="v1-get-list"),
-    path("to-do-list/<int:list_id>/task/create/", create_task_view, name="v1-create-task"),
+    path(
+        "to-do-list/<int:list_id>/task/create/", create_task_view, name="v1-create-task"
+    ),
     path(
         "to-do-list/<int:list_id>/task/<int:task_id>/edit/",
         edit_task_view,

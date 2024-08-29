@@ -6,7 +6,6 @@ from ToDoListApp.serializers import TaskSerializer
 
 
 class GetSharedTasksView(ListAPIView):
-    
     serializer_class = TaskSerializer
 
     def get_queryset(self):

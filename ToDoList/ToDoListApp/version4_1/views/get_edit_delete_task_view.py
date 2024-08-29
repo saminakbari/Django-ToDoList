@@ -1,7 +1,6 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 
-from ToDoListApp.models import Task
 from ToDoListApp.serializers import TaskSerializer
 
 
@@ -9,7 +8,12 @@ class GetEditDeleteTaskView(RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
 
     def get_queryset(self):
-        return Task.objects.filter(owner=self.request.user)
+        return self.request.user.all_tasks.all()
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["user"] = self.request.user
+        return context
 
     def perform_destroy(self, instance):
         task = self.get_object()

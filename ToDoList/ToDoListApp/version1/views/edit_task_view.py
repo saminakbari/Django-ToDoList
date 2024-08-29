@@ -20,8 +20,8 @@ def edit_task_view(request, task_id, list_id):
                 task.attachment = file
 
             if (
-                    "attachment-clear" in form.data
-                    and form.data["attachment-clear"] == "on"
+                "attachment-clear" in form.data
+                and form.data["attachment-clear"] == "on"
             ):
                 task.attachment.delete()
 

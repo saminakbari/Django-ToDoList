@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 LOGIN_REQUIRED_IGNORE_PATHS = [
-    r'/admin/*',
+    r"/admin/*",
 ]
 
 ROOT_URLCONF = "ToDoList.urls"
@@ -141,7 +141,7 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+        },
     }
 }
 

@@ -19,12 +19,14 @@ v4_urlpatterns = [
     path("to-do-list/show-all/", ShowListsView.as_view(), name="v4-show-lists"),
     path("to-do-list/create/", CreateListView.as_view(), name="v4-create-list"),
     path("to-do-list/<int:pk>/edit/", EditListView.as_view(), name="v4-edit-list"),
-    path("to-do-list/<int:pk>/delete/", DeleteListView.as_view(), name="v4-delete-list"),
+    path(
+        "to-do-list/<int:pk>/delete/", DeleteListView.as_view(), name="v4-delete-list"
+    ),
     path("to-do-list/<int:pk>/get/", GetListView.as_view(), name="v4-get-list"),
     path(
-        "to-do-list/<int:pk>/add-shared-tasks/",
+        "to-do-list/<int:pk>/add-shared-task/",
         AddSharedTaskView.as_view(),
-        name="v4-add-shared-tasks",
+        name="v4-add-shared-task",
     ),
     path("task/create/", CreateTaskView.as_view(), name="v4-create-task"),
     path("task/<int:pk>/edit/", EditTaskView.as_view(), name="v4-edit-task"),

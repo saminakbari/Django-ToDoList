@@ -10,7 +10,6 @@ from ToDoListApp.serializers import TaskSerializer
 
 
 class TaskViewSet(ViewSet):
-
     @method_decorator(cache_page(60 * 30))
     def list(self, request, **kwargs):
         user_to_do_lists = request.user.to_do_lists.all()
@@ -100,11 +99,13 @@ class TaskViewSet(ViewSet):
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = (
-                    "Task shared with " + user_to_be_shared_with.username + " successfully."
+                "Task shared with " + user_to_be_shared_with.username + " successfully."
             )
             return Response(result, status=200)
         else:
-            return Response("You have already shared this task with this user.", status=400)
+            return Response(
+                "You have already shared this task with this user.", status=400
+            )
 
     @action(detail=True, methods=["get"])
     def get_shared_tasks(self, request):
@@ -112,16 +113,3 @@ class TaskViewSet(ViewSet):
             request.user.tasks_shared_with_user.all(), many=True
         )
         return Response(serializer.data, status=200)
-
-    @action(detail=True, methods=["post"])
-    def add_shared_task(self, request, pk=None):
-        try:
-            task = Task.objects.all().get(pk=pk)
-        except Task.DoesNotExist:
-            return Response("Task with this id has not been shared with you.", status=404)
-        to_do_list = request.user.to_do_lists.get(pk=request.POST["list_id"])
-        if task in to_do_list.tasks.all():
-            return Response("You already have this task in this list.", status=400)
-        else:
-            to_do_list.tasks.add(task)
-            return Response("Task added successfully.", status=200)
