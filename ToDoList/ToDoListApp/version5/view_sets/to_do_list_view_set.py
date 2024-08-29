@@ -13,7 +13,7 @@ class ToDoListViewSet(ViewSet):
     def list(self, request):
         queryset = ToDoList.objects.filter(owner=request.user)
         serializer = ToDoListSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=200)
 
     def create(self, request):
         serializer = ToDoListSerializer(data=request.data)
@@ -29,28 +29,28 @@ class ToDoListViewSet(ViewSet):
         try:
             to_do_list = queryset.get(pk=pk)
         except ToDoList.DoesNotExist:
-            return Response("You don't have a list with this id.")
+            return Response("You don't have a list with this id.", status=404)
         serializer = ToDoListSerializer(to_do_list)
-        return Response(serializer.data)
+        return Response(serializer.data, status=200)
 
     def partial_update(self, request, pk=None):
         queryset = ToDoList.objects.filter(owner=request.user)
         try:
             to_do_list = queryset.get(pk=pk)
         except ToDoList.DoesNotExist:
-            return Response("You don't have a list with this id.")
+            return Response("You don't have a list with this id.", status=404)
         serializer = ToDoListSerializer(to_do_list, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response("To-do list updated successfully.")
+            return Response("To-do list updated successfully.", status=200)
         else:
-            return Response(serializer.errors)
+            return Response(serializer.errors, status=400)
 
     def destroy(self, request, pk=None):
         queryset = ToDoList.objects.filter(owner=request.user)
         try:
             to_do_list = queryset.get(pk=pk)
         except ToDoList.DoesNotExist:
-            return Response("You don't have a to-do list with this id.")
+            return Response("You don't have a to-do list with this id.", status=404)
         to_do_list.delete()
-        return Response("To-do list deleted successfully.")
+        return Response("To-do list deleted successfully.", status=200)

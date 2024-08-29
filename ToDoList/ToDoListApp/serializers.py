@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.response import Response
 
 from ToDoListApp.models import Task, ToDoList
 
@@ -14,6 +15,11 @@ class TaskSerializer(serializers.ModelSerializer):
         to_do_list = self.context['to_do_list']
         validated_data['to_do_lists'] = [to_do_list, ]
         return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if instance.owner != self.context['user']:
+            return Response("You don't own this task.", status=400)
+        return super().update(instance, validated_data)
 
 
 class TaskSerializerForList(serializers.ModelSerializer):

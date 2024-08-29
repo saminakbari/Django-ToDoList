@@ -16,4 +16,4 @@ class ShareTaskView(APIView):
         user_tasks = Task.objects.filter(owner=self.request.user)
         task = user_tasks.get(pk=self.kwargs['pk'])
         user.tasks_shared_with_user.add(task)
-        return Response("Task shared successfully.")
+        return Response("Task shared successfully.", status=200)

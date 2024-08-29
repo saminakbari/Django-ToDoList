@@ -15,4 +15,4 @@ class DeleteTaskView(DestroyAPIView):
         task = self.get_object()
         to_do_list = self.request.user.to_do_lists.get(pk=self.request.data["list_id"])
         to_do_list.tasks.remove(task)
-        return Response("Task deleted from list successfully.")
+        return Response("Task deleted from list successfully.", status=200)
