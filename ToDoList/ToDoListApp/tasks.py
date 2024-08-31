@@ -10,5 +10,4 @@ def check_task_deadlines():
         if task.deadline <= django.utils.timezone.now().date():
             task.state = True
             task.save()
-            print("I'm working.")
     return "finished"

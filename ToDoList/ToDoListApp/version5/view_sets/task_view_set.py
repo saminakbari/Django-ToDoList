@@ -27,12 +27,14 @@ class TaskViewSet(ViewSet):
     def create(self, request, **kwargs):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
-            task = serializer.save()
             user_to_do_lists = request.user.to_do_lists.all()
             try:
                 to_do_list = user_to_do_lists.get(pk=request.POST["list_id"])
             except ToDoList.DoesNotExist:
                 return Response("You don't have a to-do list with this id.", status=404)
+            serializer.context['user'] = request.user
+            serializer.context['to_do_list'] = to_do_list
+            task = serializer.save()
             task.to_do_lists.add(to_do_list)
             task.owner = request.user
             task.save()
@@ -40,10 +42,10 @@ class TaskViewSet(ViewSet):
         else:
             return Response(serializer.errors, status=400)
 
-    def retrieve(self, request, task_id=None):
-        queryset = Task.objects.filter(owner=request.user)
+    def retrieve(self, request, pk=None):
+        queryset = request.user.shared_added_tasks.all() | request.user.tasks.all()
         try:
-            task = queryset.get(pk=task_id)
+            task = queryset.get(pk=pk)
         except Task.DoesNotExist:
             return Response("You don't have a task with this id.", status=404)
         serializer = TaskSerializer(task)
@@ -59,6 +61,8 @@ class TaskViewSet(ViewSet):
                 return Response("You don't have access to edit this task.", status=400)
             return Response("You don't have a task with this id.", status=404)
         serializer = TaskSerializer(task, data=request.data, partial=True)
+        serializer.context['user'] = request.user
+        # serializer.context['user'] = to_do_list
         if serializer.is_valid():
             serializer.save()
             return Response("Task updated successfully.", status=200)
@@ -66,7 +70,7 @@ class TaskViewSet(ViewSet):
             return Response(serializer.errors, status=400)
 
     def destroy(self, request, pk=None):
-        queryset = Task.objects.filter(owner=request.user)
+        queryset = request.user.shared_added_tasks.all() | request.user.tasks.all()
         try:
             task = queryset.get(pk=pk)
         except Task.DoesNotExist:
@@ -86,14 +90,14 @@ class TaskViewSet(ViewSet):
             return Response("There is no task with this id in this list.", status=404)
 
     @action(detail=True, methods=["post"])
-    def share_task(self, request, task_id=None):
+    def share_task(self, request, pk=None):
         try:
             user_to_be_shared_with = User.objects.get(username=request.POST["username"])
         except User.DoesNotExist:
             return Response("There is no user with this id.", status=404)
         user_tasks = request.user.tasks
         try:
-            task = user_tasks.get(id=task_id)
+            task = user_tasks.get(id=pk)
         except Task.DoesNotExist:
             return Response("You don't have a task with this id.", status=404)
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
@@ -107,7 +111,7 @@ class TaskViewSet(ViewSet):
                 "You have already shared this task with this user.", status=400
             )
 
-    @action(detail=True, methods=["get"])
+    @action(detail=False, methods=["get"])
     def get_shared_tasks(self, request):
         serializer = TaskSerializer(
             request.user.tasks_shared_with_user.all(), many=True

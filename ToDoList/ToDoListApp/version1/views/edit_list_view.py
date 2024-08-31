@@ -30,7 +30,6 @@ def edit_list_view(request, list_id):
                 messages.add_message(request, messages.ERROR, error[1])
     else:
         form = ListForm(initial={"title": to_do_list.title})
-        print(form.fields)
         return render(
             request,
             "v1/edit_list_title_template.html",

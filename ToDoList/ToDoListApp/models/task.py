@@ -101,9 +101,9 @@ class Task(models.Model):
 
     users_who_can_see = models.ManyToManyField(
         to=User,
-        verbose_name="همه کاربرانی که تسک را می‌بینند",
+        verbose_name="کاربرانی که فقط تسک را می‌بینند",
         null=True,
-        related_name="all_tasks",
+        related_name="shared_added_tasks",
     )
 
     def __str__(self):

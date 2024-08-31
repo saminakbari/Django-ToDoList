@@ -36,4 +36,5 @@ class ToDoListModelViewSet(ModelViewSet):
             return Response("You already have this task in this list.", status=200)
         else:
             to_do_list.tasks.add(task)
+            task.users_who_can_see.add(request.user)
             return Response("Task added successfully.", status=200)

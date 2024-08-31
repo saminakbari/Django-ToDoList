@@ -30,7 +30,7 @@ class TaskSerializer(serializers.ModelSerializer):
 class TaskSerializerForList(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ["id", "title"]
+        fields = ["id", "title", "priority", "deadline"]
 
 
 class ToDoListSerializer(serializers.ModelSerializer):
