@@ -106,5 +106,8 @@ class Task(models.Model):
         related_name="shared_added_tasks",
     )
 
+    class Meta:
+        ordering = ["deadline", "priority"]
+
     def __str__(self):
         return "task: " + self.title

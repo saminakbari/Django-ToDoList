@@ -18,6 +18,7 @@ class TaskAdmin(admin.ModelAdmin):
     )
     list_filter = ("owner",)
     search_fields = ("title__startswith",)
+    ordering = ["-id"]
 
     def all_lists(self, obj):
         return [

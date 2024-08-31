@@ -41,12 +41,12 @@ class TaskModelViewSet(ModelViewSet):
         try:
             user_to_be_shared_with = User.objects.get(username=request.POST["username"])
         except User.DoesNotExist:
-            return Response("There is no user with this id.", status=404)
+            return Response("There is no user with this username.", status=404)
         user_tasks = request.user.tasks
         try:
             task = user_tasks.get(pk=self.kwargs["pk"])
         except Task.DoesNotExist:
-            return Response("You don't have a task with this id.", status=404)
+            return Response("You don't own a task with this id.", status=404)
         if task not in user_to_be_shared_with.tasks_shared_with_user.all():
             user_to_be_shared_with.tasks_shared_with_user.add(task)
             result = (
@@ -65,5 +65,7 @@ class TaskModelViewSet(ModelViewSet):
 
     def get_list_by_id(self):
         user_lists = self.request.user.to_do_lists
-        to_do_list = get_object_or_404(user_lists, pk=self.request.POST["list_id"])
-        return to_do_list
+        if self.request.POST['list_id']:
+            to_do_list = get_object_or_404(user_lists, pk=self.request.POST["list_id"])
+            return to_do_list
+        return None
