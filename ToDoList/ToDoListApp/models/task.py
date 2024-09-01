@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 
+VALID_TITLE_PATTERN = "^[a-zA-Z0-9_\\-]+$"
+VALID_DATE_PATTERN = "^\\d{4}-\\d{2}-\\d{2}$"
+
 
 def get_state(state):
     if state:
@@ -23,13 +26,13 @@ def get_priority(priority_number):
 
 
 def validate_title(title):
-    if not re.match("^[a-zA-Z0-9_\\-]+$", title):
+    if not re.match(VALID_TITLE_PATTERN, title):
         message = "The name can only contain letters, numbers, dashes and underlines."
         raise ValidationError(message)
 
 
 def validate_date(date):
-    if not re.match("^\\d{4}-\\d{2}-\\d{2}$", str(date)):
+    if not re.match(VALID_DATE_PATTERN, str(date)):
         raise ValidationError("The date format must be: yyyy-mm-dd.")
     if date < django.utils.timezone.now().date():
         raise ValidationError("The deadline cannot be in the past!")

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from rest_framework.response import Response
 
 from ToDoListApp.models import Task, ToDoList
+from ToDoListApp.models.task import validate_date, validate_priority, validate_title
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -26,6 +26,12 @@ class TaskSerializer(serializers.ModelSerializer):
         else:
             return super().update(instance, validated_data)
 
+    def validate(self, attrs):
+        validate_title(attrs['title'])
+        validate_date(attrs['deadline'])
+        validate_priority(attrs['priority'])
+        return attrs
+
 
 class TaskSerializerForList(serializers.ModelSerializer):
     class Meta:
@@ -48,3 +54,7 @@ class ToDoListSerializer(serializers.ModelSerializer):
         if instance.owner != self.context["user"]:
             raise Exception("You don't own this task.")
         return super().update(instance, validated_data)
+
+    def validate(self, attrs):
+        validate_title(attrs['title'])
+        return attrs
